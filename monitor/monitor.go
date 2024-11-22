@@ -62,7 +62,6 @@ type TokenMeta struct {
 	Mutable         bool   `json:"mutable"`
 	UpdateAuthority string `json:"updateAuthority"`
 }
-}
 
 type KnownAccounts struct {
 	// Define fields for known accounts
