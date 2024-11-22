@@ -251,7 +251,7 @@ func (m *Monitor) SubscribeToLogs(client *ws.Client, pubkey string) error {
 		if err != nil {
 			return err
 		}
-		processLogMessage(msg)
+		m.processLogMessage(msg)
 	}
 }
 
@@ -301,7 +301,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 				}
 
 				// Check mint address for additional information
-				symbol, risks, err := checkMintAddress(balance.Mint.String(), tokenUpdates)
+				symbol, risks, err := m.checkMintAddress(balance.Mint.String())
 				if err != nil {
 					updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
 				} else {
