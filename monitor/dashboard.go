@@ -44,6 +44,7 @@ func (m model) Init() tea.Cmd {
 
 func tickCmd() tea.Cmd {
 	return func() tea.Msg {
+		time.Sleep(1 * time.Second) // Simulate some work
 		return tickMsg{}
 	}
 }
@@ -67,7 +68,7 @@ func (m model) View() string {
 		mints = append(mints, mint)
 	}
 	sort.Slice(mints, func(i, j int) bool {
-		return true
+		return mints[i] < mints[j]
 	})
 
 	b.WriteString(titleStyle.Render("Mint Addresses:\n"))
