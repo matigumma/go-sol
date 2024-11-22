@@ -20,59 +20,11 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
-type TokenInfo struct {
-	Symbol    string
-	Address   string
-	CreatedAt string
-	Score     int64
-}
 
 func updateStatus(status string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
-type TokenMeta struct {
-	Name            string `json:"name"`
-	Symbol          string `json:"symbol"`
-	URI             string `json:"uri"`
-	Mutable         bool   `json:"mutable"`
-	UpdateAuthority string `json:"updateAuthority"`
-}
-
-type KnownAccounts map[string]struct {
-	Name string `json:"name"`
-	Type string `json:"type"`
-}
-
-type Holder struct {
-	Address        string  `json:"address"`
-	Amount         int64   `json:"amount"`
-	Decimals       int     `json:"decimals"`
-	Pct            float64 `json:"pct"`
-	UiAmount       float64 `json:"uiAmount"`
-	UiAmountString string  `json:"uiAmountString"`
-	Owner          string  `json:"owner"`
-	Insider        bool    `json:"insider"`
-}
-
-type Report struct {
-	TokenMeta            TokenMeta     `json:"tokenMeta"`
-	Risks                []Risk        `json:"risks"`
-	TotalMarketLiquidity float64       `json:"totalMarketLiquidity"`
-	TotalLPProviders     int           `json:"totalLPProviders"`
-	Rugged               bool          `json:"rugged"`
-	KnownAccounts        KnownAccounts `json:"knownAccounts"`
-	Verification         string        `json:"verification"`
-	Score                int           `json:"score"`
-	FreezeAuthority      string        `json:"freezeAuthority"`
-	MintAuthority        string        `json:"mintAuthority"`
-	TopHolders           []Holder      `json:"topHolders"`
-}
-
-type MintInfo struct {
-	Symbol string
-	Risks  []Risk
-}
 
 var mintState = make(map[string][]Report)
 
@@ -80,11 +32,6 @@ func (m *Monitor) getMintState() map[string][]Report {
 	return mintState
 }
 
-type Risk struct {
-	Name  string
-	Score int64
-	Level string
-}
 
 type Monitor struct {
 	tokenUpdates chan<- []TokenInfo
