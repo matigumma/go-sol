@@ -3,6 +3,7 @@ package monitor
 import (
 	"context"
 	"fmt"
+	"gosol/types"
 	"log/slog"
 
 	"encoding/json"
@@ -24,17 +25,17 @@ func updateStatus(status string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
-var mintState = make(map[string][]Report)
+var mintState = make(map[string][]types.Report)
 
-func (m *Monitor) getMintState() map[string][]Report {
+func (m *Monitor) getMintState() map[string][]types.Report {
 	return mintState
 }
 
 type Monitor struct {
-	tokenUpdates chan<- []TokenInfo
+	tokenUpdates chan<- []types.TokenInfo
 }
 
-func NewMonitor(tokenUpdates chan<- []TokenInfo) *Monitor {
+func NewMonitor(tokenUpdates chan<- []types.TokenInfo) *Monitor {
 	return &Monitor{tokenUpdates: tokenUpdates}
 }
 
@@ -58,7 +59,7 @@ type model struct {
 	table table.Model
 }
 
-func newModel(tokens []TokenInfo) model {
+func newModel(tokens []types.TokenInfo) model {
 	columns := []table.Column{
 		{Title: "SYMBOL", Width: 20},
 		{Title: "ADDRESS", Width: 10},
@@ -114,7 +115,7 @@ func (m model) View() string {
 	return m.table.View()
 }
 
-func displayTokenTable(tokens []TokenInfo) {
+func displayTokenTable(tokens []types.TokenInfo) {
 	p := tea.NewProgram(newModel(tokens))
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error running program: %v", err)
@@ -122,11 +123,11 @@ func displayTokenTable(tokens []TokenInfo) {
 	}
 }
 
-func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
+func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
-	var risks []Risk
-	var tokens []TokenInfo
+	var risks []types.Risk
+	var tokens []types.TokenInfo
 
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
@@ -137,7 +138,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 		defer resp.Body.Close()
 
 		if resp.StatusCode == http.StatusOK {
-			var report Report
+			var report types.Report
 			if err := json.NewDecoder(resp.Body).Decode(&report); err != nil {
 				return "", nil, err
 			}
@@ -146,18 +147,15 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 
 			symbol = report.TokenMeta.Symbol
 
-			createdAt := time.Now().Format("15:04")
-			for _, risk := range risks {
-				token := TokenInfo{
-					Symbol:    symbol,
-					Address:   mint,
-					CreatedAt: createdAt,
-					Score:     risk.Score,
-				}
-				tokens = append(tokens, token)
+			token := types.TokenInfo{
+				Symbol:    symbol,
+				Address:   mint,
+				CreatedAt: report.DetectedAt.Format("15:04"),
+				Score:     int64(report.Score),
 			}
+			tokens = append(tokens, token)
 			// Update the in-memory state with the report
-			mintState[mint] = []Report{report}
+			mintState[mint] = []types.Report{report}
 
 			// se envia el listado de tokens a la UI
 			m.tokenUpdates <- tokens
@@ -241,7 +239,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 
 				// Add mint address to mintState if it doesn't exist
 				if _, exists := mintState[balance.Mint.String()]; !exists {
-					mintState[balance.Mint.String()] = []Report{}
+					mintState[balance.Mint.String()] = []types.Report{}
 				}
 
 				// Check mint address for additional API information

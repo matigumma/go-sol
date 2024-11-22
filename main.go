@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gosol/monitor"
+	"gosol/types"
 	"gosol/ui"
 	"os"
 
@@ -10,17 +11,18 @@ import (
 )
 
 func main() {
-	tokenUpdates := make(chan []monitor.TokenInfo)
+	tokenUpdates := make(chan []types.TokenInfo)
 
 	monitor := monitor.NewMonitor(tokenUpdates)
 	go monitor.Run()
 
-	model := ui.NewModel([]monitor.TokenInfo{})
+	model := ui.NewModel([]types.TokenInfo{})
 
 	p := tea.NewProgram(model)
 
 	go func() {
 		for tokens := range tokenUpdates {
+			fmt.Println("Received token updates:", tokens) // Log statement added
 			p.Send(tokens)
 		}
 	}()

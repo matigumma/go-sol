@@ -2,7 +2,7 @@ package ui
 
 import (
 	"fmt"
-	"gosol/monitor"
+	"gosol/types"
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
@@ -15,7 +15,7 @@ type Model struct {
 	table table.Model
 }
 
-func NewModel(tokens []monitor.TokenInfo) Model {
+func NewModel(tokens []types.TokenInfo) Model {
 	columns := []table.Column{
 		{Title: "SYMBOL", Width: 20},
 		{Title: "ADDRESS", Width: 10},
