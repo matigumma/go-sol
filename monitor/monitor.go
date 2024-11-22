@@ -56,8 +56,12 @@ func displayTokenTable(tokens []TokenInfo) {
 }
 
 type TokenMeta struct {
-	Symbol string `json:"symbol"`
-	// Add other fields as needed
+	Name            string `json:"name"`
+	Symbol          string `json:"symbol"`
+	URI             string `json:"uri"`
+	Mutable         bool   `json:"mutable"`
+	UpdateAuthority string `json:"updateAuthority"`
+}
 }
 
 type KnownAccounts struct {
