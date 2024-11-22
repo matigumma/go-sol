@@ -141,7 +141,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 				tokens = append(tokens, token)
 			}
 			// Update the in-memory state with the report
-			mintState[mint] = append(mintState[mint], report)
+			mintState[mint] = []Report{report}
 
 			displayTokenTable(tokens)
 			break
@@ -222,6 +222,11 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
+
+				// Add mint address to mintState if it doesn't exist
+				if _, exists := mintState[balance.Mint.String()]; !exists {
+					mintState[balance.Mint.String()] = []Report{}
+				}
 
 				// Check mint address for additional information
 				symbol, risks, err := checkMintAddress(balance.Mint.String())
