@@ -102,10 +102,14 @@ func displayTokenTable(tokens []TokenInfo) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
 
+	seenAddresses := make(map[string]bool)
 	for _, token := range tokens {
-		address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
-		url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
-		table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
+		if !seenAddresses[token.Address] {
+			address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
+			url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
+			table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
+			seenAddresses[token.Address] = true
+		}
 	}
 
 	table.Render()
