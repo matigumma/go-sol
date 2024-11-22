@@ -15,7 +15,7 @@ func main() {
 	monitor := monitor.NewMonitor(tokenUpdates)
 	go monitor.Run()
 
-	model := ui.NewModel()
+	model := ui.NewModel([]monitor.TokenInfo{})
 
 	p := tea.NewProgram(model)
 
