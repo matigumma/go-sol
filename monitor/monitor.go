@@ -189,7 +189,7 @@ func processLogMessage(msg *ws.LogResult) {
 func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingBase58 transaction..."))
+	slog.Info(color.New(color.BgHiBlue).SprintFunc()("GetTransaction EncodingBase58..."))
 	tx58, err := rpcClient.GetTransaction(
 		context.TODO(),
 		signature,
@@ -200,7 +200,7 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 		},
 	)
 	if err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching EncodingBase58 transaction: %v", err)))
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err)))
 	}
 
 	if tx58 != nil {
