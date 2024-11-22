@@ -9,7 +9,10 @@ import (
 
 	"encoding/json"
 	"net/http"
+	"os"
 	"time"
+
+	"github.com/olekukonko/tablewriter"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -30,6 +33,26 @@ func Run() {
 	if err := SubscribeToLogs(client, pubkey); err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
 	}
+}
+
+type TokenInfo struct {
+	Symbol    string
+	Address   string
+	CreatedAt string
+	Score     int64
+}
+
+func displayTokenTable(tokens []TokenInfo) {
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE"})
+
+	for _, token := range tokens {
+		address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
+		url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
+		table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
+	}
+
+	table.Render()
 }
 
 type Risk struct {
@@ -65,7 +88,18 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 						level := riskMap["level"].(string)
 						risks = append(risks, Risk{Name: name, Score: score, Level: level})
 					}
+					createdAt := time.Now().Format("2006-01-02 15:04:05")
+					for _, risk := range risks {
+						token := TokenInfo{
+							Symbol:    symbol,
+							Address:   balance.Mint.String(),
+							CreatedAt: createdAt,
+							Score:     risk.Score,
+						}
+						tokens = append(tokens, token)
+					}
 				}
+				displayTokenTable(tokens)
 			}
 
 			if tokenMeta, ok := report["tokenMeta"].(map[string]interface{}); ok {
@@ -128,7 +162,7 @@ func processLogMessage(msg *ws.LogResult) {
 func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	{
+	var tokens []TokenInfo
 		// slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingJSON transaction..."))
 		// txJson, err := rpcClient.GetTransaction(
 		// 	context.TODO(),
