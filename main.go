@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"gosol/monitor"
-	"gosol/dashboard"
 )
 
 func main() {
@@ -17,7 +16,7 @@ func main() {
 	case "monitor":
 		monitor.Run()
 	case "dashboard":
-		dashboard.RunDashboard(monitor.GetMintState())
+		monitor.RunDashboard(monitor.GetMintState())
 	default:
 		fmt.Println("Invalid mode. Use 'monitor' or 'dashboard'.")
 		os.Exit(1)
