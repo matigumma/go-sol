@@ -12,17 +12,17 @@ import (
 )
 
 func Run() {
-	slog.Info(color.New(color.BgGreen).SprintFunc()("Connecting to WebSocket..."))
+	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Connecting to WebSocket..."))
 	client, err := ConnectToWebSocket()
 	if err != nil {
-		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	slog.Info(color.New(color.BgGreen).SprintFunc()("Subscribing to logs..."))
+	slog.Info(color.New(color.BgHiCyan).SprintFunc()("Subscribing to logs..."))
 	if err := SubscribeToLogs(client, pubkey); err != nil {
-		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
 	}
 }
 
@@ -47,7 +47,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	slog.Info(color.New(color.BgGreen).SprintFunc()("Start monitoring..."))
+	slog.Info(color.New(color.BgHiGreen).SprintFunc()("Start monitoring..."))
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -59,7 +59,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 
 func processLogMessage(msg *ws.LogResult) {
 	signature := msg.Value.Signature
-	slog.Info(color.New(color.BgBlue).SprintFunc()(fmt.Sprintf("Transaction Signature: %s", signature)))
+	slog.Info(color.New(color.BgHiMagenta).SprintFunc()(fmt.Sprintf("Transaction Signature: %s", signature)))
 
 	rpcClient := rpc.New(rpc.MainNetBeta_RPC)
 	getTransactionDetails(rpcClient, signature.String())
@@ -78,16 +78,16 @@ func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 		},
 	)
 	if err != nil {
-		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
 		return
 	}
 
 	if tx.Meta != nil {
 		for _, balance := range tx.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
-				slog.Info(color.New(color.BgYellow).SprintFunc()("========== New Token Found =========="))
-				slog.Info(color.New(color.BgYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
-				slog.Info(color.New(color.BgYellow).SprintFunc()("====================================="))
+				slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
+				slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
+				slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
 			}
 		}
 	}
