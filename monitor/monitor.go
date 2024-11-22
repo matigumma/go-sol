@@ -101,13 +101,21 @@ func Run() {
 func displayTokenTable(tokens []TokenInfo) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
+	table.SetColWidth(20) // Double the width for SYMBOL
 
 	seenAddresses := make(map[string]bool)
 	for _, token := range tokens {
 		if !seenAddresses[token.Address] {
-			address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
-			url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
-			table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
+			address := token.Address[:7]
+			url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
+			scoreColor := tablewriter.Colors{tablewriter.FgGreenColor}
+			if token.Score > 2000 {
+				scoreColor = tablewriter.Colors{tablewriter.FgYellowColor}
+			}
+			if token.Score > 4000 {
+				scoreColor = tablewriter.Colors{tablewriter.FgRedColor}
+			}
+			table.Rich([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url}, []tablewriter.Colors{tablewriter.Colors{}, tablewriter.Colors{}, tablewriter.Colors{}, scoreColor, tablewriter.Colors{}})
 			seenAddresses[token.Address] = true
 		}
 	}
