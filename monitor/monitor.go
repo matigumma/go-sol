@@ -27,7 +27,7 @@ type TokenInfo struct {
 	Score     int64
 }
 
-func UpdateStatus(status string) {
+func updateStatus(status string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
@@ -76,7 +76,7 @@ type MintInfo struct {
 
 var mintState = make(map[string][]Report)
 
-func (m *Monitor) GetMintState() map[string][]Report {
+func (m *Monitor) getMintState() map[string][]Report {
 	return mintState
 }
 
@@ -94,9 +94,9 @@ func NewMonitor(tokenUpdates chan<- []TokenInfo) *Monitor {
 	return &Monitor{tokenUpdates: tokenUpdates}
 }
 
-func (m *Monitor) Run() {
+func (m *Monitor) run() {
 	updateStatus("Connecting to WebSocket...")
-	client, err := ConnectToWebSocket()
+	client, err := m.connectToWebSocket()
 	if err != nil {
 		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
 	}
@@ -105,7 +105,7 @@ func (m *Monitor) Run() {
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
 	updateStatus("Subscribing to logs...")
-	if err := SubscribeToLogs(client, pubkey); err != nil {
+	if err := m.subscribeToLogs(client, pubkey); err != nil {
 		updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
 	}
 }
@@ -225,7 +225,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 }
 
 // ConnectToWebSocket establishes a WebSocket connection to the Solana MainNet Beta.
-func (m *Monitor) ConnectToWebSocket() (*ws.Client, error) {
+func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
 	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
 	if err != nil {
 		return nil, err
@@ -233,7 +233,7 @@ func (m *Monitor) ConnectToWebSocket() (*ws.Client, error) {
 	return client, nil
 }
 
-func (m *Monitor) SubscribeToLogs(client *ws.Client, pubkey string) error {
+func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 	program := solana.MustPublicKeyFromBase58(pubkey)
 
 	sub, err := client.LogsSubscribeMentions(
