@@ -71,6 +71,10 @@ type MintInfo struct {
 
 var mintState = make(map[string][]Report)
 
+func GetMintState() map[string][]Report {
+	return mintState
+}
+
 type Risk struct {
 	Name  string
 	Score int64
