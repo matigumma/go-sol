@@ -245,17 +245,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 				}
 
 				// Check mint address for additional API information
-				symbol, risks, err := m.checkMintAddress(balance.Mint.String())
-				if err != nil {
-					// updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
-				} else {
-					// obtengo el symbol y risks validos
-
-					// updateStatus(fmt.Sprintf("Token Symbol: %s", symbol))
-					for _, risk := range risks {
-						// updateStatus(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level))
-					}
-				}
+				go m.checkMintAddress(balance.Mint.String())
 			}
 		}
 	}
