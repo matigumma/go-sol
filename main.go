@@ -15,7 +15,7 @@ func main() {
 	mode, _ := reader.ReadString('\n')
 	mode = mode[:len(mode)-1] // Remove newline character
 
-	switch *mode {
+	switch mode {
 	case "monitor":
 		monitor.Run()
 	case "dashboard":

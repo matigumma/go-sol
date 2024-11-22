@@ -1,4 +1,4 @@
-package dashboard
+package monitor
 
 import (
 	"fmt"
@@ -7,7 +7,8 @@ import (
 
 	"time"
 
-	"gosol/monitor"
+	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 func UpdateStatus(status string) {
@@ -15,15 +16,15 @@ func UpdateStatus(status string) {
 }
 
 type model struct {
-	mintState map[string][]monitor.Report
-	status string
+	mintState map[string][]Report
+	status    string
 }
 
 var (
-	titleStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205"))
-	mintStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("69"))
-	scoreStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("229"))
-	riskStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("160"))
+	titleStyle  = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205"))
+	mintStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("69"))
+	scoreStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("229"))
+	riskStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("160"))
 	statusStyle = lipgloss.NewStyle().Background(lipgloss.Color("240")).Foreground(lipgloss.Color("229")).Bold(true)
 )
 
@@ -33,7 +34,7 @@ func (m *model) setStatus(status string) {
 
 type tickMsg struct{}
 
-func NewModel(mintState map[string][]monitor.Report) model {
+func NewModel(mintState map[string][]Report) model {
 	return model{mintState: mintState}
 }
 
@@ -89,7 +90,7 @@ func (m model) View() string {
 	return b.String() + "\n" + statusStyle.Render(m.status)
 }
 
-func RunDashboard(mintState map[string][]monitor.Report) {
+func RunDashboard(mintState map[string][]Report) {
 	p := tea.NewProgram(NewModel(mintState), tea.WithAltScreen())
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)

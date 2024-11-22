@@ -3,9 +3,6 @@ package monitor
 import (
 	"context"
 	"fmt"
-	"log/slog"
-
-	"github.com/fatih/color"
 
 	"encoding/json"
 	"net/http"
@@ -13,7 +10,6 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
-	"gosol/dashboard"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -28,7 +24,7 @@ type TokenInfo struct {
 }
 
 func updateStatus(status string) {
-	dashboard.UpdateStatus(status)
+	UpdateStatus(status)
 }
 
 type TokenMeta struct {
