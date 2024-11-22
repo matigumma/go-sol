@@ -257,10 +257,10 @@ func processLogMessage(msg *ws.LogResult) {
 	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
-	getTransactionDetails(rpcClient, signature)
+	getTransactionDetails(rpcClient, signature, tokenUpdates)
 }
 
-func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
+func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature, tokenUpdates chan<- []TokenInfo) {
 	cero := uint64(0) // :/
 
 	updateStatus("GetTransaction EncodingBase58...")
