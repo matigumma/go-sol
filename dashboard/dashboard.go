@@ -10,7 +10,13 @@ import (
 	"gosol/status"
 	"github.com/charmbracelet/lipgloss"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
+	tea "github.com/charmbracelet/bubbletea"
 )
+
+func UpdateStatus(status string) {
+	// Aquí puedes implementar la lógica para actualizar el estado en el dashboard
+}
 
 type model struct {
 	mintState map[string][]monitor.Report
