@@ -1,7 +1,7 @@
 package main
 
 import (
-	"flag"
+	"bufio"
 	"fmt"
 	"os"
 
@@ -9,8 +9,11 @@ import (
 )
 
 func main() {
-	mode := flag.String("mode", "monitor", "Mode to run the application: 'monitor' or 'dashboard'")
-	flag.Parse()
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Select mode to run the application: 'monitor' or 'dashboard'")
+	fmt.Print("Enter mode: ")
+	mode, _ := reader.ReadString('\n')
+	mode = mode[:len(mode)-1] // Remove newline character
 
 	switch *mode {
 	case "monitor":
