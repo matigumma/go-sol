@@ -15,6 +15,7 @@ func Run() {
 	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Connecting to WebSocket..."))
 	client, err := ConnectToWebSocket()
 	if err != nil {
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Raw transaction data: %v", txRaw)))
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
 	defer client.Close()
@@ -69,7 +70,7 @@ func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 	cero := uint64(0) // :/
 
 	slog.Info(color.New(color.BgHiBlue).SprintFunc()(fmt.Sprintf("Fetching transaction details for signature: %s", signature)))
-	tx, err := rpcClient.GetTransaction(
+	txRaw, err := rpcClient.GetTransaction(
 		context.TODO(),
 		solana.MustSignatureFromBase58(signature),
 		&rpc.GetTransactionOpts{
