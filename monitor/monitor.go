@@ -224,7 +224,6 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 	return symbol, risks, nil
 }
 
-// ConnectToWebSocket establishes a WebSocket connection to the Solana MainNet Beta.
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
 	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
 	if err != nil {
