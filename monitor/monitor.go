@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
-	"gosol/dashboard"
+	"gosol/status"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -28,7 +28,7 @@ type TokenInfo struct {
 }
 
 func updateStatus(status string) {
-	dashboard.UpdateStatus(status)
+	status.UpdateStatus(status)
 }
 
 type TokenMeta struct {

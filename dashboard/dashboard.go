@@ -7,7 +7,7 @@ import (
 
 	"time"
 
-	"gosol/monitor"
+	"gosol/status"
 	"github.com/charmbracelet/lipgloss"
 	tea "github.com/charmbracelet/bubbletea"
 )
