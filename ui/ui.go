@@ -17,11 +17,11 @@ type Model struct {
 
 func NewModel(tokens []types.TokenInfo) Model {
 	columns := []table.Column{
-		{Title: "SYMBOL", Width: 20},
-		{Title: "ADDRESS", Width: 10},
-		{Title: "CREATED AT", Width: 20},
+		{Title: "SYMBOL", Width: 10},
+		{Title: "ADDRESS", Width: 15},
+		{Title: "CREATED AT", Width: 25},
 		{Title: "SCORE", Width: 10},
-		{Title: "URL", Width: 40},
+		{Title: "URL", Width: 50},
 	}
 
 	rows := []table.Row{}
