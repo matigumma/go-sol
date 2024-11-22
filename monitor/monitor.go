@@ -65,10 +65,12 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
 	var risks []Risk
+	var tokens []TokenInfo
 
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
 		if err != nil {
+			slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching data: %v", err)))
 			return "", nil, err
 		}
 		defer resp.Body.Close()
@@ -92,7 +94,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 					for _, risk := range risks {
 						token := TokenInfo{
 							Symbol:    symbol,
-							Address:   balance.Mint.String(),
+							Address:   mint[:5] + "...",
 							CreatedAt: createdAt,
 							Score:     risk.Score,
 						}
@@ -162,95 +164,42 @@ func processLogMessage(msg *ws.LogResult) {
 func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	var tokens []TokenInfo
-		// slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingJSON transaction..."))
-		// txJson, err := rpcClient.GetTransaction(
-		// 	context.TODO(),
-		// 	signature,
-		// 	&rpc.GetTransactionOpts{
-		// 		Encoding:                       solana.EncodingJSONParsed,
-		// 		Commitment:                     rpc.CommitmentConfirmed,
-		// 		MaxSupportedTransactionVersion: &cero,
-		// 	},
-		// )
-		// if err != nil {
-		// 	slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
-		// }
-
-		// if txJson != nil {
-		// 	spew.Dump(txJson)
-		// 	spew.Dump(txJson.Transaction.GetTransaction())
-		// }
-
-		// if txJson.Meta != nil {
-		// 	slog.Info(color.New(color.BgHiBlue).SprintFunc()(fmt.Sprintf("Transaction details: %+v", txJson)))
-		// 	for _, balance := range txJson.Meta.PostTokenBalances {
-		// 		if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
-		// 			slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
-		// 			slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
-		// 			slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
-		// 		}
-		// 	}
-		// }
+	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingBase58 transaction..."))
+	tx58, err := rpcClient.GetTransaction(
+		context.TODO(),
+		signature,
+		&rpc.GetTransactionOpts{
+			Encoding:                       solana.EncodingBase58,
+			Commitment:                     rpc.CommitmentConfirmed,
+			MaxSupportedTransactionVersion: &cero,
+		},
+	)
+	if err != nil {
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching EncodingBase58 transaction: %v", err)))
 	}
-	{
-		slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingBase58 transaction..."))
-		tx58, err := rpcClient.GetTransaction(
-			context.TODO(),
-			signature,
-			&rpc.GetTransactionOpts{
-				Encoding:                       solana.EncodingBase58,
-				Commitment:                     rpc.CommitmentConfirmed,
-				MaxSupportedTransactionVersion: &cero,
-			},
-		)
-		if err != nil {
-			slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching EncodingBase58 transaction: %v", err)))
-		}
 
-		if tx58 != nil {
-			// spew.Dump(tx58)
-			// spew.Dump(tx58.Transaction.GetBinary())
-			// if txJson.Meta != nil {
-			for _, balance := range tx58.Meta.PostTokenBalances {
-				if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
-					slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
-					slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
-					slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
+	if tx58 != nil {
+		// spew.Dump(tx58)
+		// spew.Dump(tx58.Transaction.GetBinary())
+		// if txJson.Meta != nil {
+		for _, balance := range tx58.Meta.PostTokenBalances {
+			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
+				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
+				// slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
+				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
 
-					// Check mint address for additional information
-					symbol, risks, err := checkMintAddress(balance.Mint.String())
-					if err != nil {
-						slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
-					} else {
-						slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
-						for _, risk := range risks {
-							slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
-						}
+				// Check mint address for additional information
+				symbol, risks, err := checkMintAddress(balance.Mint.String())
+				if err != nil {
+					slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
+				} else {
+					slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
+					for _, risk := range risks {
+						slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
 					}
 				}
 			}
 		}
 	}
-	// {
-	// 	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Fetching EncodingBase64 transaction..."))
-	// 	tx64, err := rpcClient.GetTransaction(
-	// 		context.TODO(),
-	// 		signature,
-	// 		&rpc.GetTransactionOpts{
-	// 			Encoding:                       solana.EncodingBase64,
-	// 			Commitment:                     rpc.CommitmentConfirmed,
-	// 			MaxSupportedTransactionVersion: &cero,
-	// 		},
-	// 	)
-	// 	if err != nil {
-	// 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching EncodingBase64 transaction: %v", err)))
-	// 	}
-
-	// 	if tx64 != nil {
-	// 		spew.Dump(tx64)
-	// 		spew.Dump(tx64.Transaction.GetBinary())
-	// 	}
-	// }
 
 }
