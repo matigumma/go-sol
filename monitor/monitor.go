@@ -108,9 +108,6 @@ func init() {
 
 func displayTokenTable(tokens []TokenInfo) {
 	table.ClearRows() // Clear previous rows
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
-	table.SetColWidth(20) // Double the width for SYMBOL
 
 	seenAddresses := make(map[string]bool)
 	for _, token := range tokens {
