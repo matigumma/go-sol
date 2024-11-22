@@ -63,8 +63,10 @@ type TokenMeta struct {
 	UpdateAuthority string `json:"updateAuthority"`
 }
 
-type KnownAccounts struct {
-	// Define fields for known accounts
+type KnownAccounts map[string]struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
+}
 }
 
 type TopHolders struct {
