@@ -56,8 +56,17 @@ func displayTokenTable(tokens []TokenInfo) {
 }
 
 type Report struct {
-	TokenMeta map[string]interface{} `json:"tokenMeta"`
-	Risks     []Risk                 `json:"risks"`
+	TokenMeta            map[string]interface{} `json:"tokenMeta"`
+	Risks                []Risk                 `json:"risks"`
+	TotalMarketLiquidity float64                `json:"totalMarketLiquidity"`
+	TotalLPProviders     int                    `json:"totalLPProviders"`
+	Rugged               bool                   `json:"rugged"`
+	KnownAccounts        map[string]interface{} `json:"knownAccounts"`
+	Verification         string                 `json:"verification"`
+	Score                int                    `json:"score"`
+	FreezeAuthority      string                 `json:"freezeAuthority"`
+	MintAuthority        string                 `json:"mintAuthority"`
+	TopHolders           []string               `json:"topHolders"`
 }
 
 type Risk struct {
