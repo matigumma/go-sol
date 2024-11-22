@@ -10,6 +10,9 @@ import (
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
 	"github.com/gagliardetto/solana-go/rpc/ws"
+	"net/http"
+	"encoding/json"
+	"time"
 )
 
 func Run() {
@@ -18,6 +21,17 @@ func Run() {
 	if err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
+
+	// Check mint address for additional information
+	symbol, risks, err := checkMintAddress(balance.Mint.String())
+	if err != nil {
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
+	} else {
+		slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
+		for _, risk := range risks {
+			slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
+		}
+	}
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
@@ -25,6 +39,55 @@ func Run() {
 	if err := SubscribeToLogs(client, pubkey); err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
 	}
+}
+
+type Risk struct {
+	Name  string
+	Score int64
+	Level string
+}
+
+func checkMintAddress(mint string) (string, []Risk, error) {
+	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
+	var symbol string
+	var risks []Risk
+
+	for attempts := 0; attempts < 3; attempts++ {
+		resp, err := http.Get(url)
+		if err != nil {
+			return "", nil, err
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode == http.StatusOK {
+			var report map[string]interface{}
+			if err := json.NewDecoder(resp.Body).Decode(&report); err != nil {
+				return "", nil, err
+			}
+
+			if risksObj, ok := report["risks"].(map[string]interface{}); ok {
+				if risksArray, ok := risksObj["level"].([]interface{}); ok {
+					for _, r := range risksArray {
+						riskMap := r.(map[string]interface{})
+						name := riskMap["name"].(string)
+						score := int64(riskMap["score"].(float64))
+						level := riskMap["level"].(string)
+						risks = append(risks, Risk{Name: name, Score: score, Level: level})
+					}
+				}
+			}
+
+			if tokenMeta, ok := report["tokenMeta"].(map[string]interface{}); ok {
+				if sym, ok := tokenMeta["symbol"].(string); ok {
+					symbol = sym
+				}
+			}
+			break
+		}
+		time.Sleep(5 * time.Second)
+	}
+
+	return symbol, risks, nil
 }
 
 // ConnectToWebSocket establishes a WebSocket connection to the Solana MainNet Beta.
