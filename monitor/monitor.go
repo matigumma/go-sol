@@ -7,12 +7,13 @@ import (
 
 	"github.com/fatih/color"
 
+	"encoding/json"
+	"net/http"
+	"time"
+
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
 	"github.com/gagliardetto/solana-go/rpc/ws"
-	"net/http"
-	"encoding/json"
-	"time"
 )
 
 func Run() {
@@ -22,16 +23,6 @@ func Run() {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
 
-	// Check mint address for additional information
-	symbol, risks, err := checkMintAddress(balance.Mint.String())
-	if err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
-	} else {
-		slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
-		for _, risk := range risks {
-			slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
-		}
-	}
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
@@ -92,7 +83,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 
 // ConnectToWebSocket establishes a WebSocket connection to the Solana MainNet Beta.
 func ConnectToWebSocket() (*ws.Client, error) {
-	client, err := ws.Connect(context.Background(), rpc.MainNetBeta_WS) // "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
+	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +121,7 @@ func processLogMessage(msg *ws.LogResult) {
 	signature := msg.Value.Signature
 	slog.Info(color.New(color.BgHiMagenta).SprintFunc()(fmt.Sprintf("Transaction Signature: %s", signature)))
 
-	rpcClient := rpc.New(rpc.MainNetBeta_RPC)
+	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	getTransactionDetails(rpcClient, signature)
 }
 
@@ -192,6 +183,17 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 					slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
 					slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
 					slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
+
+					// Check mint address for additional information
+					symbol, risks, err := checkMintAddress(balance.Mint.String())
+					if err != nil {
+						slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
+					} else {
+						slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
+						for _, risk := range risks {
+							slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
+						}
+					}
 				}
 			}
 		}
