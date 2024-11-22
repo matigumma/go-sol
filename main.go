@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gosol/monitor"
 	"gosol/ui"
 	"os"
 
@@ -11,35 +12,15 @@ import (
 func main() {
 	// monitor.Run()
 
-	content := `# Hello World
-
-	This is a simple example of Markdown rendering with Glamour!
-	Check out the [other examples](https://github.com/charmbracelet/glamour/tree/master/examples) too.
-
-	Bye!
-	`
-
-	// r, _ := glamour.NewTermRenderer(
-	// 	// detect background color and pick either the default dark or light theme
-	// 	glamour.WithStylePath("dark"),
-	// 	// wrap output at specific width (default is 80)
-	// 	glamour.WithWordWrap(40),
-	// )
-
-	// out, err := r.Render(in)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Print(out)
-
-	model, err := ui.NewExample(content)
-	if err != nil {
-		fmt.Println("Could not initialize Bubble Tea model:", err)
-		os.Exit(1)
+	tokens := []monitor.TokenInfo{
+		{Symbol: "SOL", Address: "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5", CreatedAt: "2024-11-22", Score: 1000},
+		// Add more tokens as needed
 	}
 
+	model := ui.NewModel(tokens)
+
 	if _, err := tea.NewProgram(model).Run(); err != nil {
-		fmt.Println("Bummer, there's been an error:", err)
+		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
 }

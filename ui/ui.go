@@ -1,7 +1,8 @@
 package ui
 
 import (
-	"github.com/charmbracelet/bubbles/viewport"
+	"fmt"
+	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
@@ -9,63 +10,62 @@ import (
 
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
-type example struct {
-	viewport viewport.Model
+type Model struct {
+	table table.Model
 }
 
-func NewExample(content string) (*example, error) {
-	const width = 78
+func NewModel(tokens []monitor.TokenInfo) Model {
+	columns := []table.Column{
+		{Title: "SYMBOL", Width: 20},
+		{Title: "ADDRESS", Width: 10},
+		{Title: "CREATED AT", Width: 20},
+		{Title: "SCORE", Width: 10},
+		{Title: "URL", Width: 40},
+	}
 
-	vp := viewport.New(width, 20)
-	vp.Style = lipgloss.NewStyle().
-		BorderStyle(lipgloss.RoundedBorder()).
-		BorderForeground(lipgloss.Color("62"))
-		// PaddingRight(2)
+	rows := []table.Row{}
+	seenAddresses := make(map[string]bool)
+	for _, token := range tokens {
+		if !seenAddresses[token.Address] {
+			address := token.Address[:7]
+			url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
+			scoreColor := lipgloss.Color("2") // Green
+			if token.Score > 2000 {
+				scoreColor = lipgloss.Color("3") // Yellow
+			}
+			if token.Score > 4000 {
+				scoreColor = lipgloss.Color("1") // Red
+			}
+			row := table.Row{token.Symbol, address, token.CreatedAt, lipgloss.NewStyle().Foreground(scoreColor).Render(fmt.Sprintf("%d", token.Score)), url}
+			rows = append(rows, row)
+			seenAddresses[token.Address] = true
+		}
+	}
 
-	renderer, err := glamour.NewTermRenderer(
-		glamour.WithAutoStyle(),
-		glamour.WithWordWrap(width),
+	t := table.New(
+		table.WithColumns(columns),
+		table.WithRows(rows),
+		table.WithFocused(true),
 	)
-	if err != nil {
-		return nil, err
-	}
 
-	str, err := renderer.Render(content)
-	if err != nil {
-		return nil, err
-	}
-
-	vp.SetContent(str)
-
-	return &example{
-		viewport: vp,
-	}, nil
+	return Model{table: t}
 }
 
-func (e example) Init() tea.Cmd {
+func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-func (e example) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "q", "ctrl+c", "esc":
-			return e, tea.Quit
-		default:
-			var cmd tea.Cmd
-			e.viewport, cmd = e.viewport.Update(msg)
-			return e, cmd
+		case "ctrl+c", "q":
+			return m, tea.Quit
 		}
-	default:
-		return e, nil
 	}
+	return m, nil
 }
 
-func (e example) View() string {
-	return e.viewport.View() + e.helpView()
-}
-
-func (e example) helpView() string {
-	return helpStyle("\n  ↑/↓: Navigate • q: Quit\n")
+func (m Model) View() string {
+	return m.table.View()
 }
