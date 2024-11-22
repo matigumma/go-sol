@@ -86,7 +86,15 @@ type Risk struct {
 	Level string
 }
 
-func Run(tokenUpdates chan<- []TokenInfo) {
+type Monitor struct {
+	tokenUpdates chan<- []TokenInfo
+}
+
+func NewMonitor(tokenUpdates chan<- []TokenInfo) *Monitor {
+	return &Monitor{tokenUpdates: tokenUpdates}
+}
+
+func (m *Monitor) Run() {
 	updateStatus("Connecting to WebSocket...")
 	client, err := ConnectToWebSocket()
 	if err != nil {
@@ -170,7 +178,7 @@ func displayTokenTable(tokens []TokenInfo) {
 	}
 }
 
-func checkMintAddress(mint string, tokenUpdates chan<- []TokenInfo) (string, []Risk, error) {
+func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
 	var risks []Risk
@@ -207,7 +215,7 @@ func checkMintAddress(mint string, tokenUpdates chan<- []TokenInfo) (string, []R
 			// Update the in-memory state with the report
 			mintState[mint] = []Report{report}
 
-			tokenUpdates <- tokens
+			m.tokenUpdates <- tokens
 			break
 		}
 		time.Sleep(5 * time.Second)
@@ -247,7 +255,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 }
 
-func processLogMessage(msg *ws.LogResult) {
+func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 	if msg.Value.Err != nil {
 		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err))
 		return
@@ -257,10 +265,10 @@ func processLogMessage(msg *ws.LogResult) {
 	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
-	getTransactionDetails(rpcClient, signature, tokenUpdates)
+	m.getTransactionDetails(rpcClient, signature)
 }
 
-func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature, tokenUpdates chan<- []TokenInfo) {
+func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
 	updateStatus("GetTransaction EncodingBase58...")
