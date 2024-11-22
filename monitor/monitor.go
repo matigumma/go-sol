@@ -87,18 +87,18 @@ type Risk struct {
 }
 
 func Run() {
-	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Connecting to WebSocket..."))
+	updateStatus("Connecting to WebSocket...")
 	client, err := ConnectToWebSocket()
 	if err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
+		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
 	}
 
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	slog.Info(color.New(color.BgHiCyan).SprintFunc()("Subscribing to logs..."))
+	updateStatus("Subscribing to logs...")
 	if err := SubscribeToLogs(client, pubkey); err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
+		updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
 	}
 }
 
@@ -124,7 +124,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
 		if err != nil {
-			slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching data: %v", err)))
+			updateStatus(fmt.Sprintf("Error fetching data: %v", err))
 			return "", nil, err
 		}
 		defer resp.Body.Close()
@@ -182,7 +182,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	slog.Info(color.New(color.BgHiGreen).SprintFunc()("Start monitoring..."))
+	updateStatus("Start monitoring...")
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -194,12 +194,12 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 
 func processLogMessage(msg *ws.LogResult) {
 	if msg.Value.Err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Transaction failed: %v", msg.Value.Err)))
+		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err))
 		return
 	}
 
 	signature := msg.Value.Signature
-	slog.Info(color.New(color.BgHiMagenta).SprintFunc()(fmt.Sprintf("Transaction Signature: %s", signature)))
+	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	getTransactionDetails(rpcClient, signature)
@@ -208,7 +208,7 @@ func processLogMessage(msg *ws.LogResult) {
 func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	slog.Info(color.New(color.BgHiBlue).SprintFunc()("GetTransaction EncodingBase58..."))
+	updateStatus("GetTransaction EncodingBase58...")
 	tx58, err := rpcClient.GetTransaction(
 		context.TODO(),
 		signature,
@@ -219,7 +219,7 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 		},
 	)
 	if err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err)))
+		updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err))
 	}
 
 	if tx58 != nil {
@@ -240,11 +240,11 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 				// Check mint address for additional information
 				symbol, risks, err := checkMintAddress(balance.Mint.String())
 				if err != nil {
-					slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error checking mint address: %v", err)))
+					updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
 				} else {
-					slog.Info(color.New(color.BgHiGreen).SprintFunc()(fmt.Sprintf("Token Symbol: %s", symbol)))
+					updateStatus(fmt.Sprintf("Token Symbol: %s", symbol))
 					for _, risk := range risks {
-						slog.Info(color.New(color.BgHiRed).SprintFunc()(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level)))
+						updateStatus(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level))
 					}
 				}
 			}
