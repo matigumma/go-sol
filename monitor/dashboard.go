@@ -18,6 +18,7 @@ func UpdateStatus(status string) {
 type model struct {
 	mintState map[string][]Report
 	status    string
+	indicator int
 }
 
 var (
@@ -54,7 +55,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tickMsg:
 		m.setStatus("Updating dashboard...")
 		time.Sleep(1 * time.Second) // Simulate some work
-		m.setStatus("Dashboard updated.")
+		m.indicator = (m.indicator + 1) % 4 // Update the indicator
+		m.setStatus(fmt.Sprintf("Dashboard updated. %s", spinner(m.indicator)))
 		return m, tickCmd()
 	}
 	return m, nil
@@ -91,7 +93,10 @@ func (m model) View() string {
 	return b.String() + "\n" + statusStyle.Render(m.status)
 }
 
-func RunDashboard(mintState map[string][]Report) {
+func spinner(step int) string {
+	frames := []string{"|", "/", "-", "\\"}
+	return frames[step]
+}
 	p := tea.NewProgram(NewModel(mintState), tea.WithAltScreen())
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)
