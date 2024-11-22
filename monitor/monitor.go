@@ -19,40 +19,11 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
-func Run() {
-	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Connecting to WebSocket..."))
-	client, err := ConnectToWebSocket()
-	if err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
-	}
-}
-
-	defer client.Close()
-
-	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	slog.Info(color.New(color.BgHiCyan).SprintFunc()("Subscribing to logs..."))
-	if err := SubscribeToLogs(client, pubkey); err != nil {
-		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
-	}
-
 type TokenInfo struct {
 	Symbol    string
 	Address   string
 	CreatedAt string
 	Score     int64
-}
-
-func displayTokenTable(tokens []TokenInfo) {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
-
-	for _, token := range tokens {
-		address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
-		url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
-		table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
-	}
-
-	table.Render()
 }
 
 type TokenMeta struct {
@@ -66,7 +37,6 @@ type TokenMeta struct {
 type KnownAccounts map[string]struct {
 	Name string `json:"name"`
 	Type string `json:"type"`
-}
 }
 
 type TopHolders struct {
@@ -93,6 +63,35 @@ type Risk struct {
 	Level string
 }
 
+func Run() {
+	slog.Info(color.New(color.BgHiBlue).SprintFunc()("Connecting to WebSocket..."))
+	client, err := ConnectToWebSocket()
+	if err != nil {
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
+	}
+
+	defer client.Close()
+
+	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
+	slog.Info(color.New(color.BgHiCyan).SprintFunc()("Subscribing to logs..."))
+	if err := SubscribeToLogs(client, pubkey); err != nil {
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
+	}
+}
+
+func displayTokenTable(tokens []TokenInfo) {
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
+
+	for _, token := range tokens {
+		address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
+		url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", token.Address)
+		table.Append([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url})
+	}
+
+	table.Render()
+}
+
 func checkMintAddress(mint string) (string, []Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
@@ -115,9 +114,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 
 			risks = report.Risks
 
-			if sym, ok := report.TokenMeta["symbol"].(string); ok {
-				symbol = sym
-			}
+			symbol = report.TokenMeta.Symbol
 
 			createdAt := time.Now().Format("2006-01-02 15:04:05")
 			for _, risk := range risks {
