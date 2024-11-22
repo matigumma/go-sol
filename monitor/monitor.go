@@ -3,15 +3,17 @@ package monitor
 import (
 	"context"
 	"fmt"
+	"log/slog"
 
 	"encoding/json"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/bubbles/table"
+	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/fatih/color"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -26,7 +28,7 @@ type TokenInfo struct {
 }
 
 func updateStatus(status string) {
-	UpdateStatus(status)
+	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
 type TokenMeta struct {
