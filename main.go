@@ -31,7 +31,7 @@ func main() {
 		item{title: "Dashboard", desc: "Run the dashboard mode"},
 	}
 
-	const defaultWidth = 20
+	const defaultWidth = 30 // Increase the width to accommodate the title and options
 	const listHeight = 10 // Define the height of the list
 
 	l := list.New(items, list.NewDefaultDelegate(), defaultWidth, listHeight)
