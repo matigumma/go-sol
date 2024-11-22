@@ -69,7 +69,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				case "Monitor":
 					monitor.Run()
 				case "Dashboard":
-					monitor.RunDashboard(monitor.GetMintState())
+					mintState := monitor.GetMintState()
+					p := tea.NewProgram(monitor.NewModel(mintState), tea.WithAltScreen())
+					if err := p.Start(); err != nil {
+						fmt.Printf("Error: %v", err)
+						os.Exit(1)
+					}
 				}
 			}
 			return m, tea.Quit
