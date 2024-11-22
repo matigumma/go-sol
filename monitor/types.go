@@ -1,5 +1,7 @@
 package monitor
 
+import "time"
+
 type TokenInfo struct {
 	Symbol    string
 	Address   string
@@ -43,6 +45,7 @@ type Report struct {
 	FreezeAuthority      string        `json:"freezeAuthority"`
 	MintAuthority        string        `json:"mintAuthority"`
 	TopHolders           []Holder      `json:"topHolders"`
+	DetectedAt           time.Time     `json:"detectedAt"`
 }
 
 type MintInfo struct {
