@@ -43,7 +43,7 @@ type TokenInfo struct {
 
 func displayTokenTable(tokens []TokenInfo) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE"})
+	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
 
 	for _, token := range tokens {
 		address := fmt.Sprintf("%s...%s", token.Address[:4], token.Address[len(token.Address)-4:])
