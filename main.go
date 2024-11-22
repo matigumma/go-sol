@@ -44,7 +44,7 @@ func main() {
 
 	m := model{list: l}
 
-	p := tea.NewProgram(m)
+	p := tea.NewProgram(m, tea.WithAltScreen(), tea.WithSignalHandler())
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)
 		os.Exit(1)
