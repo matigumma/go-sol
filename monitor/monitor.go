@@ -25,6 +25,7 @@ func Run() {
 	if err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
+}
 
 	defer client.Close()
 
