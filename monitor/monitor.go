@@ -55,6 +55,11 @@ func displayTokenTable(tokens []TokenInfo) {
 	table.Render()
 }
 
+type Report struct {
+	TokenMeta map[string]interface{} `json:"tokenMeta"`
+	Risks     []Risk                 `json:"risks"`
+}
+
 type Risk struct {
 	Name  string
 	Score int64
@@ -76,25 +81,15 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 		defer resp.Body.Close()
 
 		if resp.StatusCode == http.StatusOK {
-			var report map[string]interface{}
+			var report Report
 			if err := json.NewDecoder(resp.Body).Decode(&report); err != nil {
 				return "", nil, err
 			}
 
-			if risksArray, ok := report["risks"].([]interface{}); ok {
-				for _, r := range risksArray {
-					riskMap := r.(map[string]interface{})
-					name := riskMap["name"].(string)
-					score := int64(riskMap["score"].(float64))
-					level := riskMap["level"].(string)
-					risks = append(risks, Risk{Name: name, Score: score, Level: level})
-				}
-			}
+			risks = report.Risks
 
-			if tokenMeta, ok := report["tokenMeta"].(map[string]interface{}); ok {
-				if sym, ok := tokenMeta["symbol"].(string); ok {
-					symbol = sym
-				}
+			if sym, ok := report.TokenMeta["symbol"].(string); ok {
+				symbol = sym
 			}
 
 			createdAt := time.Now().Format("2006-01-02 15:04:05")
