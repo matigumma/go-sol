@@ -69,7 +69,7 @@ type MintInfo struct {
 	Risks  []Risk
 }
 
-var mintState []MintInfo
+var mintState = make(map[string][]Report)
 
 type Risk struct {
 	Name  string
@@ -140,11 +140,8 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 				}
 				tokens = append(tokens, token)
 			}
-			// Update the in-memory state
-			mintState = append(mintState, MintInfo{
-				Symbol: symbol,
-				Risks:  risks,
-			}
+			// Update the in-memory state with the report
+			mintState[mint] = append(mintState[mint], report)
 
 			displayTokenTable(tokens)
 			break
