@@ -32,6 +32,7 @@ func main() {
 	}
 
 	const defaultWidth = 20
+	const listHeight = 10 // Define the height of the list
 
 	l := list.New(items, list.NewDefaultDelegate(), defaultWidth, listHeight)
 	l.Title = "Select mode to run the application"
