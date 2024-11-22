@@ -27,7 +27,7 @@ type TokenInfo struct {
 	Score     int64
 }
 
-func updateStatus(status string) {
+func UpdateStatus(status string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
@@ -76,7 +76,7 @@ type MintInfo struct {
 
 var mintState = make(map[string][]Report)
 
-func GetMintState() map[string][]Report {
+func (m *Monitor) GetMintState() map[string][]Report {
 	return mintState
 }
 
@@ -225,7 +225,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 }
 
 // ConnectToWebSocket establishes a WebSocket connection to the Solana MainNet Beta.
-func ConnectToWebSocket() (*ws.Client, error) {
+func (m *Monitor) ConnectToWebSocket() (*ws.Client, error) {
 	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
 	if err != nil {
 		return nil, err
@@ -233,7 +233,7 @@ func ConnectToWebSocket() (*ws.Client, error) {
 	return client, nil
 }
 
-func SubscribeToLogs(client *ws.Client, pubkey string) error {
+func (m *Monitor) SubscribeToLogs(client *ws.Client, pubkey string) error {
 	program := solana.MustPublicKeyFromBase58(pubkey)
 
 	sub, err := client.LogsSubscribeMentions(
