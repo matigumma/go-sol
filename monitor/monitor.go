@@ -20,18 +20,15 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
-
 func updateStatus(status string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
-
 
 var mintState = make(map[string][]Report)
 
 func (m *Monitor) getMintState() map[string][]Report {
 	return mintState
 }
-
 
 type Monitor struct {
 	tokenUpdates chan<- []TokenInfo
@@ -41,19 +38,19 @@ func NewMonitor(tokenUpdates chan<- []TokenInfo) *Monitor {
 	return &Monitor{tokenUpdates: tokenUpdates}
 }
 
-func (m *Monitor) run() {
-	updateStatus("Connecting to WebSocket...")
+func (m *Monitor) Run() {
+	// updateStatus("Connecting to WebSocket...")
 	client, err := m.connectToWebSocket()
 	if err != nil {
-		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
+		// updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
 	}
 
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	updateStatus("Subscribing to logs...")
+	// updateStatus("Subscribing to logs...")
 	if err := m.subscribeToLogs(client, pubkey); err != nil {
-		updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
+		// updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
 	}
 }
 
@@ -134,7 +131,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
 		if err != nil {
-			updateStatus(fmt.Sprintf("Error fetching data: %v", err))
+			// updateStatus(fmt.Sprintf("Error fetching data: %v", err))
 			return "", nil, err
 		}
 		defer resp.Body.Close()
@@ -162,6 +159,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []Risk, error) {
 			// Update the in-memory state with the report
 			mintState[mint] = []Report{report}
 
+			// se envia el listado de tokens a la UI
 			m.tokenUpdates <- tokens
 			break
 		}
@@ -191,7 +189,7 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	updateStatus("Start monitoring...")
+	// updateStatus("Start monitoring...")
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -203,12 +201,12 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 
 func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 	if msg.Value.Err != nil {
-		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err))
+		// updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err))
 		return
 	}
 
 	signature := msg.Value.Signature
-	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
+	// updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	m.getTransactionDetails(rpcClient, signature)
@@ -217,7 +215,7 @@ func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	updateStatus("GetTransaction EncodingBase58...")
+	// updateStatus("GetTransaction EncodingBase58...")
 	tx58, err := rpcClient.GetTransaction(
 		context.TODO(),
 		signature,
@@ -228,7 +226,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		},
 	)
 	if err != nil {
-		updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err))
+		// updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err))
 	}
 
 	if tx58 != nil {
@@ -246,18 +244,19 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 					mintState[balance.Mint.String()] = []Report{}
 				}
 
-				// Check mint address for additional information
+				// Check mint address for additional API information
 				symbol, risks, err := m.checkMintAddress(balance.Mint.String())
 				if err != nil {
-					updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
+					// updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
 				} else {
-					updateStatus(fmt.Sprintf("Token Symbol: %s", symbol))
+					// obtengo el symbol y risks validos
+
+					// updateStatus(fmt.Sprintf("Token Symbol: %s", symbol))
 					for _, risk := range risks {
-						updateStatus(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level))
+						// updateStatus(fmt.Sprintf("Risk: %s, Score: %d, Level: %s", risk.Name, risk.Score, risk.Level))
 					}
 				}
 			}
 		}
 	}
-
 }
