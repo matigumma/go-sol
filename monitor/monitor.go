@@ -69,7 +69,7 @@ type MintInfo struct {
 	Risks  []Risk
 }
 
-var mintState = make(map[string]MintInfo)
+var mintState []MintInfo
 
 type Risk struct {
 	Name  string
@@ -141,7 +141,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 				tokens = append(tokens, token)
 			}
 			// Update the in-memory state
-			mintState[mint] = MintInfo{
+			mintState = append(mintState, MintInfo{
 				Symbol: symbol,
 				Risks:  risks,
 			}
