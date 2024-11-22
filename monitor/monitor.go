@@ -81,27 +81,14 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 				return "", nil, err
 			}
 
-			if risksObj, ok := report["risks"].(map[string]interface{}); ok {
-				if risksArray, ok := risksObj["level"].([]interface{}); ok {
-					for _, r := range risksArray {
-						riskMap := r.(map[string]interface{})
-						name := riskMap["name"].(string)
-						score := int64(riskMap["score"].(float64))
-						level := riskMap["level"].(string)
-						risks = append(risks, Risk{Name: name, Score: score, Level: level})
-					}
-					createdAt := time.Now().Format("2006-01-02 15:04:05")
-					for _, risk := range risks {
-						token := TokenInfo{
-							Symbol:    symbol,
-							Address:   mint[:5] + "...",
-							CreatedAt: createdAt,
-							Score:     risk.Score,
-						}
-						tokens = append(tokens, token)
-					}
+			if risksArray, ok := report["risks"].([]interface{}); ok {
+				for _, r := range risksArray {
+					riskMap := r.(map[string]interface{})
+					name := riskMap["name"].(string)
+					score := int64(riskMap["score"].(float64))
+					level := riskMap["level"].(string)
+					risks = append(risks, Risk{Name: name, Score: score, Level: level})
 				}
-				displayTokenTable(tokens)
 			}
 
 			if tokenMeta, ok := report["tokenMeta"].(map[string]interface{}); ok {
@@ -109,6 +96,18 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 					symbol = sym
 				}
 			}
+
+			createdAt := time.Now().Format("2006-01-02 15:04:05")
+			for _, risk := range risks {
+				token := TokenInfo{
+					Symbol:    symbol,
+					Address:   mint[:5] + "...",
+					CreatedAt: createdAt,
+					Score:     risk.Score,
+				}
+				tokens = append(tokens, token)
+			}
+			displayTokenTable(tokens)
 			break
 		}
 		time.Sleep(5 * time.Second)
