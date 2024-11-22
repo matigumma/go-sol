@@ -39,26 +39,19 @@ type KnownAccounts map[string]struct {
 	Type string `json:"type"`
 }
 
-type TopHolders struct {
-	Holders []string
+type Holder struct {
+	Address        string  `json:"address"`
+	Amount         int64   `json:"amount"`
+	Decimals       int     `json:"decimals"`
+	Pct            float64 `json:"pct"`
+	UiAmount       float64 `json:"uiAmount"`
+	UiAmountString string  `json:"uiAmountString"`
+	Owner          string  `json:"owner"`
+	Insider        bool    `json:"insider"`
 }
 
-func (t *TopHolders) UnmarshalJSON(data []byte) error {
-	// Attempt to unmarshal into a slice of strings
-	var holders []string
-	if err := json.Unmarshal(data, &holders); err == nil {
-		t.Holders = holders
-		return nil
-	}
-
-	// If it fails, attempt to unmarshal into an empty struct (or any other expected type)
-	var emptyStruct struct{}
-	if err := json.Unmarshal(data, &emptyStruct); err == nil {
-		t.Holders = []string{}
-		return nil
-	}
-
-	return fmt.Errorf("failed to unmarshal TopHolders: %s", string(data))
+type TopHolders struct {
+	Holders []Holder `json:"holders"`
 }
 
 type Report struct {
