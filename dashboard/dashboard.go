@@ -5,12 +5,28 @@ import (
 	"sort"
 	"strings"
 
+	"time"
+
 	"gosol/monitor"
+	"github.com/charmbracelet/lipgloss"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type model struct {
 	mintState map[string][]monitor.Report
+	status string
+}
+
+var (
+	titleStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205"))
+	mintStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("69"))
+	scoreStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("229"))
+	riskStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("160"))
+	statusStyle = lipgloss.NewStyle().Background(lipgloss.Color("240")).Foreground(lipgloss.Color("229")).Bold(true)
+)
+
+func (m *model) setStatus(status string) {
+	m.status = status
 }
 
 type tickMsg struct{}
@@ -32,6 +48,9 @@ func tickCmd() tea.Cmd {
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg.(type) {
 	case tickMsg:
+		m.setStatus("Updating dashboard...")
+		time.Sleep(1 * time.Second) // Simulate some work
+		m.setStatus("Dashboard updated.")
 		return m, tickCmd()
 	}
 	return m, nil
@@ -48,24 +67,24 @@ func (m model) View() string {
 		return true
 	})
 
-	b.WriteString("Mint Addresses:\n")
+	b.WriteString(titleStyle.Render("Mint Addresses:\n"))
 	for _, mint := range mints {
-		b.WriteString(fmt.Sprintf("- %s\n", mint))
+		b.WriteString(mintStyle.Render(fmt.Sprintf("- %s\n", mint)))
 	}
 
-	b.WriteString("\nReports:\n")
+	b.WriteString(titleStyle.Render("\nReports:\n"))
 	for _, mint := range mints {
 		reports := m.mintState[mint]
 		for _, report := range reports {
-			b.WriteString(fmt.Sprintf("Mint: %s\n", mint))
+			b.WriteString(mintStyle.Render(fmt.Sprintf("Mint: %s\n", mint)))
 			b.WriteString(fmt.Sprintf("Symbol: %s\n", report.TokenMeta.Symbol))
-			b.WriteString(fmt.Sprintf("Score: %d\n", report.Score))
-			b.WriteString(fmt.Sprintf("Risks: %d\n", len(report.Risks)))
+			b.WriteString(scoreStyle.Render(fmt.Sprintf("Score: %d\n", report.Score)))
+			b.WriteString(riskStyle.Render(fmt.Sprintf("Risks: %d\n", len(report.Risks))))
 			b.WriteString("\n")
 		}
 	}
 
-	return b.String()
+	return b.String() + "\n" + statusStyle.Render(m.status)
 }
 
 func RunDashboard(mintState map[string][]monitor.Report) {
