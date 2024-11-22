@@ -2621,7 +2621,8 @@ func main() {
       dec := bin.NewBinDecoder(data)
       err := dec.Decode(&tokAcc)
       if err != nil {
-        panic(err)
+        fmt.Println("Error receiving message:", err)
+        continue
       }
       tokenAccounts = append(tokenAccounts, tokAcc)
     }
@@ -2956,9 +2957,15 @@ import (
 
 func main() {
   ctx := context.Background()	
-  client, err := ws.Connect(context.Background(), rpc.MainNetBeta_WS)
-  if err != nil {
-    panic(err)
+  var client *ws.Client
+  var err error
+  for {
+    client, err = ws.Connect(context.Background(), rpc.MainNetBeta_WS)
+    if err == nil {
+      break
+    }
+    fmt.Println("Failed to connect, retrying in 5 seconds...")
+    time.Sleep(5 * time.Second)
   }
   program := solana.MustPublicKeyFromBase58("9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin") // serum
 
