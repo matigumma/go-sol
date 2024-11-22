@@ -5,16 +5,17 @@ import (
 	"sort"
 	"strings"
 
+	"gosol/monitor"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type model struct {
-	mintState map[string][]Report
+	mintState map[string][]monitor.Report
 }
 
 type tickMsg struct{}
 
-func NewModel(mintState map[string][]Report) model {
+func NewModel(mintState map[string][]monitor.Report) model {
 	return model{mintState: mintState}
 }
 
@@ -67,7 +68,7 @@ func (m model) View() string {
 	return b.String()
 }
 
-func RunDashboard(mintState map[string][]Report) {
+func RunDashboard(mintState map[string][]monitor.Report) {
 	p := tea.NewProgram(NewModel(mintState))
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)
