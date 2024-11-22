@@ -75,8 +75,9 @@ func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 		return
 	}
 
-	if tx.Transaction.Meta != nil {
-		for _, balance := range tx.Transaction.Meta.PostTokenBalances {
+	parsedTx := tx.Transaction.GetParsedTransaction()
+	if parsedTx.Meta != nil {
+		for _, balance := range parsedTx.Meta.PostTokenBalances {
 			if balance.Owner == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint != "So11111111111111111111111111111111111111112" {
 				fmt.Println("========== New Token Found ==========")
 				fmt.Println("Mint Address:", balance.Mint)
