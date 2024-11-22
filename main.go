@@ -32,7 +32,7 @@ func main() {
 	}
 
 	const defaultWidth = 30 // Increase the width to accommodate the title and options
-	const listHeight = 10 // Define the height of the list
+	const listHeight = 10   // Define the height of the list
 
 	l := list.New(items, list.NewDefaultDelegate(), defaultWidth, listHeight)
 	l.Title = "Select mode to run the application"
@@ -44,7 +44,7 @@ func main() {
 
 	m := model{list: l}
 
-	p := tea.NewProgram(m, tea.WithAltScreen(), tea.WithSignalHandler())
+	p := tea.NewProgram(m, tea.WithAltScreen())
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)
 		os.Exit(1)
