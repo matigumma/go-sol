@@ -3,7 +3,8 @@ package monitor
 import (
 	"context"
 	"fmt"
-	"log"
+	"log/slog"
+	"github.com/fatih/color"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -11,15 +12,17 @@ import (
 )
 
 func Run() {
+	slog.Info(color.New(color.BgGreen).SprintFunc()("Connecting to WebSocket..."))
 	client, err := ConnectToWebSocket()
 	if err != nil {
-		log.Fatalf("Failed to connect to WebSocket: %v", err)
+		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Failed to connect to WebSocket: %v", err)))
 	}
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
+	slog.Info(color.New(color.BgGreen).SprintFunc()("Subscribing to logs..."))
 	if err := SubscribeToLogs(client, pubkey); err != nil {
-		log.Fatalf("Failed to subscribe to logs: %v", err)
+		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
 	}
 }
 
@@ -44,7 +47,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	fmt.Println("Start monitoring...")
+	slog.Info(color.New(color.BgGreen).SprintFunc()("Start monitoring..."))
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -56,7 +59,7 @@ func SubscribeToLogs(client *ws.Client, pubkey string) error {
 
 func processLogMessage(msg *ws.LogResult) {
 	signature := msg.Value.Signature
-	fmt.Println("Transaction Signature:", signature)
+	slog.Info(color.New(color.BgBlue).SprintFunc()(fmt.Sprintf("Transaction Signature: %s", signature)))
 
 	rpcClient := rpc.New(rpc.MainNetBeta_RPC)
 	getTransactionDetails(rpcClient, signature.String())
@@ -75,16 +78,16 @@ func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 		},
 	)
 	if err != nil {
-		fmt.Println("Error fetching transaction:", err)
+		slog.Error(color.New(color.BgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
 		return
 	}
 
 	if tx.Meta != nil {
 		for _, balance := range tx.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
-				fmt.Println("========== New Token Found ==========")
-				fmt.Println("Mint Address:", balance.Mint)
-				fmt.Println("=====================================")
+				slog.Info(color.New(color.BgYellow).SprintFunc()("========== New Token Found =========="))
+				slog.Info(color.New(color.BgYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
+				slog.Info(color.New(color.BgYellow).SprintFunc()("====================================="))
 			}
 		}
 	}
