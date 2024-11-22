@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
+	"gosol/dashboard"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -24,6 +25,10 @@ type TokenInfo struct {
 	Address   string
 	CreatedAt string
 	Score     int64
+}
+
+func updateStatus(status string) {
+	dashboard.UpdateStatus(status)
 }
 
 type TokenMeta struct {
