@@ -33,7 +33,6 @@ func Run() {
 	if err := SubscribeToLogs(client, pubkey); err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Failed to subscribe to logs: %v", err)))
 	}
-}
 
 type TokenInfo struct {
 	Symbol    string
