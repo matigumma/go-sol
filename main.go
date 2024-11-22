@@ -28,7 +28,6 @@ type model struct {
 func main() {
 	items := []list.Item{
 		item{title: "Monitor", desc: "Run the monitor mode"},
-		item{title: "Dashboard", desc: "Run the dashboard mode"},
 	}
 
 	const defaultWidth = 30 // Increase the width to accommodate the title and options
@@ -69,13 +68,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				switch m.choice {
 				case "Monitor":
 					monitor.Run()
-				case "Dashboard":
-					mintState := monitor.GetMintState()
-					p := tea.NewProgram(monitor.NewModel(mintState), tea.WithAltScreen())
-					if err := p.Start(); err != nil {
-						fmt.Printf("Error: %v", err)
-						os.Exit(1)
-					}
 				}
 			}
 			return m, tea.Quit
