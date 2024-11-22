@@ -7,10 +7,7 @@ import (
 
 	"time"
 
-	"github.com/charmbracelet/lipgloss"
-	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
-	tea "github.com/charmbracelet/bubbletea"
+	"gosol/monitor"
 )
 
 func UpdateStatus(status string) {
@@ -93,7 +90,7 @@ func (m model) View() string {
 }
 
 func RunDashboard(mintState map[string][]monitor.Report) {
-	p := tea.NewProgram(NewModel(mintState), tea.WithAltScreen(), tea.WithSignalHandler())
+	p := tea.NewProgram(NewModel(mintState), tea.WithAltScreen())
 	if err := p.Start(); err != nil {
 		fmt.Printf("Error: %v", err)
 	}
