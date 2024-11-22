@@ -153,11 +153,11 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 
 			symbol = report.TokenMeta.Symbol
 
-			createdAt := time.Now().Format("2006-01-02 15:04:05")
+			createdAt := time.Now().Format("15:04")
 			for _, risk := range risks {
 				token := TokenInfo{
 					Symbol:    symbol,
-					Address:   mint[:5] + "...",
+					Address:   mint,
 					CreatedAt: createdAt,
 					Score:     risk.Score,
 				}
