@@ -9,7 +9,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/olekukonko/tablewriter"
+	"github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/bubbles/table"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -98,35 +100,72 @@ func Run() {
 	}
 }
 
-var table *tablewriter.Table
-
-func init() {
-	table = tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"SYMBOL", "ADDRESS", "CREATED AT", "SCORE", "URL"})
-	table.SetColWidth(20) // Double the width for SYMBOL
+type model struct {
+	table table.Model
 }
 
-func displayTokenTable(tokens []TokenInfo) {
-	table.ClearRows() // Clear previous rows
+func newModel(tokens []TokenInfo) model {
+	columns := []table.Column{
+		{Title: "SYMBOL", Width: 20},
+		{Title: "ADDRESS", Width: 10},
+		{Title: "CREATED AT", Width: 20},
+		{Title: "SCORE", Width: 10},
+		{Title: "URL", Width: 40},
+	}
 
+	rows := []table.Row{}
 	seenAddresses := make(map[string]bool)
 	for _, token := range tokens {
 		if !seenAddresses[token.Address] {
 			address := token.Address[:7]
 			url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
-			scoreColor := tablewriter.Colors{tablewriter.FgGreenColor}
+			scoreColor := lipgloss.Color("2") // Green
 			if token.Score > 2000 {
-				scoreColor = tablewriter.Colors{tablewriter.FgYellowColor}
+				scoreColor = lipgloss.Color("3") // Yellow
 			}
 			if token.Score > 4000 {
-				scoreColor = tablewriter.Colors{tablewriter.FgRedColor}
+				scoreColor = lipgloss.Color("1") // Red
 			}
-			table.Rich([]string{token.Symbol, address, token.CreatedAt, fmt.Sprintf("%d", token.Score), url}, []tablewriter.Colors{tablewriter.Colors{}, tablewriter.Colors{}, tablewriter.Colors{}, scoreColor, tablewriter.Colors{}})
+			row := table.Row{token.Symbol, address, token.CreatedAt, lipgloss.NewStyle().Foreground(scoreColor).Render(fmt.Sprintf("%d", token.Score)), url}
+			rows = append(rows, row)
 			seenAddresses[token.Address] = true
 		}
 	}
 
-	table.Render()
+	t := table.New(
+		table.WithColumns(columns),
+		table.WithRows(rows),
+		table.WithFocused(true),
+	)
+
+	return model{table: t}
+}
+
+func (m model) Init() tea.Cmd {
+	return nil
+}
+
+func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch msg.String() {
+		case "ctrl+c", "q":
+			return m, tea.Quit
+		}
+	}
+	return m, nil
+}
+
+func (m model) View() string {
+	return m.table.View()
+}
+
+func displayTokenTable(tokens []TokenInfo) {
+	p := tea.NewProgram(newModel(tokens))
+	if err := p.Start(); err != nil {
+		fmt.Printf("Error running program: %v", err)
+		os.Exit(1)
+	}
 }
 
 func checkMintAddress(mint string) (string, []Risk, error) {
