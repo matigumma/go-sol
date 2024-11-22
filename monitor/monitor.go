@@ -64,6 +64,13 @@ type Report struct {
 	TopHolders           []Holder      `json:"topHolders"`
 }
 
+type MintInfo struct {
+	Symbol string
+	Risks  []Risk
+}
+
+var mintState = make(map[string]MintInfo)
+
 type Risk struct {
 	Name  string
 	Score int64
@@ -133,6 +140,12 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 				}
 				tokens = append(tokens, token)
 			}
+			// Update the in-memory state
+			mintState[mint] = MintInfo{
+				Symbol: symbol,
+				Risks:  risks,
+			}
+
 			displayTokenTable(tokens)
 			break
 		}
