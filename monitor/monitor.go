@@ -68,6 +68,7 @@ func processLogMessage(msg *ws.LogResult) {
 func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 	cero := uint64(0) // :/
 
+	slog.Info(color.New(color.BgHiBlue).SprintFunc()(fmt.Sprintf("Fetching transaction details for signature: %s", signature)))
 	tx, err := rpcClient.GetTransaction(
 		context.TODO(),
 		solana.MustSignatureFromBase58(signature),
@@ -79,10 +80,12 @@ func getTransactionDetails(rpcClient *rpc.Client, signature string) {
 	)
 	if err != nil {
 		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
+		slog.Error(color.New(color.BgBlack, color.FgRed).SprintFunc()(fmt.Sprintf("Error fetching transaction: %v", err)))
 		return
 	}
 
 	if tx.Meta != nil {
+		slog.Info(color.New(color.BgHiBlue).SprintFunc()(fmt.Sprintf("Transaction details: %+v", tx)))
 		for _, balance := range tx.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
 				slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
