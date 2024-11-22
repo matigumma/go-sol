@@ -50,10 +50,6 @@ type Holder struct {
 	Insider        bool    `json:"insider"`
 }
 
-type TopHolders struct {
-	Holders []Holder `json:"holders"`
-}
-
 type Report struct {
 	TokenMeta            TokenMeta     `json:"tokenMeta"`
 	Risks                []Risk        `json:"risks"`
@@ -65,7 +61,7 @@ type Report struct {
 	Score                int           `json:"score"`
 	FreezeAuthority      string        `json:"freezeAuthority"`
 	MintAuthority        string        `json:"mintAuthority"`
-	TopHolders           TopHolders    `json:"topHolders"`
+	TopHolders           []Holder      `json:"topHolders"`
 }
 
 type Risk struct {
