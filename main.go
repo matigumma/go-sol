@@ -12,7 +12,8 @@ import (
 func main() {
 	tokenUpdates := make(chan []monitor.TokenInfo)
 
-	go monitor.Run(tokenUpdates)
+	monitor := monitor.NewMonitor(tokenUpdates)
+	go monitor.Run()
 
 	model := ui.NewModel([]monitor.TokenInfo{})
 
