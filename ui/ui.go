@@ -2,9 +2,10 @@ package ui
 
 import (
 	"fmt"
+	"gosol/monitor"
+
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
 )
 
