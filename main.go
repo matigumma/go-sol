@@ -23,7 +23,7 @@ func main() {
 	go func() {
 		for tokens := range tokenUpdates {
 			fmt.Println("Received token updates:", tokens) // Log statement added
-			p.Send(tokens)
+			p.Send(ui.TokenUpdateMsg(tokens))
 		}
 	}()
 

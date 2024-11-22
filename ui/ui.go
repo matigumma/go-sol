@@ -56,6 +56,8 @@ func (m Model) Init() tea.Cmd {
 	return nil
 }
 
+type TokenUpdateMsg []types.TokenInfo
+
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -63,6 +65,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c", "q":
 			return m, tea.Quit
 		}
+	case TokenUpdateMsg:
+		// Actualiza la tabla con los nuevos tokens
+		m.table = NewModel(msg).table
 	}
 	return m, nil
 }
