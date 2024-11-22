@@ -10,16 +10,21 @@ import (
 )
 
 func main() {
-	// monitor.Run()
+	tokenUpdates := make(chan []monitor.TokenInfo)
 
-	tokens := []monitor.TokenInfo{
-		{Symbol: "SOL", Address: "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5", CreatedAt: "2024-11-22", Score: 1000},
-		// Add more tokens as needed
-	}
+	go monitor.Run(tokenUpdates)
 
-	model := ui.NewModel(tokens)
+	model := ui.NewModel([]monitor.TokenInfo{})
 
-	if _, err := tea.NewProgram(model).Run(); err != nil {
+	p := tea.NewProgram(model)
+
+	go func() {
+		for tokens := range tokenUpdates {
+			p.Send(tokens)
+		}
+	}()
+
+	if _, err := p.Run(); err != nil {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}

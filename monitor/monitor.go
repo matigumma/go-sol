@@ -86,7 +86,7 @@ type Risk struct {
 	Level string
 }
 
-func Run() {
+func Run(tokenUpdates chan<- []TokenInfo) {
 	updateStatus("Connecting to WebSocket...")
 	client, err := ConnectToWebSocket()
 	if err != nil {
@@ -170,7 +170,7 @@ func displayTokenTable(tokens []TokenInfo) {
 	}
 }
 
-func checkMintAddress(mint string) (string, []Risk, error) {
+func checkMintAddress(mint string, tokenUpdates chan<- []TokenInfo) (string, []Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
 	var risks []Risk
@@ -207,7 +207,7 @@ func checkMintAddress(mint string) (string, []Risk, error) {
 			// Update the in-memory state with the report
 			mintState[mint] = []Report{report}
 
-			displayTokenTable(tokens)
+			tokenUpdates <- tokens
 			break
 		}
 		time.Sleep(5 * time.Second)
@@ -293,7 +293,7 @@ func getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 				}
 
 				// Check mint address for additional information
-				symbol, risks, err := checkMintAddress(balance.Mint.String())
+				symbol, risks, err := checkMintAddress(balance.Mint.String(), tokenUpdates)
 				if err != nil {
 					updateStatus(fmt.Sprintf("Error checking mint address: %v", err))
 				} else {
