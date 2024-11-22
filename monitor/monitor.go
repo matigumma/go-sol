@@ -55,18 +55,31 @@ func displayTokenTable(tokens []TokenInfo) {
 	table.Render()
 }
 
+type TokenMeta struct {
+	Symbol string `json:"symbol"`
+	// Add other fields as needed
+}
+
+type KnownAccounts struct {
+	// Define fields for known accounts
+}
+
+type TopHolders struct {
+	Holders []string `json:"holders"`
+}
+
 type Report struct {
-	TokenMeta            map[string]interface{} `json:"tokenMeta"`
-	Risks                []Risk                 `json:"risks"`
-	TotalMarketLiquidity float64                `json:"totalMarketLiquidity"`
-	TotalLPProviders     int                    `json:"totalLPProviders"`
-	Rugged               bool                   `json:"rugged"`
-	KnownAccounts        map[string]interface{} `json:"knownAccounts"`
-	Verification         string                 `json:"verification"`
-	Score                int                    `json:"score"`
-	FreezeAuthority      string                 `json:"freezeAuthority"`
-	MintAuthority        string                 `json:"mintAuthority"`
-	TopHolders           []string               `json:"topHolders"`
+	TokenMeta            TokenMeta     `json:"tokenMeta"`
+	Risks                []Risk        `json:"risks"`
+	TotalMarketLiquidity float64       `json:"totalMarketLiquidity"`
+	TotalLPProviders     int           `json:"totalLPProviders"`
+	Rugged               bool          `json:"rugged"`
+	KnownAccounts        KnownAccounts `json:"knownAccounts"`
+	Verification         string        `json:"verification"`
+	Score                int           `json:"score"`
+	FreezeAuthority      string        `json:"freezeAuthority"`
+	MintAuthority        string        `json:"mintAuthority"`
+	TopHolders           TopHolders    `json:"topHolders"`
 }
 
 type Risk struct {
