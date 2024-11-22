@@ -4,84 +4,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/charmbracelet/bubbles/list"
-	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
 
 	"gosol/monitor"
 )
 
-type item struct {
-	title, desc string
-}
-
-func (i item) Title() string       { return i.title }
-func (i item) Description() string { return i.desc }
-func (i item) FilterValue() string { return i.title }
-
-type model struct {
-	list     list.Model
-	choice   string
-	quitting bool
-}
 
 func main() {
-	items := []list.Item{
-		item{title: "Monitor", desc: "Run the monitor mode"},
-	}
-
-	const defaultWidth = 30 // Increase the width to accommodate the title and options
-	const listHeight = 10   // Define the height of the list
-
-	l := list.New(items, list.NewDefaultDelegate(), defaultWidth, listHeight)
-	l.Title = "Select mode to run the application"
-	l.SetShowStatusBar(false)
-	l.SetFilteringEnabled(false)
-	l.Styles.Title = lipgloss.NewStyle().MarginLeft(2)
-	l.Styles.PaginationStyle = l.Styles.PaginationStyle.MarginLeft(2)
-	l.Styles.HelpStyle = l.Styles.HelpStyle.MarginLeft(2).Padding(1, 0, 0, 0)
-
-	m := model{list: l}
-
-	p := tea.NewProgram(m, tea.WithAltScreen())
-	if err := p.Start(); err != nil {
+	monitor.Run()
 		fmt.Printf("Error: %v", err)
 		os.Exit(1)
 	}
 }
 
-func (m model) Init() tea.Cmd {
-	return nil
-}
-
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		switch msg.String() {
-		case "ctrl+c", "q":
-			m.quitting = true
-			return m, tea.Quit
-		case "enter":
-			i, ok := m.list.SelectedItem().(item)
-			if ok {
-				m.choice = i.title
-				switch m.choice {
-				case "Monitor":
-					monitor.Run()
-				}
-			}
-			return m, tea.Quit
-		}
-	}
-
-	var cmd tea.Cmd
-	m.list, cmd = m.list.Update(msg)
-	return m, cmd
-}
-
-func (m model) View() string {
-	if m.quitting {
-		return "Goodbye!\n"
-	}
-	return "\n" + m.list.View()
-}
