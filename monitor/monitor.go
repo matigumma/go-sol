@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/charmbracelet/bubbles/table"
@@ -23,6 +24,16 @@ func updateStatus(status string, statusUpdates chan<- string) {
 	// slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 	statusUpdates <- status
 }
+
+func playAlertSound() {
+	cmd := exec.Command("say", "New token detected")
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println("Error executing say command:", err)
+	}
+
+	// Reproduce el sonido de alerta cuando se detecta un nuevo token
+	playAlertSound()
 
 var mintState = make(map[string][]types.Report)
 
