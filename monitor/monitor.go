@@ -172,7 +172,8 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
 	updateStatus("Connecting to WebSocket...", m.statusUpdates)
-	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
+	websocketURL := os.Getenv("WEBSOCKET_URL")
+	client, err := ws.Connect(context.Background(), websocketURL)
 	if err != nil {
 		return nil, err
 	}

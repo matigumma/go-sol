@@ -7,11 +7,16 @@ import (
 	"gosol/ui"
 	"os"
 
+	"log"
+	"github.com/joho/godotenv"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 func main() {
-	tokenUpdates := make(chan []types.TokenInfo)
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
 	statusUpdates := make(chan string)
 
 	monitor := monitor.NewMonitor(tokenUpdates, statusUpdates)
