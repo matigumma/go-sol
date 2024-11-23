@@ -36,8 +36,6 @@ type StatusMessage struct {
 }
 
 var statusHistory []StatusMessage
-var websocketURL string
-var apiKey string
 
 func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
 	statusMessage := StatusMessage{Level: level, Message: message}
@@ -75,6 +73,8 @@ type Monitor struct {
 }
 
 func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- StatusMessage) *Monitor {
+	websocketURL := os.Getenv("WEBSOCKET_URL")
+	apiKey := os.Getenv("API_KEY")
 	return &Monitor{tokenUpdates: tokenUpdates, statusUpdates: statusUpdates}
 }
 
