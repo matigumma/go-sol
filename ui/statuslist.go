@@ -5,6 +5,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/bubbles/spinner"
 )
 
 type StatusListModel struct {
@@ -19,8 +20,12 @@ func NewStatusListModel(messages []monitor.StatusMessage) StatusListModel {
 		items[i] = listItem{message: msg}
 	}
 
+	s := spinner.New()
+	s.Spinner = spinner.Dot
+	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
+
 	l := list.New(items, list.NewDefaultDelegate(), 100, 1) // Ajusta el tamaño según sea necesario
-	l.Title = l.Styles.Spinner.Render()
+	l.Title = s.View()
 	l.SetShowTitle(true)
 	l.SetShowStatusBar(false)
 	l.SetFilteringEnabled(false)
