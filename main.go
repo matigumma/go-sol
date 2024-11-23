@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gosol/monitor"
+	"gosol/wsmanager"
 	"gosol/types"
 	"gosol/ui"
 	"os"
@@ -19,34 +19,23 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 
-	// Crea canales
+	// Crear canales
 	tokenUpdates := make(chan []types.TokenInfo)
 	statusUpdates := make(chan monitor.StatusMessage)
 
-	monitor := monitor.NewMonitor(tokenUpdates, statusUpdates)
+	// Inicializar el WSManager
+	wsMgr := wsmanager.NewWSManager(os.Getenv("WEBSOCKET_URL"), os.Getenv("API_KEY"), statusUpdates, tokenUpdates)
+	err = wsMgr.Connect()
+	if err != nil {
+		log.Fatalf("WebSocket connection failed: %v", err)
+	}
 
-	// go func() {
-	// 	// Enviar un token de ejemplo al canal tokenUpdates
-	// 	mockToken := []types.TokenInfo{
-	// 		{Symbol: "MOCK", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:00", Score: 1000},
-	// 		{Symbol: "MOCK2", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:02", Score: 2000},
-	// 		{Symbol: "MOCK3", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:03", Score: 3000},
-	// 		{Symbol: "MOCK4", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:04", Score: 4000},
-	// 		{Symbol: "MOCK5", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:05", Score: 5000},
-	// 		{Symbol: "MOCK6", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:06", Score: 6000},
-	// 		{Symbol: "MOCK7", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:07", Score: 7000},
-	// 		{Symbol: "MOCK8", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:08", Score: 8000},
-	// 		{Symbol: "MOCK9", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:09", Score: 9000},
-	// 		{Symbol: "MOCK10", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:10", Score: 10000},
-	// 		{Symbol: "MOCK11", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:11", Score: 11000},
-	// 		{Symbol: "MOCK12", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:12", Score: 12000},
-	// 		{Symbol: "MOCK13", Address: "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump", CreatedAt: "00:13", Score: 13000},
-	// 	}
-	// 	tokenUpdates <- mockToken
-
-	// }()
-
-	go monitor.Run()
+	// Suscribirse a los logs
+	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
+	err = wsMgr.SubscribeToLogs(pubkey)
+	if err != nil {
+		log.Fatalf("Failed to subscribe to logs: %v", err)
+	}
 
 	uiModel, _ := ui.InitProject(monitor)
 
@@ -69,4 +58,6 @@ func main() {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
+	// Cerrar el WSManager al finalizar
+	wsMgr.Close()
 }
