@@ -37,9 +37,6 @@ type StatusMessage struct {
 func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
     statusUpdates <- StatusMessage{Level: level, Message: message}
 }
-	// slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
-	updateStatus(status, INFO, statusUpdates)
-}
 
 // Reproduce el sonido de alerta cuando se detecta un nuevo token
 func (m *Monitor) playAlertSound() {

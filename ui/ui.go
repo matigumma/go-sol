@@ -103,7 +103,9 @@ func formatStatusBar(msg StatusMessage) string {
     }
     return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
 }
+func (m Model) View() string {
 	tableView := m.table.View()
 	statusBarView := formatStatusBar(StatusMessage{Level: NONE, Message: m.statusBar})
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
+}
 }
