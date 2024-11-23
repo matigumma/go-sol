@@ -138,45 +138,47 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 	var risks []types.Risk
 
 	for attempts := 0; attempts < 3; attempts++ {
-		resp, err := http.Get(url)
-		if err != nil {
-			updateStatus(fmt.Sprintf("Error fetching data: %v", err), m.statusUpdates)
-			return "", nil, err
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode == http.StatusOK {
-			var report types.Report
-			if err := json.NewDecoder(resp.Body).Decode(&report); err != nil {
-				return "", nil, err
+		go func(attempt int) {
+			resp, err := http.Get(url)
+			if err != nil {
+				updateStatus(fmt.Sprintf("Error fetching data: %v", err), m.statusUpdates)
+				return
 			}
+			defer resp.Body.Close()
 
-			risks = report.Risks
-
-			symbol = report.TokenMeta.Symbol
-
-			// Update the in-memory state with the report
-			mintState[mint] = []types.Report{report}
-
-			// Enviar el estado completo de mintState al canal tokenUpdates
-			var allTokens []types.TokenInfo
-			for mint, reports := range mintState {
-				for _, report := range reports {
-					token := types.TokenInfo{
-						Symbol:    report.TokenMeta.Symbol,
-						Address:   mint,
-						CreatedAt: report.DetectedAt.In(time.Local).Format("15:04"),
-						Score:     int64(report.Score),
-					}
-					allTokens = append(allTokens, token)
+			if resp.StatusCode == http.StatusOK {
+				var report types.Report
+				if err := json.NewDecoder(resp.Body).Decode(&report); err != nil {
+					return
 				}
+
+				risks = report.Risks
+				symbol = report.TokenMeta.Symbol
+
+				// Update the in-memory state with the report
+				mintState[mint] = []types.Report{report}
+
+				// Enviar el estado completo de mintState al canal tokenUpdates
+				var allTokens []types.TokenInfo
+				for mint, reports := range mintState {
+					for _, report := range reports {
+						token := types.TokenInfo{
+							Symbol:    report.TokenMeta.Symbol,
+							Address:   mint,
+							CreatedAt: report.DetectedAt.In(time.Local).Format("15:04"),
+							Score:     int64(report.Score),
+						}
+						allTokens = append(allTokens, token)
+					}
+				}
+				if attempt > 0 {
+					updateStatus(fmt.Sprintf("🌀 Attempt %d: Updating allTokens...", attempt+1), m.statusUpdates)
+				}
+				m.tokenUpdates <- allTokens
 			}
-			if attempts > 1 {
-				updateStatus("🌀 Updating allTokens...", m.statusUpdates)
-			}
-			m.tokenUpdates <- allTokens
-			break
-		}
+		}(attempts)
+
+		// Esperar 5 segundos entre cada intento
 		time.Sleep(5 * time.Second)
 	}
 
