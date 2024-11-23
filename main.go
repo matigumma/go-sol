@@ -13,7 +13,9 @@ import (
 func main() {
 	tokenUpdates := make(chan []types.TokenInfo)
 
-	monitor := monitor.NewMonitor(tokenUpdates)
+	statusUpdates := make(chan string)
+
+	monitor := monitor.NewMonitor(tokenUpdates, statusUpdates)
 	go func() {
 		// Enviar un token de ejemplo al canal tokenUpdates
 		mockToken := []types.TokenInfo{
@@ -37,6 +39,12 @@ func main() {
 		for tokens := range tokenUpdates {
 			fmt.Println("Received token updates:", tokens) // Log statement added
 			p.Send(ui.TokenUpdateMsg(tokens))
+		}
+	}()
+
+	go func() {
+		for status := range statusUpdates {
+			p.Send(ui.StatusBarUpdateMsg(status))
 		}
 	}()
 

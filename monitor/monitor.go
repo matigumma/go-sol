@@ -21,7 +21,7 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
-func updateStatus(status string) {
+func updateStatus(status string, statusUpdates chan<- string) {
 	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
 }
 
@@ -32,26 +32,27 @@ func (m *Monitor) getMintState() map[string][]types.Report {
 }
 
 type Monitor struct {
-	tokenUpdates chan<- []types.TokenInfo
+	tokenUpdates  chan<- []types.TokenInfo
+	statusUpdates chan<- string
 }
 
-func NewMonitor(tokenUpdates chan<- []types.TokenInfo) *Monitor {
-	return &Monitor{tokenUpdates: tokenUpdates}
+func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- string) *Monitor {
+	return &Monitor{tokenUpdates: tokenUpdates, statusUpdates: statusUpdates}
 }
 
 func (m *Monitor) Run() {
-	// updateStatus("Connecting to WebSocket...")
+	updateStatus("Connecting to WebSocket...", m.statusUpdates)
 	client, err := m.connectToWebSocket()
 	if err != nil {
-		// updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
+		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), m.statusUpdates)
 	}
 
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	// updateStatus("Subscribing to logs...")
+	updateStatus("Subscribing to logs...", m.statusUpdates)
 	if err := m.subscribeToLogs(client, pubkey); err != nil {
-		// updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
+		updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err), m.statusUpdates)
 	}
 }
 
