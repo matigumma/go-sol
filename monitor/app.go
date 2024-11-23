@@ -16,7 +16,7 @@ type App struct {
 	logProcessor   *LogProcessor
 	transactionMgr *TransactionManager
 	apiClient      *APIClient
-	stateManager   *StateManager
+	StateManager   *StateManager
 	StatusUpdates  chan StatusMessage
 	logCh          chan *ws.LogResult
 	TokenUpdates   chan []types.TokenInfo
