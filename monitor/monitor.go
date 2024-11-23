@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"gosol/types"
-	"log/slog"
 
 	"encoding/json"
 	"net/http"
@@ -14,7 +13,6 @@ import (
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/fatih/color"
 
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
@@ -22,7 +20,8 @@ import (
 )
 
 func updateStatus(status string, statusUpdates chan<- string) {
-	slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
+	// slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
+	statusUpdates <- status
 }
 
 var mintState = make(map[string][]types.Report)
@@ -133,7 +132,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
 		if err != nil {
-			// updateStatus(fmt.Sprintf("Error fetching data: %v", err))
+			updateStatus(fmt.Sprintf("Error fetching data: %v", err), m.statusUpdates)
 			return "", nil, err
 		}
 		defer resp.Body.Close()
@@ -188,7 +187,7 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	// updateStatus("Start monitoring...")
+	updateStatus("Start monitoring...", m.statusUpdates)
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -214,7 +213,7 @@ func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	// updateStatus("GetTransaction EncodingBase58...")
+	updateStatus("GetTransaction EncodingBase58...", m.statusUpdates)
 	tx58, err := rpcClient.GetTransaction(
 		context.TODO(),
 		signature,
@@ -225,7 +224,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		},
 	)
 	if err != nil {
-		// updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err))
+		updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err), m.statusUpdates)
 	}
 
 	if tx58 != nil {
