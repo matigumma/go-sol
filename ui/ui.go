@@ -162,7 +162,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.adjustWidths(m.table.Width())
 	case StatusBarUpdateMsg:
 		messages := m.currentMonitor.GetStatusHistory()
-		// Convertir los mensajes en list.Items
+		// Limitar los mensajes a los últimos 10
+		if len(messages) > 10 {
+			messages = messages[len(messages)-10:]
+		}
 		items := make([]list.Item, len(messages))
 		for i, msg := range messages {
 			items[i] = listItem{message: msg}
