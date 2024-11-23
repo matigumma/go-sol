@@ -35,7 +35,7 @@ type Model struct {
 	stateManager  *monitor.StateManager
 }
 
-func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo, stateManager *monitor.StateManager) Model {
+func NewModel(app *monitor.App) Model {
 	columns := []table.Column{
 		{Title: "", Width: 2},
 		{Title: "CREATED AT", Width: 10},
@@ -46,7 +46,7 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 	}
 
 	rows := []table.Row{}
-	for _, token := range tokens {
+	for _, token := range []types.TokenInfo{} {
 		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
 			continue
 		}
@@ -79,14 +79,14 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 		table.WithFocused(true),
 	)
 
-	messages := stateManager.GetStatusHistory()
+	messages := app.StateManager.GetStatusHistory()
 
 	return Model{
 		table:         t,
 		statusBar:     NewStatusListModel(messages),
-		statusUpdates: statusCh,
-		tokenUpdates:  tokenCh,
-		stateManager:  stateManager,
+		statusUpdates: app.StatusUpdates,
+		tokenUpdates:  app.TokenUpdates,
+		stateManager:  app.StateManager,
 		activeView:    1,
 		// Inicializar otros campos
 	}
