@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"gosol/monitor"
 	"gosol/types"
-	"gosol/monitor"
-	"gosol/ui"
+	"strconv"
 	"strings"
 	"time"
 
@@ -21,8 +20,10 @@ type TokenUpdateMsg []types.TokenInfo
 type StatusBarUpdateMsg monitor.StatusMessage
 
 type Model struct {
-	table          table.Model
-	statusBar      string
+	activeView int
+	table      table.Model
+	// statusBar      string
+	statusBar      StatusListModel
 	selectedToken  *types.Report
 	currentMonitor *monitor.Monitor
 }
@@ -77,6 +78,7 @@ func NewModel(tokens []types.TokenInfo) Model {
 func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
 	m := NewModel([]types.TokenInfo{})
 	m.currentMonitor = monitor
+	m.activeView = 0
 
 	return m, nil
 }
@@ -87,17 +89,34 @@ func (m Model) Init() tea.Cmd {
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
+	// case tea.WindowSizeMsg:
+	// 	h, v := docStyle.GetFrameSize()
+	// 	m.statusBar.list.SetSize(msg.Width-h, msg.Height-v)
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
-		case "up", "k":
-			if m.table.Cursor() > 0 {
-				m.table.MoveUp(1)
+		case "tab":
+			m.activeView = (m.activeView + 1) % 2
+		case "up":
+			if m.activeView == 0 {
+				if m.table.Cursor() > 0 {
+					m.table.MoveUp(1)
+				}
+			} else if m.activeView == 1 {
+				if m.statusBar.list.Cursor() > 0 {
+					m.statusBar.list.CursorUp()
+				}
 			}
-		case "down", "j":
-			if m.table.Cursor() < len(m.table.Rows())-1 {
-				m.table.MoveDown(1)
+		case "down":
+			if m.activeView == 0 {
+				if m.table.Cursor() < len(m.table.Rows())-1 {
+					m.table.MoveDown(1)
+				}
+			} else if m.activeView == 1 {
+				if m.statusBar.list.Cursor() < len(m.statusBar.list.Items())-1 {
+					m.statusBar.list.CursorDown()
+				}
 			}
 		case "enter":
 			// Obtener el token seleccionado de la tabla
@@ -120,12 +139,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.selectedToken = nil
 		}
 	case TokenUpdateMsg:
-		// Actualiza la tabla con los nuevos tokens
 		m.table = NewModel(msg).table
 	case StatusBarUpdateMsg:
-		// Actualiza la ui de statusbar
-		// Actualiza la barra de estado con el mensaje recibido
-		m.statusBar = formatStatusBar(msg)
+		messages := m.currentMonitor.GetStatusHistory()
+		fmt.Sprintln("StatusBarUpdateMsg case last msg: ", messages[len(messages)-1].Message)
+		m.statusBar = NewStatusListModel(messages)
 	}
 	return m, nil
 }
@@ -135,9 +153,10 @@ func (m Model) View() string {
 		return m.tokenDetailView()
 	}
 	tableView := m.table.View()
-	messages := monitor.GetStatusHistory()
-	statusListModel := ui.NewStatusListModel(messages)
-	statusBarView := statusListModel.View()
+	// statusBar messages and model
+	// messages := m.currentMonitor.GetStatusHistory()
+	// statusListModel := NewStatusListModel(messages)
+	statusBarView := m.statusBar.View()
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
 
@@ -217,20 +236,20 @@ func formatTopHolders(holders []types.Holder) string {
 	return strings.Join(result, "\n")
 }
 
-func formatStatusBar(msg StatusBarUpdateMsg) string {
-	var color lipgloss.Color
-	switch msg.Level {
-	case monitor.INFO:
-		color = lipgloss.Color("2") // Green
-	case monitor.WARN:
-		color = lipgloss.Color("3") // Yellow
-	case monitor.ERR:
-		color = lipgloss.Color("1") // Red
-	default:
-		color = lipgloss.Color("241") // Gray
-	}
-	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
-}
+// func formatStatusBar(msg StatusBarUpdateMsg) string {
+// 	var color lipgloss.Color
+// 	switch msg.Level {
+// 	case monitor.INFO:
+// 		color = lipgloss.Color("2") // Green
+// 	case monitor.WARN:
+// 		color = lipgloss.Color("3") // Yellow
+// 	case monitor.ERR:
+// 		color = lipgloss.Color("1") // Red
+// 	default:
+// 		color = lipgloss.Color("241") // Gray
+// 	}
+// 	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
+// }
 
 func parseScore(scoreStr string) int64 {
 	score, err := strconv.ParseInt(scoreStr, 10, 64)
