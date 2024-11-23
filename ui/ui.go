@@ -108,4 +108,3 @@ func (m Model) View() string {
 	statusBarView := formatStatusBar(StatusMessage{Level: NONE, Message: m.statusBar})
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
-}
