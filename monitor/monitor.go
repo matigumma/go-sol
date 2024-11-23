@@ -127,7 +127,6 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
 	var risks []types.Risk
-	var tokens []types.TokenInfo
 
 	for attempts := 0; attempts < 3; attempts++ {
 		resp, err := http.Get(url)
@@ -153,12 +152,23 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 				CreatedAt: report.DetectedAt.Format("15:04"),
 				Score:     int64(report.Score),
 			}
-			tokens = append(tokens, token)
 			// Update the in-memory state with the report
 			mintState[mint] = []types.Report{report}
 
-			// se envia el listado de tokens a la UI
-			m.tokenUpdates <- tokens
+			// Enviar el estado completo de mintState al canal tokenUpdates
+			var allTokens []types.TokenInfo
+			for mint, reports := range mintState {
+				for _, report := range reports {
+					token := types.TokenInfo{
+						Symbol:    report.TokenMeta.Symbol,
+						Address:   mint,
+						CreatedAt: report.DetectedAt.Format("15:04"),
+						Score:     int64(report.Score),
+					}
+					allTokens = append(allTokens, token)
+				}
+			}
+			m.tokenUpdates <- allTokens
 			break
 		}
 		time.Sleep(5 * time.Second)
