@@ -122,10 +122,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.table.MoveUp(1)
 				}
 			} else if m.activeView == 1 {
-				if m.statusBar.list.Cursor() > 0 {
-					// m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveUp"}}})
-					m.statusBar.list.CursorUp()
-				}
+				m.statusBar.list.CursorUp()
 			}
 		case "down":
 			if m.activeView == 0 {
@@ -133,10 +130,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.table.MoveDown(1)
 				}
 			} else if m.activeView == 1 {
-				if m.statusBar.list.Cursor() < len(m.statusBar.list.Items())-1 {
-					// m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveDown"}}})
-					m.statusBar.list.CursorDown()
-				}
+				m.statusBar.list.CursorDown()
 			}
 		case "enter":
 			// Obtener el token seleccionado de la tabla
