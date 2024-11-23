@@ -9,7 +9,8 @@ import (
 )
 
 type StatusListModel struct {
-	list list.Model
+	list    list.Model
+	spinner spinner.Model
 }
 
 var docStyle = lipgloss.NewStyle().Margin(1, 2)
