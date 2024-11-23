@@ -14,7 +14,20 @@ func main() {
 	tokenUpdates := make(chan []types.TokenInfo)
 
 	monitor := monitor.NewMonitor(tokenUpdates)
-	go monitor.Run()
+	go func() {
+		// Enviar un token de ejemplo al canal tokenUpdates
+		mockToken := []types.TokenInfo{
+			{
+				Symbol:    "MOCK",
+				Address:   "MockAddress",
+				CreatedAt: "00:00",
+				Score:     1000,
+			},
+		}
+		tokenUpdates <- mockToken
+
+		monitor.Run()
+	}()
 
 	uiModel := ui.NewModel([]types.TokenInfo{})
 
