@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"gosol/monitor"
 	"gosol/types"
+	"strconv"
+	"strings"
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
@@ -12,12 +14,11 @@ import (
 
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
-type sessionState uint
-
 type Model struct {
-	state     sessionState
-	table     table.Model
-	statusBar string
+	table          table.Model
+	statusBar      string
+	selectedToken  *types.TokenInfo
+	currentMonitor *monitor.Monitor
 }
 
 func NewModel(tokens []types.TokenInfo) Model {
@@ -67,6 +68,14 @@ func NewModel(tokens []types.TokenInfo) Model {
 	return Model{table: t}
 }
 
+func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
+	m := NewModel([]types.TokenInfo{})
+	m.currentMonitor = monitor
+
+	return m, nil
+}
+
+// Init run any intial IO on program start
 func (m Model) Init() tea.Cmd {
 	return nil
 }
@@ -74,12 +83,49 @@ func (m Model) Init() tea.Cmd {
 type TokenUpdateMsg []types.TokenInfo
 type StatusBarUpdateMsg monitor.StatusMessage
 
+func parseScore(scoreStr string) int64 {
+	score, err := strconv.ParseInt(scoreStr, 10, 64)
+	if err != nil {
+		return 0
+	}
+	return score
+}
+
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
+		case "up", "k":
+			if m.table.Cursor() > 0 {
+				m.table.MoveUp(1)
+			}
+		case "down", "j":
+			if m.table.Cursor() < len(m.table.Rows())-1 {
+				m.table.MoveDown(1)
+			}
+		case "enter":
+			// Obtener el token seleccionado de la tabla
+			selectedRow := m.table.SelectedRow()
+			if selectedRow != nil {
+				// Asume que el primer campo es el símbolo del token
+				symbol := selectedRow[2]
+				for _, row := range m.table.Rows() {
+					if row[2] == symbol { // Accede al índice correcto
+						m.selectedToken = &types.TokenInfo{
+							Symbol:    row[2],
+							CreatedAt: row[1],
+							Score:     parseScore(row[3]),
+							Address:   row[4],
+						}
+						break
+					}
+				}
+			}
+		case "esc":
+			// Volver a la vista de la tabla
+			m.selectedToken = nil
 		}
 	case TokenUpdateMsg:
 		// Actualiza la tabla con los nuevos tokens
@@ -106,7 +152,80 @@ func formatStatusBar(msg StatusBarUpdateMsg) string {
 	}
 	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
 }
+
+func (m Model) tokenDetailView() string {
+	if m.selectedToken == nil {
+		return ""
+	}
+	token := m.selectedToken
+
+	// depura currentMonitor para ver si esta correcto
+	// y luego el getMintState()
+
+	fullTokenInfo, ok := m.currentMonitor.GetMintState()[token.Address]
+	if !ok || len(fullTokenInfo) == 0 {
+		return "Error: Token information not found."
+	}
+
+	return formatReportAsMarkdown(fullTokenInfo[0])
+}
+
+func formatReportAsMarkdown(report types.Report) string {
+	var risks []string
+	for _, risk := range report.Risks {
+		risks = append(risks, fmt.Sprintf("- **%s**: %s (Score: %d)", risk.Name, risk.Level, risk.Score))
+	}
+
+	return fmt.Sprintf(`                                                                                                                                                 
+# Token Report: %s                                                                                                                                                       
+																																										 
+**Symbol**: %s                                                                                                                                                           
+**Name**: %s                                                                                                                                                             
+**Score**: %d                                                                                                                                                            
+**Rugged**: %t                                                                                                                                                           
+**Verification**: %s                                                                                                                                                     
+																																										 
+## Known Accounts                                                                                                                                                        
+%s                                                                                                                                                                       
+																																										 
+## Risks                                                                                                                                                                 
+%s                                                                                                                                                                       
+																																										 
+## Top Holders                                                                                                                                                           
+%s                                                                                                                                                                       
+`,
+		report.TokenMeta.Name,
+		report.TokenMeta.Symbol,
+		report.TokenMeta.Name,
+		report.Score,
+		report.Rugged,
+		report.Verification,
+		formatKnownAccounts(report.KnownAccounts),
+		strings.Join(risks, "\n"),
+		formatTopHolders(report.TopHolders),
+	)
+}
+
+func formatKnownAccounts(accounts types.KnownAccounts) string {
+	var result []string
+	for address, account := range accounts {
+		result = append(result, fmt.Sprintf("- **%s**: %s (%s)", address, account.Name, account.Type))
+	}
+	return strings.Join(result, "\n")
+}
+
+func formatTopHolders(holders []types.Holder) string {
+	var result []string
+	for _, holder := range holders {
+		result = append(result, fmt.Sprintf("- **%s**: %d (%.2f%%)", holder.Address, holder.Amount, holder.Pct))
+	}
+	return strings.Join(result, "\n")
+}
+
 func (m Model) View() string {
+	if m.selectedToken != nil {
+		return m.tokenDetailView()
+	}
 	tableView := m.table.View()
 	statusBarView := formatStatusBar(StatusBarUpdateMsg{Level: monitor.NONE, Message: m.statusBar})
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
