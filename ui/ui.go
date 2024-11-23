@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"gosol/monitor"
 	"gosol/types"
-	"strconv"
+	"gosol/monitor"
+	"gosol/ui"
 	"strings"
 	"time"
 
@@ -134,7 +135,9 @@ func (m Model) View() string {
 		return m.tokenDetailView()
 	}
 	tableView := m.table.View()
-	statusBarView := formatStatusBar(StatusBarUpdateMsg{Level: monitor.NONE, Message: m.statusBar})
+	messages := monitor.GetStatusHistory()
+	statusListModel := ui.NewStatusListModel(messages)
+	statusBarView := statusListModel.View()
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
 
