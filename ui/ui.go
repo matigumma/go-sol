@@ -103,18 +103,12 @@ func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-func (m *Model) adjustWidths(width int) {
-	h, _ := docStyle.GetFrameSize()
-	m.table.SetWidth(width - h)
-	m.statusBar.list.SetWidth(width - h)
-}
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		m.adjustWidths(msg.Width)
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
@@ -159,7 +153,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case TokenUpdateMsg:
 		m.table = NewModel(msg).table
-		m.adjustWidths(m.table.Width())
 	case StatusBarUpdateMsg:
 		messages := m.currentMonitor.GetStatusHistory()
 		// Limitar los mensajes a los últimos 10
@@ -177,7 +170,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		// Actualizar el modelo de la lista con los nuevos elementos
 		m.statusBar.list.SetItems(items)
-		m.adjustWidths(m.statusBar.list.Width())
 	}
 
 	// Actualizar el spinner
