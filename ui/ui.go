@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
@@ -158,6 +159,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			items[i] = listItem{message: msg}
 		}
 
+		for i, j := 0, len(items)-1; i < j; i, j = i+1, j-1 {
+			items[i], items[j] = items[j], items[i]
+		}
+
 		// Actualizar el modelo de la lista con los nuevos elementos
 		m.statusBar.list.SetItems(items)
 	}
@@ -173,7 +178,7 @@ func (m Model) View() string {
 	// messages := m.currentMonitor.GetStatusHistory()
 	// statusListModel := NewStatusListModel(messages)
 	statusBarView := m.statusBar.View()
-	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
+	return fmt.Sprintf("\n%s\n%s", statusBarView, tableView)
 }
 
 func (m Model) tokenDetailView() string {

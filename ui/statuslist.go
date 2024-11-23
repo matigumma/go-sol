@@ -4,8 +4,8 @@ import (
 	"gosol/monitor"
 
 	"github.com/charmbracelet/bubbles/list"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/bubbles/spinner"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type StatusListModel struct {
@@ -24,7 +24,7 @@ func NewStatusListModel(messages []monitor.StatusMessage) StatusListModel {
 	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 
-	l := list.New(items, list.NewDefaultDelegate(), 100, 1) // Ajusta el tamaño según sea necesario
+	l := list.New(items, list.NewDefaultDelegate(), 180, 1) // Ajusta el tamaño según sea necesario
 	l.Title = s.View()
 	l.SetShowTitle(true)
 	l.SetShowStatusBar(false)
