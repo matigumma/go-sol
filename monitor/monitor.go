@@ -20,9 +20,25 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
-func updateStatus(status string, statusUpdates chan<- string) {
+type LogLevel int
+
+const (
+    INFO LogLevel = iota
+    WARN
+    ERR
+    NONE
+)
+
+type StatusMessage struct {
+    Level   LogLevel
+    Message string
+}
+
+func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
+    statusUpdates <- StatusMessage{Level: level, Message: message}
+}
 	// slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
-	statusUpdates <- status
+	updateStatus(status, INFO, statusUpdates)
 }
 
 // Reproduce el sonido de alerta cuando se detecta un nuevo token
@@ -42,7 +58,7 @@ func (m *Monitor) getMintState() map[string][]types.Report {
 
 type Monitor struct {
 	tokenUpdates  chan<- []types.TokenInfo
-	statusUpdates chan<- string
+	statusUpdates chan<- StatusMessage
 }
 
 func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- string) *Monitor {

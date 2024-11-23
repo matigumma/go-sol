@@ -69,7 +69,7 @@ func (m Model) Init() tea.Cmd {
 }
 
 type TokenUpdateMsg []types.TokenInfo
-type StatusBarUpdateMsg string
+type StatusBarUpdateMsg StatusMessage
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
@@ -84,13 +84,26 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case StatusBarUpdateMsg:
 		// Actualiza la ui de statusbar
 		// Actualiza la barra de estado con el mensaje recibido
-		m.statusBar = string(msg)
+		m.statusBar = formatStatusBar(msg)
 	}
 	return m, nil
 }
 
-func (m Model) View() string {
+func formatStatusBar(msg StatusMessage) string {
+    var color lipgloss.Color
+    switch msg.Level {
+    case INFO:
+        color = lipgloss.Color("2") // Green
+    case WARN:
+        color = lipgloss.Color("3") // Yellow
+    case ERR:
+        color = lipgloss.Color("1") // Red
+    default:
+        color = lipgloss.Color("241") // Gray
+    }
+    return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
+}
 	tableView := m.table.View()
-	statusBarView := lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(m.statusBar)
+	statusBarView := formatStatusBar(StatusMessage{Level: NONE, Message: m.statusBar})
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
