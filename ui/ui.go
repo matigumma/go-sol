@@ -214,13 +214,6 @@ func formatTopHolders(holders []types.Holder) string {
 	return strings.Join(result, "\n")
 }
 
-func parseScore(scoreStr string) int64 {
-	score, err := strconv.ParseInt(scoreStr, 10, 64)
-	if err != nil {
-		return 0
-	}
-	return score
-}
 func formatStatusBar(msg StatusBarUpdateMsg) string {
 	var color lipgloss.Color
 	switch msg.Level {
@@ -234,4 +227,12 @@ func formatStatusBar(msg StatusBarUpdateMsg) string {
 		color = lipgloss.Color("241") // Gray
 	}
 	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
+}
+
+func parseScore(scoreStr string) int64 {
+	score, err := strconv.ParseInt(scoreStr, 10, 64)
+	if err != nil {
+		return 0
+	}
+	return score
 }
