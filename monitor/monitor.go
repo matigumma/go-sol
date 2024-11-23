@@ -191,7 +191,6 @@ func (m *Monitor) CheckMintAddress(mint string) (string, []types.Risk, error) {
 				// si es muy mala actualizar el statusbar y salir
 				if report.Score > 8000 {
 					updateStatus(fmt.Sprintf("💩 Token Sym:[%s]: '%s' Score[%d]", report.TokenMeta.Symbol, report.TokenMeta.Name, report.Score), NONE, m.statusUpdates)
-					attempt = 4
 					return
 				}
 
