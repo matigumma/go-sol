@@ -90,9 +90,9 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 	}
 }
 
-func InitProject(stateManager *monitor.StateManager) (tea.Model, tea.Cmd) {
+func InitProject(statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo, stateManager *monitor.StateManager) (tea.Model, tea.Cmd) {
 	// Inicializar el modelo de la tabla con tokens vacíos
-	m := NewModel([]types.TokenInfo{}, stateManager.statusUpdates, stateManager.tokenUpdates, stateManager)
+	m := NewModel([]types.TokenInfo{}, statusCh, tokenCh, stateManager)
 	m.activeView = 1
 
 	// Obtener el historial de mensajes de estado y crear el modelo de lista
