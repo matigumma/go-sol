@@ -15,6 +15,11 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+var (
+	activeBorderStyle   = lipgloss.NewStyle().Border(lipgloss.NormalBorder()).BorderForeground(lipgloss.Color("205"))
+	inactiveBorderStyle = lipgloss.NewStyle().Border(lipgloss.NormalBorder()).BorderForeground(lipgloss.Color("240"))
+)
+
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
 type TokenUpdateMsg []types.TokenInfo
@@ -186,11 +191,16 @@ func (m Model) View() string {
 	if m.selectedToken != nil {
 		return m.tokenDetailView()
 	}
-	tableView := m.table.View()
-	// statusBar messages and model
-	// messages := m.currentMonitor.GetStatusHistory()
-	// statusListModel := NewStatusListModel(messages)
-	statusBarView := m.statusBar.View()
+	var tableView, statusBarView string
+
+	// Apply active or inactive border style based on activeView
+	if m.activeView == 0 {
+		tableView = activeBorderStyle.Render(m.table.View())
+		statusBarView = inactiveBorderStyle.Render(m.statusBar.View())
+	} else {
+		tableView = inactiveBorderStyle.Render(m.table.View())
+		statusBarView = activeBorderStyle.Render(m.statusBar.View())
+	}
 	return fmt.Sprintf("\n%s\n%s", statusBarView, tableView)
 }
 
