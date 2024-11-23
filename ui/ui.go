@@ -123,7 +123,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			} else if m.activeView == 1 {
 				if m.statusBar.list.Cursor() > 0 {
-					m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveUp"}}})
+					// m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveUp"}}})
 					m.statusBar.list.CursorUp()
 				}
 			}
@@ -134,7 +134,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			} else if m.activeView == 1 {
 				if m.statusBar.list.Cursor() < len(m.statusBar.list.Items())-1 {
-					m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveDown"}}})
+					// m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveDown"}}})
 					m.statusBar.list.CursorDown()
 				}
 			}
