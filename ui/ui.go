@@ -87,7 +87,7 @@ func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
 
 	// Comando inicial para Bubble Tea, si es necesario
 	cmd := tea.Batch(
-		// Aquí puedes agregar comandos iniciales si los necesitas
+	// Aquí puedes agregar comandos iniciales si los necesitas
 	)
 
 	return m, cmd
