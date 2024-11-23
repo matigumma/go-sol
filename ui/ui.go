@@ -26,14 +26,13 @@ type TokenUpdateMsg []types.TokenInfo
 type StatusBarUpdateMsg monitor.StatusMessage
 
 type Model struct {
-	activeView     int
-	table          table.Model
-	statusBar      StatusListModel
-	selectedToken  *types.Report
-	currentMonitor *monitor.Monitor
-	statusUpdates  <-chan monitor.StatusMessage
-	tokenUpdates   <-chan []types.TokenInfo
-	// Otros campos necesarios
+	activeView    int
+	table         table.Model
+	statusBar     StatusListModel
+	selectedToken *types.Report
+	statusUpdates <-chan monitor.StatusMessage
+	tokenUpdates  <-chan []types.TokenInfo
+	stateManager  *monitor.StateManager
 }
 
 func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo, stateManager *monitor.StateManager) Model {
@@ -80,31 +79,17 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 		table.WithFocused(true),
 	)
 
+	messages := stateManager.GetStatusHistory()
+
 	return Model{
 		table:         t,
-		statusBar:     NewStatusListModel([]monitor.StatusMessage{}),
+		statusBar:     NewStatusListModel(messages),
 		statusUpdates: statusCh,
 		tokenUpdates:  tokenCh,
 		stateManager:  stateManager,
+		activeView:    1,
 		// Inicializar otros campos
 	}
-}
-
-func InitProject(statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo, stateManager *monitor.StateManager) (tea.Model, tea.Cmd) {
-	// Inicializar el modelo de la tabla con tokens vacíos
-	m := NewModel([]types.TokenInfo{}, statusCh, tokenCh, stateManager)
-	m.activeView = 1
-
-	// Obtener el historial de mensajes de estado y crear el modelo de lista
-	messages := stateManager.GetStatusHistory()
-	m.statusBar = NewStatusListModel(messages)
-
-	// Comando inicial para Bubble Tea, si es necesario
-	cmd := tea.Batch(
-	// Aquí puedes agregar comandos iniciales si los necesitas
-	)
-
-	return m, cmd
 }
 
 func (m Model) Init() tea.Cmd {
@@ -147,9 +132,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// Asume que el primer campo es el símbolo del token
 				symbol := selectedRow[2]
 
-				mintState := m.currentMonitor.GetMintState()
-
-				for _, row := range mintState {
+				for _, row := range m.stateManager.MintState {
 					if row[0].TokenMeta.Symbol == symbol { // Accede al índice correcto
 						m.selectedToken = &row[0]
 						break
@@ -169,7 +152,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case TokenUpdateMsg:
 		m.table = NewModel(msg).table
 	case StatusBarUpdateMsg:
-		messages := m.currentMonitor.GetStatusHistory()
+		messages := m.stateManager.GetStatusHistory()
 		// Limitar los mensajes a los últimos 10
 		if len(messages) > 10 {
 			messages = messages[len(messages)-10:]
