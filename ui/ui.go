@@ -39,6 +39,12 @@ func NewModel(tokens []types.TokenInfo) Model {
 		// {Title: "URL", Width: 100},
 	}
 
+	// Actualizar el spinner
+	cmd, _ := m.statusBar.Update(msg)
+	cmds = append(cmds, cmd)
+
+	return m, tea.Batch(cmds...)
+
 	rows := []table.Row{}
 	for _, token := range tokens {
 		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
@@ -99,6 +105,8 @@ func (m Model) Init() tea.Cmd {
 }
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	var cmds []tea.Cmd
+
 	switch msg := msg.(type) {
 	// case tea.WindowSizeMsg:
 	// 	h, v := docStyle.GetFrameSize()

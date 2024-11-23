@@ -32,7 +32,7 @@ func NewStatusListModel(messages []monitor.StatusMessage) StatusListModel {
 
 	l.Styles.Title = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205"))
 
-	return StatusListModel{list: l}
+	return StatusListModel{list: l, spinner: s}
 }
 
 type listItem struct {
@@ -51,6 +51,13 @@ func (i listItem) FilterValue() string {
 	return i.message.Message
 }
 
+func (m *StatusListModel) Update(msg tea.Msg) (tea.Cmd, bool) {
+	var cmd tea.Cmd
+	m.spinner, cmd = m.spinner.Update(msg)
+	return cmd, true
+}
+
 func (m StatusListModel) View() string {
+	m.list.Title = m.spinner.View() // Actualizar el título con la vista del spinner
 	return m.list.View()
 }
