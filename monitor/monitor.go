@@ -25,15 +25,14 @@ func updateStatus(status string, statusUpdates chan<- string) {
 	statusUpdates <- status
 }
 
-func playAlertSound() {
-	cmd := exec.Command("say", "New token detected")
+// Reproduce el sonido de alerta cuando se detecta un nuevo token
+func (m *Monitor) playAlertSound() {
+	cmd := exec.Command("say", "New token")
 	err := cmd.Run()
 	if err != nil {
-		fmt.Println("Error executing say command:", err)
+		updateStatus(fmt.Sprintf("Error executing say command: %v", err), m.statusUpdates)
 	}
-
-	// Reproduce el sonido de alerta cuando se detecta un nuevo token
-	playAlertSound()
+}
 
 var mintState = make(map[string][]types.Report)
 
@@ -172,6 +171,9 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 					allTokens = append(allTokens, token)
 				}
 			}
+			if attempts > 1 {
+				updateStatus("🌀 Updating allTokens...", m.statusUpdates)
+			}
 			m.tokenUpdates <- allTokens
 			break
 		}
@@ -184,7 +186,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
 	websocketURL := os.Getenv("WEBSOCKET_URL")
 	apiKey := os.Getenv("API_KEY")
-	updateStatus("Connecting to WebSocket... : "+websocketURL, m.statusUpdates)
+	updateStatus("Connecting to WebSocket... : "+websocketURL[:len(websocketURL)-9], m.statusUpdates)
 	client, err := ws.Connect(context.Background(), websocketURL+apiKey)
 	if err != nil {
 		return nil, err
@@ -251,6 +253,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		for _, balance := range tx58.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
 				updateStatus("========== New Token Found =========="+fmt.Sprintf(" : %s ...", balance.Mint.String()[:7]), m.statusUpdates)
+				m.playAlertSound()
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
