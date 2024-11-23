@@ -19,8 +19,6 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 
-	hello() // Call the hello function
-
 	// Crea canales
 	tokenUpdates := make(chan []types.TokenInfo)
 	statusUpdates := make(chan monitor.StatusMessage)
