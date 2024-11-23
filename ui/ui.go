@@ -39,12 +39,6 @@ func NewModel(tokens []types.TokenInfo) Model {
 		// {Title: "URL", Width: 100},
 	}
 
-	// Actualizar el spinner
-	cmd, _ := m.statusBar.Update(msg)
-	cmds = append(cmds, cmd)
-
-	return m, tea.Batch(cmds...)
-
 	rows := []table.Row{}
 	for _, token := range tokens {
 		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
@@ -124,6 +118,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			} else if m.activeView == 1 {
 				if m.statusBar.list.Cursor() > 0 {
+					m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveUp"}}})
 					m.statusBar.list.CursorUp()
 				}
 			}
@@ -134,6 +129,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			} else if m.activeView == 1 {
 				if m.statusBar.list.Cursor() < len(m.statusBar.list.Items())-1 {
+					m.statusBar.list.SetItems([]list.Item{listItem{message: monitor.StatusMessage{Message: "MoveDown"}}})
 					m.statusBar.list.CursorDown()
 				}
 			}
@@ -174,7 +170,16 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// Actualizar el modelo de la lista con los nuevos elementos
 		m.statusBar.list.SetItems(items)
 	}
-	return m, nil
+
+	// Actualizar el spinner
+	cmd, _ := m.statusBar.Update(msg)
+	cmds = append(cmds, cmd)
+
+	// Asegúrate de que el spinner se actualice en cada ciclo
+	spinnerCmd := m.statusBar.spinner.Tick
+	cmds = append(cmds, spinnerCmd)
+
+	return m, tea.Batch(cmds...)
 }
 
 func (m Model) View() string {
