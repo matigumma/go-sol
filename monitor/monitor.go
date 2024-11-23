@@ -36,6 +36,8 @@ type StatusMessage struct {
 }
 
 var statusHistory []StatusMessage
+var websocketURL string
+var apiKey string
 
 func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
 	statusMessage := StatusMessage{Level: level, Message: message}
@@ -101,6 +103,9 @@ type model struct {
 }
 
 func newModel(tokens []types.TokenInfo) model {
+	websocketURL = os.Getenv("WEBSOCKET_URL")
+	apiKey = os.Getenv("API_KEY")
+
 	columns := []table.Column{
 		{Title: "SYMBOL", Width: 20},
 		{Title: "ADDRESS", Width: 10},
@@ -239,8 +244,6 @@ func (m *Monitor) CheckMintAddress(mint string) (string, []types.Risk, error) {
 }
 
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
-	websocketURL := os.Getenv("WEBSOCKET_URL")
-	apiKey := os.Getenv("API_KEY")
 	updateStatus("Connecting to WebSocket... : "+websocketURL[:len(websocketURL)-9], NONE, m.statusUpdates)
 	client, err := ws.Connect(context.Background(), websocketURL+apiKey)
 	if err != nil {
@@ -280,7 +283,7 @@ func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 	signature := msg.Value.Signature
 	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature), INFO, m.statusUpdates)
 
-	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
+	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=" + apiKey) // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	m.getTransactionDetails(rpcClient, signature)
 }
 
