@@ -171,9 +171,10 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 }
 
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
-	updateStatus("Connecting to WebSocket...", m.statusUpdates)
 	websocketURL := os.Getenv("WEBSOCKET_URL")
-	client, err := ws.Connect(context.Background(), websocketURL)
+	apiKey := os.Getenv("API_KEY")
+	updateStatus("Connecting to WebSocket... : "+websocketURL, m.statusUpdates)
+	client, err := ws.Connect(context.Background(), websocketURL+apiKey)
 	if err != nil {
 		return nil, err
 	}
