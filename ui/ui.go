@@ -17,36 +17,41 @@ type Model struct {
 
 func NewModel(tokens []types.TokenInfo) Model {
 	columns := []table.Column{
-		{Title: "SYMBOL", Width: 10},
-		{Title: "ADDRESS", Width: 15},
 		{Title: "CREATED AT", Width: 25},
+		{Title: "SYMBOL", Width: 10},
 		{Title: "SCORE", Width: 10},
+		{Title: "ADDRESS", Width: 15},
 		{Title: "URL", Width: 50},
 	}
 
 	rows := []table.Row{}
-	seenAddresses := make(map[string]bool)
 	for _, token := range tokens {
-		if !seenAddresses[token.Address] {
-			address := token.Address[:7]
-			url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
-			scoreColor := lipgloss.Color("2") // Green
-			if token.Score > 2000 {
-				scoreColor = lipgloss.Color("3") // Yellow
-			}
-			if token.Score > 4000 {
-				scoreColor = lipgloss.Color("1") // Red
-			}
-			row := table.Row{token.Symbol, address, token.CreatedAt, lipgloss.NewStyle().Foreground(scoreColor).Render(fmt.Sprintf("%d", token.Score)), url}
-			rows = append(rows, row)
-			seenAddresses[token.Address] = true
+		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
+			continue
 		}
+		address := token.Address[:7] + "..."
+		url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
+		// scoreColor := color.BgGreen // Green
+		// if token.Score > 2000 {
+		// 	scoreColor = color.BgYellow // Yellow
+		// }
+		// if token.Score > 4000 {
+		// 	scoreColor = color.BgRed // Red
+		// }
+		row := table.Row{
+			token.CreatedAt,
+			token.Symbol,
+			fmt.Sprintf("%d", token.Score),
+			address,
+			url,
+		}
+		rows = append(rows, row)
 	}
 
 	t := table.New(
 		table.WithColumns(columns),
 		table.WithRows(rows),
-		table.WithFocused(true),
+		table.WithHeight(5),
 	)
 
 	return Model{table: t}
@@ -57,6 +62,7 @@ func (m Model) Init() tea.Cmd {
 }
 
 type TokenUpdateMsg []types.TokenInfo
+type StatusBarUpdateMsg string
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
@@ -68,6 +74,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case TokenUpdateMsg:
 		// Actualiza la tabla con los nuevos tokens
 		m.table = NewModel(msg).table
+	case StatusBarUpdateMsg:
+		// Actualiza la ui de statusbar
+		// crear una nueva ui para actualizar el statusbar con el mensaje proveniente del monitor
 	}
 	return m, nil
 }
