@@ -48,24 +48,24 @@ func NewApp() *App {
 		logProcessor:   logProc,
 		transactionMgr: transMgr,
 		apiClient:      apiCli,
-		stateManager:   stateMgr,
-		statusUpdates:  statusCh,
-		tokenUpdates:   tokenCh,
+		StateManager:   stateMgr,
+		StatusUpdates:  statusCh,
+		TokenUpdates:   tokenCh,
 		logCh:          logCh,
-		ctx:            ctx,
-		cancel:         cancel,
+		Ctx:            ctx,
+		Cancel:         cancel,
 	}
 }
 
 func (app *App) Run() {
-	go app.wsClient.Reconnect(app.ctx)
+	go app.wsClient.Reconnect(app.Ctx)
 	// Aquí puedes iniciar otras rutinas necesarias
 
 	// Iniciar una goroutine para procesar los logs
 	go func() {
 		for {
 			select {
-			case <-app.ctx.Done():
+			case <-app.Ctx.Done():
 				return
 			case logMsg := <-app.logCh:
 				app.logProcessor.ProcessLog(logMsg)
@@ -75,9 +75,9 @@ func (app *App) Run() {
 }
 
 func (app *App) Stop() {
-	app.cancel()
+	app.Cancel()
 	app.transactionMgr.Wait()
-	close(app.statusUpdates)
-	close(app.tokenUpdates)
+	close(app.StatusUpdates)
+	close(app.TokenUpdates)
 	close(app.logCh)
 }

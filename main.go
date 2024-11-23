@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"gosol/monitor"
-	"gosol/types"
 	"gosol/ui"
 
 	tea "github.com/charmbracelet/bubbletea"

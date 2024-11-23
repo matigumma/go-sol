@@ -22,30 +22,30 @@ type StatusMessage struct {
 }
 
 type StateManager struct {
-	mintState     map[string][]types.Report
-	statusHistory []StatusMessage
+	MintState     map[string][]types.Report
+	StatusHistory []StatusMessage
 	mu            sync.RWMutex
 }
 
 func NewStateManager() *StateManager {
 	return &StateManager{
-		mintState:     make(map[string][]types.Report),
-		statusHistory: make([]StatusMessage, 0),
+		MintState:     make(map[string][]types.Report),
+		StatusHistory: make([]StatusMessage, 0),
 	}
 }
 
 func (sm *StateManager) AddMint(mint string) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
-	if _, exists := sm.mintState[mint]; !exists {
-		sm.mintState[mint] = []types.Report{}
+	if _, exists := sm.MintState[mint]; !exists {
+		sm.MintState[mint] = []types.Report{}
 	}
 }
 
 func (sm *StateManager) UpdateMintState(mint string, report types.Report) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
-	sm.mintState[mint] = append(sm.mintState[mint], report)
+	sm.MintState[mint] = append(sm.MintState[mint], report)
 }
 
 func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) {
@@ -53,7 +53,7 @@ func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) 
 	defer sm.mu.RUnlock()
 
 	var allTokens []types.TokenInfo
-	for mint, reports := range sm.mintState {
+	for mint, reports := range sm.MintState {
 		if len(reports) == 0 {
 			continue
 		}
@@ -77,11 +77,11 @@ func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) 
 func (sm *StateManager) AddStatusMessage(msg StatusMessage) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
-	sm.statusHistory = append(sm.statusHistory, msg)
+	sm.StatusHistory = append(sm.StatusHistory, msg)
 }
 
 func (sm *StateManager) GetStatusHistory() []StatusMessage {
 	sm.mu.RLock()
 	defer sm.mu.RUnlock()
-	return sm.statusHistory
+	return sm.StatusHistory
 }
