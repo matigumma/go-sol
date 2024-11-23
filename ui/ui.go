@@ -12,17 +12,18 @@ import (
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
 type Model struct {
-	table table.Model
+	table     table.Model
 	statusBar string
 }
 
 func NewModel(tokens []types.TokenInfo) Model {
 	columns := []table.Column{
-		{Title: "CREATED AT", Width: 25},
+		{Title: "", Width: 2},
+		{Title: "CREATED AT", Width: 10},
 		{Title: "SYMBOL", Width: 10},
 		{Title: "SCORE", Width: 10},
-		{Title: "ADDRESS", Width: 15},
-		{Title: "URL", Width: 50},
+		{Title: "ADDRESS", Width: 10},
+		{Title: "URL", Width: 100},
 	}
 
 	rows := []table.Row{}
@@ -32,14 +33,18 @@ func NewModel(tokens []types.TokenInfo) Model {
 		}
 		address := token.Address[:7] + "..."
 		url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
-		// scoreColor := color.BgGreen // Green
-		// if token.Score > 2000 {
-		// 	scoreColor = color.BgYellow // Yellow
-		// }
-		// if token.Score > 4000 {
-		// 	scoreColor = color.BgRed // Red
-		// }
+		scoreColor := "🟢" // Green
+		if token.Score > 2000 {
+			scoreColor = "🟡" // Yellow
+		}
+		if token.Score > 3000 {
+			scoreColor = "🟠" // Yellow
+		}
+		if token.Score > 4000 {
+			scoreColor = "🔴" // Red
+		}
 		row := table.Row{
+			scoreColor,
 			token.CreatedAt,
 			token.Symbol,
 			fmt.Sprintf("%d", token.Score),
@@ -52,7 +57,8 @@ func NewModel(tokens []types.TokenInfo) Model {
 	t := table.New(
 		table.WithColumns(columns),
 		table.WithRows(rows),
-		table.WithHeight(5),
+		table.WithHeight(7),
+		table.WithFocused(true),
 	)
 
 	return Model{table: t}
@@ -86,5 +92,5 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m Model) View() string {
 	tableView := m.table.View()
 	statusBarView := lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(m.statusBar)
-	return fmt.Sprintf("%s\n\n%s", tableView, statusBarView)
+	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
