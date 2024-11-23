@@ -12,7 +12,17 @@ type APIClient struct {
 	stateManager  *StateManager
 	statusUpdates chan<- StatusMessage
 	tokenUpdates  chan<- []types.TokenInfo
+	requestThrottle chan struct{}
 }
+
+func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan<- StatusMessage, tokenUpdates chan<- []types.TokenInfo) *APIClient {
+	return &APIClient{
+		baseURL:         baseURL,
+		stateManager:    stateManager,
+		statusUpdates:   statusUpdates,
+		tokenUpdates:    tokenUpdates,
+		requestThrottle: make(chan struct{}, 10), // Limitar a 10 solicitudes concurrentes
+	}
 
 func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan<- StatusMessage, tokenUpdates chan<- []types.TokenInfo) *APIClient {
 	return &APIClient{
@@ -25,6 +35,9 @@ func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan
 
 func (api *APIClient) FetchAndProcessReport(mint string) {
 	go func() {
+		api.requestThrottle <- struct{}{} // Adquirir un "permiso" para hacer la solicitud
+		defer func() { <-api.requestThrottle }() // Liberar el "permiso" al finalizar
+
 		report, err := api.fetchTokenReport(mint)
 		if err != nil {
 			api.stateManager.AddStatusMessage(StatusMessage{Level: ERR, Message: fmt.Sprintf("Error fetching report for %s: %v", mint, err)})
@@ -42,6 +55,19 @@ func (api *APIClient) FetchAndProcessReport(mint string) {
 }
 
 func (api *APIClient) fetchTokenReport(mint string) (types.Report, error) {
+	var report types.Report
+	var err error
+	for attempts := 0; attempts < 3; attempts++ {
+		report, err = api.tryFetchTokenReport(mint)
+		if err == nil {
+			return report, nil
+		}
+		time.Sleep(time.Duration(attempts+1) * time.Second) // Esperar más tiempo en cada intento
+	}
+	return report, err
+}
+
+func (api *APIClient) tryFetchTokenReport(mint string) (types.Report, error) {
 	url := fmt.Sprintf("%s/v1/tokens/%s/report", api.baseURL, mint)
 	resp, err := http.Get(url)
 	if err != nil {
