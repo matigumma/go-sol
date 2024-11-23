@@ -34,6 +34,7 @@ type Holder struct {
 }
 
 type Report struct {
+	Mint                 string        `json:"mint"`
 	TokenMeta            TokenMeta     `json:"tokenMeta"`
 	Risks                []Risk        `json:"risks"`
 	TotalMarketLiquidity float64       `json:"totalMarketLiquidity"`

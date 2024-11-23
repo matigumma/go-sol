@@ -6,18 +6,23 @@ import (
 	"gosol/types"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
 )
 
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
+type TokenUpdateMsg []types.TokenInfo
+type StatusBarUpdateMsg monitor.StatusMessage
+
 type Model struct {
 	table          table.Model
 	statusBar      string
-	selectedToken  *types.TokenInfo
+	selectedToken  *types.Report
 	currentMonitor *monitor.Monitor
 }
 
@@ -28,7 +33,7 @@ func NewModel(tokens []types.TokenInfo) Model {
 		{Title: "SYMBOL", Width: 10},
 		{Title: "SCORE", Width: 10},
 		{Title: "ADDRESS", Width: 10},
-		{Title: "URL", Width: 100},
+		// {Title: "URL", Width: 100},
 	}
 
 	rows := []table.Row{}
@@ -37,7 +42,7 @@ func NewModel(tokens []types.TokenInfo) Model {
 			continue
 		}
 		address := token.Address[:7] + "..."
-		url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
+		// url := fmt.Sprintf("https://rugcheck.xyz/tokens/%s", token.Address)
 		scoreColor := "🟢" // Green
 		if token.Score > 2000 {
 			scoreColor = "🟡" // Yellow
@@ -54,7 +59,7 @@ func NewModel(tokens []types.TokenInfo) Model {
 			token.Symbol,
 			fmt.Sprintf("%d", token.Score),
 			address,
-			url,
+			// url,
 		}
 		rows = append(rows, row)
 	}
@@ -75,20 +80,8 @@ func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-// Init run any intial IO on program start
 func (m Model) Init() tea.Cmd {
 	return nil
-}
-
-type TokenUpdateMsg []types.TokenInfo
-type StatusBarUpdateMsg monitor.StatusMessage
-
-func parseScore(scoreStr string) int64 {
-	score, err := strconv.ParseInt(scoreStr, 10, 64)
-	if err != nil {
-		return 0
-	}
-	return score
 }
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -111,14 +104,12 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if selectedRow != nil {
 				// Asume que el primer campo es el símbolo del token
 				symbol := selectedRow[2]
-				for _, row := range m.table.Rows() {
-					if row[2] == symbol { // Accede al índice correcto
-						m.selectedToken = &types.TokenInfo{
-							Symbol:    row[2],
-							CreatedAt: row[1],
-							Score:     parseScore(row[3]),
-							Address:   row[4],
-						}
+
+				mintState := m.currentMonitor.GetMintState()
+
+				for _, row := range mintState {
+					if row[0].TokenMeta.Symbol == symbol { // Accede al índice correcto
+						m.selectedToken = &row[0]
 						break
 					}
 				}
@@ -138,36 +129,37 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-func formatStatusBar(msg StatusBarUpdateMsg) string {
-	var color lipgloss.Color
-	switch msg.Level {
-	case monitor.INFO:
-		color = lipgloss.Color("2") // Green
-	case monitor.WARN:
-		color = lipgloss.Color("3") // Yellow
-	case monitor.ERR:
-		color = lipgloss.Color("1") // Red
-	default:
-		color = lipgloss.Color("241") // Gray
+func (m Model) View() string {
+	if m.selectedToken != nil {
+		return m.tokenDetailView()
 	}
-	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
+	tableView := m.table.View()
+	statusBarView := formatStatusBar(StatusBarUpdateMsg{Level: monitor.NONE, Message: m.statusBar})
+	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }
 
 func (m Model) tokenDetailView() string {
 	if m.selectedToken == nil {
 		return ""
 	}
-	token := m.selectedToken
-
-	// depura currentMonitor para ver si esta correcto
-	// y luego el getMintState()
-
-	fullTokenInfo, ok := m.currentMonitor.GetMintState()[token.Address]
-	if !ok || len(fullTokenInfo) == 0 {
-		return "Error: Token information not found."
+	if m.currentMonitor == nil {
+		return "Error: Monitor not initialized."
 	}
 
-	return formatReportAsMarkdown(fullTokenInfo[0])
+	// request update
+	go m.currentMonitor.CheckMintAddress(m.selectedToken.Mint)
+
+	time.Sleep(1 * time.Second)
+
+	markdownContent := formatReportAsMarkdown(*m.selectedToken)
+
+	// Usar glamour para renderizar el Markdown
+	renderedContent, err := glamour.Render(markdownContent, "dark")
+	if err != nil {
+		return fmt.Sprintf("Error rendering markdown: %v", err)
+	}
+
+	return renderedContent
 }
 
 func formatReportAsMarkdown(report types.Report) string {
@@ -222,11 +214,24 @@ func formatTopHolders(holders []types.Holder) string {
 	return strings.Join(result, "\n")
 }
 
-func (m Model) View() string {
-	if m.selectedToken != nil {
-		return m.tokenDetailView()
+func parseScore(scoreStr string) int64 {
+	score, err := strconv.ParseInt(scoreStr, 10, 64)
+	if err != nil {
+		return 0
 	}
-	tableView := m.table.View()
-	statusBarView := formatStatusBar(StatusBarUpdateMsg{Level: monitor.NONE, Message: m.statusBar})
-	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
+	return score
+}
+func formatStatusBar(msg StatusBarUpdateMsg) string {
+	var color lipgloss.Color
+	switch msg.Level {
+	case monitor.INFO:
+		color = lipgloss.Color("2") // Green
+	case monitor.WARN:
+		color = lipgloss.Color("3") // Yellow
+	case monitor.ERR:
+		color = lipgloss.Color("1") // Red
+	default:
+		color = lipgloss.Color("241") // Gray
+	}
+	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
 }

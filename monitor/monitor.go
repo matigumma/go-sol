@@ -35,8 +35,18 @@ type StatusMessage struct {
 	Message string
 }
 
+var statusHistory []StatusMessage
+
 func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
-	statusUpdates <- StatusMessage{Level: level, Message: message}
+	statusMessage := StatusMessage{Level: level, Message: message}
+	statusUpdates <- statusMessage
+
+	// Agregar el mensaje al historial
+	statusHistory = append(statusHistory, statusMessage)
+}
+
+func (m *Monitor) GetStatusHistory() []StatusMessage {
+	return statusHistory
 }
 
 // slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
@@ -53,7 +63,7 @@ func (m *Monitor) playAlertSound() {
 
 var mintState = make(map[string][]types.Report)
 
-func (m *Monitor) getMintState() map[string][]types.Report {
+func (m *Monitor) GetMintState() map[string][]types.Report {
 	return mintState
 }
 
@@ -154,7 +164,7 @@ func displayTokenTable(tokens []types.TokenInfo) {
 	}
 }
 
-func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
+func (m *Monitor) CheckMintAddress(mint string) (string, []types.Risk, error) {
 	url := fmt.Sprintf("https://api.rugcheck.xyz/v1/tokens/%s/report", mint)
 	var symbol string
 	var risks []types.Risk
@@ -174,27 +184,43 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 					return
 				}
 
+				// si es muy mala actualizar el statusbar y salir
+				if report.Score > 8000 {
+					updateStatus(fmt.Sprintf("💩 Token Sym:[%s]: '%s' Score[%d]", report.TokenMeta.Symbol, report.TokenMeta.Name, report.Score), NONE, m.statusUpdates)
+					attempt = 4
+					return
+				}
+
 				risks = report.Risks
 				symbol = report.TokenMeta.Symbol
 
 				// Update the in-memory state with the report
-				mintState[mint] = []types.Report{report}
+				// mintState[mint] = []types.Report{report}
+				// Agregar el nuevo reporte al historial
+				mintState[mint] = append(mintState[mint], report)
 
 				// Enviar el estado completo de mintState al canal tokenUpdates
 				var allTokens []types.TokenInfo
 				for mint, reports := range mintState {
-					for _, report := range reports {
-						token := types.TokenInfo{
-							Symbol:    report.TokenMeta.Symbol,
-							Address:   mint,
-							CreatedAt: report.DetectedAt.In(time.Local).Format("15:04"),
-							Score:     int64(report.Score),
-						}
-						allTokens = append(allTokens, token)
+					if len(reports) == 0 {
+						continue
 					}
+					// Usar el último reporte (el más reciente)
+					latestReport := reports[len(reports)-1]
+					token := types.TokenInfo{
+						Symbol:    latestReport.TokenMeta.Symbol,
+						Address:   mint,
+						CreatedAt: latestReport.DetectedAt.In(time.Local).Format("15:04"),
+						Score:     int64(latestReport.Score),
+					}
+					allTokens = append(allTokens, token)
 				}
+
+				// Ordenar allTokens por la fecha del último reporte
 				sort.Slice(allTokens, func(i, j int) bool {
-					return mintState[allTokens[i].Address][0].DetectedAt.Before(mintState[allTokens[j].Address][0].DetectedAt)
+					return mintState[allTokens[i].Address][len(mintState[allTokens[i].Address])-1].DetectedAt.Before(
+						mintState[allTokens[j].Address][len(mintState[allTokens[j].Address])-1].DetectedAt,
+					)
 				})
 
 				if attempt > 0 {
@@ -293,7 +319,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 				}
 
 				// Check mint address for additional API information
-				go m.checkMintAddress(balance.Mint.String())
+				go m.CheckMintAddress(balance.Mint.String())
 			}
 		}
 	}
