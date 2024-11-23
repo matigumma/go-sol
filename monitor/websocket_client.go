@@ -53,7 +53,7 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 
 	go func() {
 		defer sub.Unsubscribe()
-		wsc.updateStatus("Start monitoring...")
+		wsc.updateStatus("Start monitoring...", INFO)
 		for {
 			msg, err := sub.Recv(ctx)
 			if err != nil {
@@ -91,5 +91,5 @@ func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
 }
 
 func (wsc *WebSocketClient) updateStatus(message string) {
-	// TransactionManager.stateManager.AddStatusMessage(StatusMessage{Level: level, Message: message})
+	wsc.statusUpdates <- StatusMessage{Level: INFO, Message: message}
 }

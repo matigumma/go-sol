@@ -82,7 +82,7 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 
 	return Model{
 		table:         t,
-		statusBar:     NewStatusListModel(messages),
+		statusBar:     NewStatusListModel([]monitor.StatusMessage{}),
 		statusUpdates: statusCh,
 		tokenUpdates:  tokenCh,
 		// Inicializar otros campos
@@ -162,7 +162,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case monitor.StatusMessage:
 		// Actualizar statusHistory en el UI
-		m.statusBar.UpdateStatus(msg)
+		m.statusBar.list.SetItems(append(m.statusBar.list.Items(), listItem{message: msg}))
 	case []types.TokenInfo:
 		// Actualizar la tabla de tokens
 		m.table = NewModel(msg).table

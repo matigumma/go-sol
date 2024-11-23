@@ -34,7 +34,7 @@ func NewApp(pubkey, apiBaseURL string) *App {
 	apiCli := NewAPIClient(apiBaseURL, stateMgr, statusCh, tokenCh)
 	transMgr := NewTransactionManager(apiCli, stateMgr, statusCh, tokenCh)
 	logProc := NewLogProcessor(transMgr, statusCh)
-	wsCli := NewWebSocketClient(websocketURL, apiKey, pubkey, transMgr.logCh, statusCh)
+	wsCli := NewWebSocketClient(websocketURL, apiKey, pubkey, logProc.logCh, statusCh)
 
 	return &App{
 		wsClient:       wsCli,
