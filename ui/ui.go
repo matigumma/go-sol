@@ -13,6 +13,7 @@ var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
 type Model struct {
 	table table.Model
+	statusBar string
 }
 
 func NewModel(tokens []types.TokenInfo) Model {
@@ -76,11 +77,14 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.table = NewModel(msg).table
 	case StatusBarUpdateMsg:
 		// Actualiza la ui de statusbar
-		// crear una nueva ui para actualizar el statusbar con el mensaje proveniente del monitor
+		// Actualiza la barra de estado con el mensaje recibido
+		m.statusBar = string(msg)
 	}
 	return m, nil
 }
 
 func (m Model) View() string {
-	return m.table.View()
+	tableView := m.table.View()
+	statusBarView := lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render(m.statusBar)
+	return fmt.Sprintf("%s\n\n%s", tableView, statusBarView)
 }
