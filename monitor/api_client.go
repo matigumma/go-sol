@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"gosol/types"
 	"net/http"
+	"time"
 )
 
 type APIClient struct {
-	baseURL       string
-	stateManager  *StateManager
-	statusUpdates chan<- StatusMessage
-	tokenUpdates  chan<- []types.TokenInfo
+	baseURL         string
+	stateManager    *StateManager
+	statusUpdates   chan<- StatusMessage
+	tokenUpdates    chan<- []types.TokenInfo
 	requestThrottle chan struct{}
 }
 
@@ -23,19 +24,11 @@ func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan
 		tokenUpdates:    tokenUpdates,
 		requestThrottle: make(chan struct{}, 10), // Limitar a 10 solicitudes concurrentes
 	}
-
-func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan<- StatusMessage, tokenUpdates chan<- []types.TokenInfo) *APIClient {
-	return &APIClient{
-		baseURL:       baseURL,
-		stateManager:  stateManager,
-		statusUpdates: statusUpdates,
-		tokenUpdates:  tokenUpdates,
-	}
 }
 
 func (api *APIClient) FetchAndProcessReport(mint string) {
 	go func() {
-		api.requestThrottle <- struct{}{} // Adquirir un "permiso" para hacer la solicitud
+		api.requestThrottle <- struct{}{}        // Adquirir un "permiso" para hacer la solicitud
 		defer func() { <-api.requestThrottle }() // Liberar el "permiso" al finalizar
 
 		report, err := api.fetchTokenReport(mint)

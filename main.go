@@ -11,10 +11,7 @@ import (
 )
 
 func main() {
-	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5"
-	apiBaseURL := "https://api.rugcheck.xyz"
-
-	app := monitor.NewApp(pubkey, apiBaseURL)
+	app := monitor.NewApp()
 	app.Run()
 
 	tokens := []types.TokenInfo{} // Inicialmente vacío

@@ -32,7 +32,7 @@ func NewWebSocketClient(websocketURL, apiKey, pubkey string, logCh chan<- *ws.Lo
 func (wsc *WebSocketClient) Connect(ctx context.Context) error {
 	client, err := ws.Connect(ctx, wsc.websocketURL+wsc.apiKey)
 	if err != nil {
-		wsc.updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err))
+		wsc.updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), ERR)
 		return err
 	}
 	wsc.client = client
@@ -47,7 +47,7 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 		rpc.CommitmentConfirmed,
 	)
 	if err != nil {
-		wsc.updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err))
+		wsc.updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err), ERR)
 		return err
 	}
 
@@ -57,7 +57,7 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 		for {
 			msg, err := sub.Recv(ctx)
 			if err != nil {
-				wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err))
+				wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err), ERR)
 				return
 			}
 			wsc.logCh <- msg
@@ -68,6 +68,9 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 }
 
 func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
+	backoff := 1 * time.Second
+	maxBackoff := 30 * time.Second
+
 	for {
 		select {
 		case <-ctx.Done():
@@ -75,21 +78,30 @@ func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
 		default:
 			err := wsc.Connect(ctx)
 			if err != nil {
-				wsc.updateStatus("Retrying connection in 5 seconds...")
-				time.Sleep(5 * time.Second)
+				wsc.updateStatus("Retrying connection...", ERR)
+				time.Sleep(backoff)
+				backoff *= 2
+				if backoff > maxBackoff {
+					backoff = maxBackoff
+				}
 				continue
 			}
 			err = wsc.Subscribe(ctx)
 			if err != nil {
-				wsc.updateStatus("Retrying subscription in 5 seconds...")
-				time.Sleep(5 * time.Second)
+				wsc.updateStatus("Retrying subscription...", ERR)
+				time.Sleep(backoff)
+				backoff *= 2
+				if backoff > maxBackoff {
+					backoff = maxBackoff
+				}
 				continue
 			}
+			backoff = 1 * time.Second // Reset backoff after a successful connection
 			break
 		}
 	}
 }
 
-func (wsc *WebSocketClient) updateStatus(message string) {
-	wsc.statusUpdates <- StatusMessage{Level: INFO, Message: message}
+func (wsc *WebSocketClient) updateStatus(message string, level LogLevel) {
+	wsc.statusUpdates <- StatusMessage{Level: level, Message: message}
 }

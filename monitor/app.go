@@ -4,6 +4,8 @@ import (
 	"context"
 	"gosol/types"
 	"os"
+
+	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
 var websocketURL string
@@ -16,16 +18,21 @@ type App struct {
 	apiClient      *APIClient
 	stateManager   *StateManager
 	statusUpdates  chan StatusMessage
+	logCh          chan *ws.LogResult
 	tokenUpdates   chan []types.TokenInfo
 	ctx            context.Context
 	cancel         context.CancelFunc
 }
 
-func NewApp(pubkey, apiBaseURL string) *App {
+func NewApp() *App {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	statusCh := make(chan StatusMessage, 100)
 	tokenCh := make(chan []types.TokenInfo, 100)
+	logCh := make(chan *ws.LogResult, 100)
+
+	pubkey := os.Getenv("RAY_FEE_PUBKEY")
+	apiBaseURL := os.Getenv("API_BASE_URL")
 
 	websocketURL = os.Getenv("WEBSOCKET_URL")
 	apiKey = os.Getenv("API_KEY")
@@ -34,7 +41,7 @@ func NewApp(pubkey, apiBaseURL string) *App {
 	apiCli := NewAPIClient(apiBaseURL, stateMgr, statusCh, tokenCh)
 	transMgr := NewTransactionManager(apiCli, stateMgr, statusCh, tokenCh)
 	logProc := NewLogProcessor(transMgr, statusCh)
-	wsCli := NewWebSocketClient(websocketURL, apiKey, pubkey, logProc.logCh, statusCh)
+	wsCli := NewWebSocketClient(websocketURL, apiKey, pubkey, logCh, statusCh)
 
 	return &App{
 		wsClient:       wsCli,
@@ -44,6 +51,7 @@ func NewApp(pubkey, apiBaseURL string) *App {
 		stateManager:   stateMgr,
 		statusUpdates:  statusCh,
 		tokenUpdates:   tokenCh,
+		logCh:          logCh,
 		ctx:            ctx,
 		cancel:         cancel,
 	}
@@ -52,6 +60,18 @@ func NewApp(pubkey, apiBaseURL string) *App {
 func (app *App) Run() {
 	go app.wsClient.Reconnect(app.ctx)
 	// Aquí puedes iniciar otras rutinas necesarias
+
+	// Iniciar una goroutine para procesar los logs
+	go func() {
+		for {
+			select {
+			case <-app.ctx.Done():
+				return
+			case logMsg := <-app.logCh:
+				app.logProcessor.ProcessLog(logMsg)
+			}
+		}
+	}()
 }
 
 func (app *App) Stop() {
@@ -59,4 +79,5 @@ func (app *App) Stop() {
 	app.transactionMgr.Wait()
 	close(app.statusUpdates)
 	close(app.tokenUpdates)
+	close(app.logCh)
 }
