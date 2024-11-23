@@ -76,11 +76,21 @@ func NewModel(tokens []types.TokenInfo) Model {
 }
 
 func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
+	// Inicializar el modelo de la tabla con tokens vacíos
 	m := NewModel([]types.TokenInfo{})
 	m.currentMonitor = monitor
 	m.activeView = 0
 
-	return m, nil
+	// Obtener el historial de mensajes de estado y crear el modelo de lista
+	messages := monitor.GetStatusHistory()
+	m.statusBar = NewStatusListModel(messages)
+
+	// Comando inicial para Bubble Tea, si es necesario
+	cmd := tea.Batch(
+		// Aquí puedes agregar comandos iniciales si los necesitas
+	)
+
+	return m, cmd
 }
 
 func (m Model) Init() tea.Cmd {
