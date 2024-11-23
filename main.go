@@ -16,9 +16,9 @@ func main() {
 	monitor := monitor.NewMonitor(tokenUpdates)
 	go monitor.Run()
 
-	model := ui.NewModel([]types.TokenInfo{})
+	uiModel := ui.NewModel([]types.TokenInfo{})
 
-	p := tea.NewProgram(model)
+	p := tea.NewProgram(uiModel, tea.WithAltScreen())
 
 	go func() {
 		for tokens := range tokenUpdates {
