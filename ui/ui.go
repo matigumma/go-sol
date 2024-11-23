@@ -85,7 +85,7 @@ func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
 	// Inicializar el modelo de la tabla con tokens vacíos
 	m := NewModel([]types.TokenInfo{})
 	m.currentMonitor = monitor
-	m.activeView = 0
+	m.activeView = 1
 
 	// Obtener el historial de mensajes de estado y crear el modelo de lista
 	messages := monitor.GetStatusHistory()
@@ -108,9 +108,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		h, v := docStyle.GetFrameSize()
+		h, _ := docStyle.GetFrameSize()
 		m.table.SetWidth(msg.Width - h)
-		m.statusBar.list.SetSize(msg.Width-h, msg.Height-v)
+		m.statusBar.list.SetWidth(msg.Width - h)
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
