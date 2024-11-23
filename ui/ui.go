@@ -36,7 +36,7 @@ type Model struct {
 	// Otros campos necesarios
 }
 
-func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo) Model {
+func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo, stateManager *monitor.StateManager) Model {
 	columns := []table.Column{
 		{Title: "", Width: 2},
 		{Title: "CREATED AT", Width: 10},
@@ -85,18 +85,18 @@ func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, t
 		statusBar:     NewStatusListModel([]monitor.StatusMessage{}),
 		statusUpdates: statusCh,
 		tokenUpdates:  tokenCh,
+		stateManager:  stateManager,
 		// Inicializar otros campos
 	}
 }
 
-func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
+func InitProject(stateManager *monitor.StateManager) (tea.Model, tea.Cmd) {
 	// Inicializar el modelo de la tabla con tokens vacíos
-	m := NewModel([]types.TokenInfo{})
-	m.currentMonitor = monitor
+	m := NewModel([]types.TokenInfo{}, stateManager.statusUpdates, stateManager.tokenUpdates, stateManager)
 	m.activeView = 1
 
 	// Obtener el historial de mensajes de estado y crear el modelo de lista
-	messages := monitor.GetStatusHistory()
+	messages := stateManager.GetStatusHistory()
 	m.statusBar = NewStatusListModel(messages)
 
 	// Comando inicial para Bubble Tea, si es necesario
@@ -245,12 +245,12 @@ func (m Model) tokenDetailView() string {
 	if m.selectedToken == nil {
 		return ""
 	}
-	if m.currentMonitor == nil {
-		return "Error: Monitor not initialized."
+	if m.stateManager == nil {
+		return "Error: StateManager not initialized."
 	}
 
 	// request update
-	go m.currentMonitor.CheckMintAddress(m.selectedToken.Mint)
+	go m.stateManager.RequestReportOnDemand(m.selectedToken.Mint)
 
 	time.Sleep(1 * time.Second)
 

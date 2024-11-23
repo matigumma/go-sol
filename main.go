@@ -14,10 +14,8 @@ func main() {
 	app := monitor.NewApp()
 	app.Run()
 
-	tokens := []types.TokenInfo{} // Inicialmente vacío
-	ui.InitProject(app.currentMonitor)
-
-	model := ui.NewModel(tokens, app.statusUpdates, app.tokenUpdates)
+	// Inicializar el modelo de UI con el StateManager
+	model := ui.NewModel([]types.TokenInfo{}, app.statusUpdates, app.tokenUpdates, app.stateManager)
 
 	p := tea.NewProgram(model)
 	if err := p.Start(); err != nil {
