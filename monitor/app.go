@@ -17,11 +17,11 @@ type App struct {
 	transactionMgr *TransactionManager
 	apiClient      *APIClient
 	stateManager   *StateManager
-	statusUpdates  chan StatusMessage
+	StatusUpdates  chan StatusMessage
 	logCh          chan *ws.LogResult
-	tokenUpdates   chan []types.TokenInfo
-	ctx            context.Context
-	cancel         context.CancelFunc
+	TokenUpdates   chan []types.TokenInfo
+	Ctx            context.Context
+	Cancel         context.CancelFunc
 }
 
 func NewApp() *App {

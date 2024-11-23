@@ -15,7 +15,7 @@ func main() {
 	app.Run()
 
 	// Inicializar el modelo de UI con el StateManager
-	model := ui.NewModel([]types.TokenInfo{}, app.statusUpdates, app.tokenUpdates, app.stateManager)
+	model := ui.NewModel([]types.TokenInfo{}, app.StatusUpdates, app.TokenUpdates, app.StateManager)
 
 	p := tea.NewProgram(model)
 	if err := p.Start(); err != nil {
