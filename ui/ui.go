@@ -107,9 +107,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
-	// case tea.WindowSizeMsg:
-	// 	h, v := docStyle.GetFrameSize()
-	// 	m.statusBar.list.SetSize(msg.Width-h, msg.Height-v)
+	case tea.WindowSizeMsg:
+		h, v := docStyle.GetFrameSize()
+		m.table.SetWidth(msg.Width - h)
+		m.statusBar.list.SetSize(msg.Width-h, msg.Height-v)
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
