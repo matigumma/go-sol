@@ -2,6 +2,7 @@ package ui
 
 import (
 	"fmt"
+	"gosol/monitor"
 	"gosol/types"
 
 	"github.com/charmbracelet/bubbles/table"
@@ -11,7 +12,10 @@ import (
 
 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241")).Render
 
+type sessionState uint
+
 type Model struct {
+	state     sessionState
 	table     table.Model
 	statusBar string
 }
@@ -57,7 +61,6 @@ func NewModel(tokens []types.TokenInfo) Model {
 	t := table.New(
 		table.WithColumns(columns),
 		table.WithRows(rows),
-		table.WithHeight(7),
 		table.WithFocused(true),
 	)
 
@@ -69,7 +72,7 @@ func (m Model) Init() tea.Cmd {
 }
 
 type TokenUpdateMsg []types.TokenInfo
-type StatusBarUpdateMsg StatusMessage
+type StatusBarUpdateMsg monitor.StatusMessage
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
@@ -89,22 +92,22 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-func formatStatusBar(msg StatusMessage) string {
-    var color lipgloss.Color
-    switch msg.Level {
-    case INFO:
-        color = lipgloss.Color("2") // Green
-    case WARN:
-        color = lipgloss.Color("3") // Yellow
-    case ERR:
-        color = lipgloss.Color("1") // Red
-    default:
-        color = lipgloss.Color("241") // Gray
-    }
-    return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
+func formatStatusBar(msg StatusBarUpdateMsg) string {
+	var color lipgloss.Color
+	switch msg.Level {
+	case monitor.INFO:
+		color = lipgloss.Color("2") // Green
+	case monitor.WARN:
+		color = lipgloss.Color("3") // Yellow
+	case monitor.ERR:
+		color = lipgloss.Color("1") // Red
+	default:
+		color = lipgloss.Color("241") // Gray
+	}
+	return lipgloss.NewStyle().Foreground(color).Render(msg.Message)
 }
 func (m Model) View() string {
 	tableView := m.table.View()
-	statusBarView := formatStatusBar(StatusMessage{Level: NONE, Message: m.statusBar})
+	statusBarView := formatStatusBar(StatusBarUpdateMsg{Level: monitor.NONE, Message: m.statusBar})
 	return fmt.Sprintf("\n%s\n\n%s", statusBarView, tableView)
 }

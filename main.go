@@ -8,8 +8,9 @@ import (
 	"os"
 
 	"log"
-	"github.com/joho/godotenv"
+
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -17,7 +18,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file")
 	}
-	statusUpdates := make(chan string)
+
+	// Crea canales
+	tokenUpdates := make(chan []types.TokenInfo)
+	statusUpdates := make(chan monitor.StatusMessage)
 
 	monitor := monitor.NewMonitor(tokenUpdates, statusUpdates)
 	go func() {

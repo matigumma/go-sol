@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"gosol/types"
+	"sort"
 
 	"encoding/json"
 	"net/http"
@@ -23,27 +24,30 @@ import (
 type LogLevel int
 
 const (
-    INFO LogLevel = iota
-    WARN
-    ERR
-    NONE
+	INFO LogLevel = iota
+	WARN
+	ERR
+	NONE
 )
 
 type StatusMessage struct {
-    Level   LogLevel
-    Message string
+	Level   LogLevel
+	Message string
 }
 
 func updateStatus(message string, level LogLevel, statusUpdates chan<- StatusMessage) {
-    statusUpdates <- StatusMessage{Level: level, Message: message}
+	statusUpdates <- StatusMessage{Level: level, Message: message}
 }
+
+// slog.Log(context.TODO(), slog.LevelInfo, fmt.Sprintf("%s", color.New(color.BgHiBlue).SprintFunc()(status)), time.Now().Format("15:04"))
+// updateStatus(status, INFO, statusUpdates)
 
 // Reproduce el sonido de alerta cuando se detecta un nuevo token
 func (m *Monitor) playAlertSound() {
 	cmd := exec.Command("say", "New token")
 	err := cmd.Run()
 	if err != nil {
-		updateStatus(fmt.Sprintf("Error executing say command: %v", err), m.statusUpdates)
+		updateStatus(fmt.Sprintf("Error executing say command: %v", err), ERR, m.statusUpdates)
 	}
 }
 
@@ -58,22 +62,27 @@ type Monitor struct {
 	statusUpdates chan<- StatusMessage
 }
 
-func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- string) *Monitor {
+func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- StatusMessage) *Monitor {
 	return &Monitor{tokenUpdates: tokenUpdates, statusUpdates: statusUpdates}
 }
 
 func (m *Monitor) Run() {
 	client, err := m.connectToWebSocket()
 	if err != nil {
-		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), m.statusUpdates)
+		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), ERR, m.statusUpdates)
 	}
-
 	defer client.Close()
 
 	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	updateStatus("Subscribing to logs...", m.statusUpdates)
-	if err := m.subscribeToLogs(client, pubkey); err != nil {
-		updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err), m.statusUpdates)
+	updateStatus("Subscribing to logs...", NONE, m.statusUpdates)
+
+	for {
+		if err := m.subscribeToLogs(client, pubkey); err != nil {
+			updateStatus(fmt.Sprintf("Failed to subscribe to logs: %v", err), ERR, m.statusUpdates)
+			time.Sleep(5 * time.Second) // Wait before retrying
+			continue                    // Retry subscription
+		}
+		break // Exit loop if subscription is successful
 	}
 }
 
@@ -150,11 +159,11 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 	var symbol string
 	var risks []types.Risk
 
-	for attempts := 0; attempts < 3; attempts++ {
+	for attempts := 0; attempts < 4; attempts++ {
 		go func(attempt int) {
 			resp, err := http.Get(url)
 			if err != nil {
-				updateStatus(fmt.Sprintf("Error fetching data: %v", err), m.statusUpdates)
+				updateStatus(fmt.Sprintf("Error fetching data: %v", err), ERR, m.statusUpdates)
 				return
 			}
 			defer resp.Body.Close()
@@ -184,9 +193,14 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 						allTokens = append(allTokens, token)
 					}
 				}
+				sort.Slice(allTokens, func(i, j int) bool {
+					return mintState[allTokens[i].Address][0].DetectedAt.Before(mintState[allTokens[j].Address][0].DetectedAt)
+				})
+
 				if attempt > 0 {
-					updateStatus(fmt.Sprintf("🌀 Attempt %d: Updating allTokens...", attempt+1), m.statusUpdates)
+					updateStatus(fmt.Sprintf("🌀 Attempt %d: Updating allTokens...", attempt+1), INFO, m.statusUpdates)
 				}
+
 				m.tokenUpdates <- allTokens
 			}
 		}(attempts)
@@ -201,7 +215,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
 	websocketURL := os.Getenv("WEBSOCKET_URL")
 	apiKey := os.Getenv("API_KEY")
-	updateStatus("Connecting to WebSocket... : "+websocketURL[:len(websocketURL)-9], m.statusUpdates)
+	updateStatus("Connecting to WebSocket... : "+websocketURL[:len(websocketURL)-9], NONE, m.statusUpdates)
 	client, err := ws.Connect(context.Background(), websocketURL+apiKey)
 	if err != nil {
 		return nil, err
@@ -221,7 +235,7 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 	}
 	defer sub.Unsubscribe()
 
-	updateStatus("Start monitoring...", m.statusUpdates)
+	updateStatus("Start monitoring...", WARN, m.statusUpdates)
 	for {
 		msg, err := sub.Recv(context.Background())
 		if err != nil {
@@ -233,12 +247,12 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 
 func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 	if msg.Value.Err != nil {
-		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err), m.statusUpdates)
+		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err), NONE, m.statusUpdates)
 		return
 	}
 
 	signature := msg.Value.Signature
-	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature), m.statusUpdates)
+	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature), INFO, m.statusUpdates)
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	m.getTransactionDetails(rpcClient, signature)
@@ -247,7 +261,7 @@ func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.Signature) {
 	cero := uint64(0) // :/
 
-	updateStatus("GetTransaction EncodingBase58...", m.statusUpdates)
+	updateStatus("GetTransaction EncodingBase58...", NONE, m.statusUpdates)
 	tx58, err := rpcClient.GetTransaction(
 		context.TODO(),
 		signature,
@@ -258,7 +272,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		},
 	)
 	if err != nil {
-		updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err), m.statusUpdates)
+		updateStatus(fmt.Sprintf("Error GetTransaction EncodingBase58: %v", err), ERR, m.statusUpdates)
 	}
 
 	if tx58 != nil {
@@ -267,7 +281,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		// if txJson.Meta != nil {
 		for _, balance := range tx58.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
-				updateStatus("========== New Token Found =========="+fmt.Sprintf(" : %s ...", balance.Mint.String()[:7]), m.statusUpdates)
+				updateStatus("========== New Token Found =========="+fmt.Sprintf(" : %s ...", balance.Mint.String()[:7]), INFO, m.statusUpdates)
 				m.playAlertSound()
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
