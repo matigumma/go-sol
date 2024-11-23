@@ -26,15 +26,17 @@ type TokenUpdateMsg []types.TokenInfo
 type StatusBarUpdateMsg monitor.StatusMessage
 
 type Model struct {
-	activeView int
-	table      table.Model
-	// statusBar      string
+	activeView     int
+	table          table.Model
 	statusBar      StatusListModel
 	selectedToken  *types.Report
 	currentMonitor *monitor.Monitor
+	statusUpdates  <-chan monitor.StatusMessage
+	tokenUpdates   <-chan []types.TokenInfo
+	// Otros campos necesarios
 }
 
-func NewModel(tokens []types.TokenInfo) Model {
+func NewModel(tokens []types.TokenInfo, statusCh <-chan monitor.StatusMessage, tokenCh <-chan []types.TokenInfo) Model {
 	columns := []table.Column{
 		{Title: "", Width: 2},
 		{Title: "CREATED AT", Width: 10},
@@ -78,7 +80,13 @@ func NewModel(tokens []types.TokenInfo) Model {
 		table.WithFocused(true),
 	)
 
-	return Model{table: t}
+	return Model{
+		table:         t,
+		statusBar:     NewStatusListModel(messages),
+		statusUpdates: statusCh,
+		tokenUpdates:  tokenCh,
+		// Inicializar otros campos
+	}
 }
 
 func InitProject(monitor *monitor.Monitor) (tea.Model, tea.Cmd) {
@@ -103,13 +111,14 @@ func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
+		// Manejar cambio de tamaño
 	case tea.KeyMsg:
+		// Manejar entradas de teclado
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
@@ -151,6 +160,12 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			// Volver a la vista de la tabla
 			m.selectedToken = nil
 		}
+	case monitor.StatusMessage:
+		// Actualizar statusHistory en el UI
+		m.statusBar.UpdateStatus(msg)
+	case []types.TokenInfo:
+		// Actualizar la tabla de tokens
+		m.table = NewModel(msg).table
 	case TokenUpdateMsg:
 		m.table = NewModel(msg).table
 	case StatusBarUpdateMsg:
@@ -180,7 +195,33 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	spinnerCmd := m.statusBar.spinner.Tick
 	cmds = append(cmds, spinnerCmd)
 
+	// Escuchar en los canales y enviar mensajes recibidos al modelo
+	cmds = append(cmds,
+		listenOnStatusUpdates(m.statusUpdates),
+		listenOnTokenUpdates(m.tokenUpdates),
+	)
+
 	return m, tea.Batch(cmds...)
+}
+
+func listenOnStatusUpdates(ch <-chan monitor.StatusMessage) tea.Cmd {
+	return func() tea.Msg {
+		msg, ok := <-ch
+		if !ok {
+			return nil
+		}
+		return msg
+	}
+}
+
+func listenOnTokenUpdates(ch <-chan []types.TokenInfo) tea.Cmd {
+	return func() tea.Msg {
+		tokens, ok := <-ch
+		if !ok {
+			return nil
+		}
+		return tokens
+	}
 }
 
 func (m Model) View() string {
