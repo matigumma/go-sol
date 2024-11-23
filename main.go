@@ -12,7 +12,6 @@ import (
 
 func main() {
 	tokenUpdates := make(chan []types.TokenInfo)
-
 	statusUpdates := make(chan string)
 
 	monitor := monitor.NewMonitor(tokenUpdates, statusUpdates)
@@ -21,7 +20,7 @@ func main() {
 		mockToken := []types.TokenInfo{
 			{
 				Symbol:    "MOCK",
-				Address:   "MockAddress",
+				Address:   "85HveQ18FegDyKnqo9evQHtUHeDt11GQYgVkse2Rpump",
 				CreatedAt: "00:00",
 				Score:     1000,
 			},
@@ -37,7 +36,6 @@ func main() {
 
 	go func() {
 		for tokens := range tokenUpdates {
-			fmt.Println("Received token updates:", tokens) // Log statement added
 			p.Send(ui.TokenUpdateMsg(tokens))
 		}
 	}()

@@ -40,7 +40,6 @@ func NewMonitor(tokenUpdates chan<- []types.TokenInfo, statusUpdates chan<- stri
 }
 
 func (m *Monitor) Run() {
-	updateStatus("Connecting to WebSocket...", m.statusUpdates)
 	client, err := m.connectToWebSocket()
 	if err != nil {
 		updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), m.statusUpdates)
@@ -146,12 +145,6 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 
 			symbol = report.TokenMeta.Symbol
 
-			token := types.TokenInfo{
-				Symbol:    symbol,
-				Address:   mint,
-				CreatedAt: report.DetectedAt.Format("15:04"),
-				Score:     int64(report.Score),
-			}
 			// Update the in-memory state with the report
 			mintState[mint] = []types.Report{report}
 
@@ -162,7 +155,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 					token := types.TokenInfo{
 						Symbol:    report.TokenMeta.Symbol,
 						Address:   mint,
-						CreatedAt: report.DetectedAt.Format("15:04"),
+						CreatedAt: report.DetectedAt.In(time.Local).Format("15:04"),
 						Score:     int64(report.Score),
 					}
 					allTokens = append(allTokens, token)
@@ -178,6 +171,7 @@ func (m *Monitor) checkMintAddress(mint string) (string, []types.Risk, error) {
 }
 
 func (m *Monitor) connectToWebSocket() (*ws.Client, error) {
+	updateStatus("Connecting to WebSocket...", m.statusUpdates)
 	client, err := ws.Connect(context.Background(), "wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_WS: "wss://api.mainnet-beta.solana.com" || wss://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571
 	if err != nil {
 		return nil, err
@@ -209,12 +203,12 @@ func (m *Monitor) subscribeToLogs(client *ws.Client, pubkey string) error {
 
 func (m *Monitor) processLogMessage(msg *ws.LogResult) {
 	if msg.Value.Err != nil {
-		// updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err))
+		updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err), m.statusUpdates)
 		return
 	}
 
 	signature := msg.Value.Signature
-	// updateStatus(fmt.Sprintf("Transaction Signature: %s", signature))
+	updateStatus(fmt.Sprintf("Transaction Signature: %s", signature), m.statusUpdates)
 
 	rpcClient := rpc.New("https://mainnet.helius-rpc.com/?api-key=7bbbdbba-4a0f-4812-8112-757fbafbe571") // rpc.MainNetBeta_RPC: https://api.mainnet-beta.solana.com ||
 	m.getTransactionDetails(rpcClient, signature)
@@ -243,6 +237,7 @@ func (m *Monitor) getTransactionDetails(rpcClient *rpc.Client, signature solana.
 		// if txJson.Meta != nil {
 		for _, balance := range tx58.Meta.PostTokenBalances {
 			if balance.Owner.String() == "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1" && balance.Mint.String() != "So11111111111111111111111111111111111111112" {
+				updateStatus("========== New Token Found =========="+fmt.Sprintf(" : %s ...", balance.Mint.String()[:7]), m.statusUpdates)
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("========== New Token Found =========="))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()(fmt.Sprintf("Mint Address: %s", balance.Mint)))
 				// slog.Info(color.New(color.BgHiYellow).SprintFunc()("====================================="))
