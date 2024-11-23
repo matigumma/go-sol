@@ -19,7 +19,13 @@ func NewStatusListModel(messages []monitor.StatusMessage) StatusListModel {
 		items[i] = listItem{message: msg}
 	}
 
-	l := list.New(items, list.NewDefaultDelegate(), 0, 0)
+	l := list.New(items, list.NewDefaultDelegate(), 50, 10) // Ajusta el tamaño según sea necesario
+	l.Title = "Status History"
+	l.SetShowStatusBar(false)
+	l.SetFilteringEnabled(false)
+
+	// Estilos personalizados
+	l.Styles.Title = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("205"))
 	l.SetShowStatusBar(false)
 	l.SetFilteringEnabled(false)
 

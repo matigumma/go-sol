@@ -152,8 +152,14 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.table = NewModel(msg).table
 	case StatusBarUpdateMsg:
 		messages := m.currentMonitor.GetStatusHistory()
-		fmt.Sprintln("StatusBarUpdateMsg case last msg: ", messages[len(messages)-1].Message)
-		m.statusBar = NewStatusListModel(messages)
+		// Convertir los mensajes en list.Items
+		items := make([]list.Item, len(messages))
+		for i, msg := range messages {
+			items[i] = listItem{message: msg}
+		}
+
+		// Actualizar el modelo de la lista con los nuevos elementos
+		m.statusBar.list.SetItems(items)
 	}
 	return m, nil
 }
