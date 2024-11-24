@@ -9,31 +9,29 @@ import (
 )
 
 type APIClient struct {
-	baseURL         string
-	stateManager    *StateManager
-	statusUpdates   chan<- StatusMessage
-	tokenUpdates    chan<- []types.TokenInfo
-	requestThrottle chan struct{}
+	stateManager  *StateManager
+	statusUpdates chan<- StatusMessage
+	tokenUpdates  chan<- []types.TokenInfo
+	// requestThrottle chan struct{}
 }
 
-func NewAPIClient(baseURL string, stateManager *StateManager, statusUpdates chan<- StatusMessage, tokenUpdates chan<- []types.TokenInfo) *APIClient {
+func NewAPIClient(stateManager *StateManager, statusUpdates chan<- StatusMessage, tokenUpdates chan<- []types.TokenInfo) *APIClient {
 	return &APIClient{
-		baseURL:         baseURL,
-		stateManager:    stateManager,
-		statusUpdates:   statusUpdates,
-		tokenUpdates:    tokenUpdates,
-		requestThrottle: make(chan struct{}, 10), // Limitar a 10 solicitudes concurrentes
+		stateManager:  stateManager,
+		statusUpdates: statusUpdates,
+		tokenUpdates:  tokenUpdates,
+		// requestThrottle: make(chan struct{}, 10), // Limitar a 10 solicitudes concurrentes
 	}
 }
 
 func (api *APIClient) FetchAndProcessReport(mint string) {
 	go func() {
-		api.requestThrottle <- struct{}{}        // Adquirir un "permiso" para hacer la solicitud
-		defer func() { <-api.requestThrottle }() // Liberar el "permiso" al finalizar
+		// api.requestThrottle <- struct{}{}        // Adquirir un "permiso" para hacer la solicitud
+		// defer func() { <-api.requestThrottle }() // Liberar el "permiso" al finalizar
 
 		report, err := api.fetchTokenReport(mint)
 		if err != nil {
-			api.stateManager.AddStatusMessage(StatusMessage{Level: ERR, Message: fmt.Sprintf("Error fetching report for %s: %v", mint, err)})
+			api.statusUpdates <- StatusMessage{Level: ERR, Message: fmt.Sprintf("Error fetching report for %s: %v", mint, err)}
 			return
 		}
 
@@ -61,7 +59,7 @@ func (api *APIClient) fetchTokenReport(mint string) (types.Report, error) {
 }
 
 func (api *APIClient) tryFetchTokenReport(mint string) (types.Report, error) {
-	url := fmt.Sprintf("%s/v1/tokens/%s/report", api.baseURL, mint)
+	url := fmt.Sprintf("%s/v1/tokens/%s/report", apiBaseURL, mint)
 	resp, err := http.Get(url)
 	if err != nil {
 		return types.Report{}, err
@@ -81,7 +79,7 @@ func (api *APIClient) tryFetchTokenReport(mint string) (types.Report, error) {
 }
 
 func (api *APIClient) handleHighRiskToken(report types.Report) {
-	api.stateManager.AddStatusMessage(StatusMessage{Level: NONE, Message: fmt.Sprintf("💩 Token Sym:[%s]: '%s' Score[%d]", report.TokenMeta.Symbol, report.TokenMeta.Name, report.Score)})
+	api.statusUpdates <- StatusMessage{Level: NONE, Message: fmt.Sprintf("💩 Token Sym:[%s]: '%s' Score[%d]", report.TokenMeta.Symbol, report.TokenMeta.Name, report.Score)}
 }
 
 func (api *APIClient) RequestReportOnDemand(mint string) {

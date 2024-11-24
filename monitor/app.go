@@ -73,15 +73,13 @@ func NewApp() *App {
 
 func (app *App) Run() {
 	go app.wsClient.Reconnect(app.Ctx)
-	done := make(chan struct{})
+	// done := make(chan struct{})
 
 	go func() {
-		defer close(done)
+		// defer close(done)
 		for {
 			select {
 			case logMsg := <-app.LogCh:
-				fmt.Printf("Received logMsg value error: %v\n", logMsg.Value.Err)
-				app.StateManager.StatusHistory = append(app.StateManager.StatusHistory, StatusMessage{Message: logMsg.Value.Signature.String(), Level: WARN})
 				app.logProcessor.ProcessLog(logMsg)
 			case <-app.Ctx.Done():
 				return
@@ -90,6 +88,10 @@ func (app *App) Run() {
 	}()
 
 	// <-done
+}
+
+func (app *App) updateStatus(message string, level LogLevel) {
+	app.StatusUpdates <- StatusMessage{Level: level, Message: message}
 }
 
 func (app *App) Stop() {

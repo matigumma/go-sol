@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: ${{ github.event.repository.name }}
+            asset_name: ${{ github.event.repository.name }}-linux-amd64
+          - os: windows-latest
+            artifact_name: ${{ github.event.repository.name }}.exe
+            asset_name: ${{ github.event.repository.name }}-windows-amd64.exe
+    runs-on: ${{ matrix.os }}  
+    timeout-minutes: 5
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: magnetikonline/action-golang-cache@v5
+      with:
+        go-version-file: go.mod
+
+    - name: Build executable
+      run: |
+        go build -o ${{ matrix.asset_name }}
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{ matrix.asset_name }}
+        asset_name: ${{ matrix.asset_name }}
+        tag: ${{ github.ref }}

@@ -2,6 +2,7 @@ package telegramadapter
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"regexp"
@@ -11,7 +12,6 @@ import (
 
 	"github.com/gotd/td/telegram"
 	"github.com/gotd/td/tg"
-	"github.com/joho/godotenv"
 )
 
 type TelegramClient struct {
@@ -19,17 +19,19 @@ type TelegramClient struct {
 }
 
 func NewTelegramClient(monitor *monitor.App) *TelegramClient {
+	fmt.Println("New Telegram Client model")
 	return &TelegramClient{
 		monitor: monitor,
 	}
 }
 
 func (t *TelegramClient) Run() {
+	fmt.Println("Running Telegram Client")
 	// Cargar variables de entorno
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 
 	apiID := os.Getenv("API_ID")
 	apiIDInt, err := strconv.Atoi(apiID)
@@ -45,6 +47,7 @@ func (t *TelegramClient) Run() {
 
 	// Crear cliente de Telegram
 	client := telegram.NewClient(apiIDInt, apiHash, telegram.Options{})
+	fmt.Println("Client created")
 
 	// Conectar al cliente
 	if err := client.Run(context.Background(), func(ctx context.Context) error {
@@ -53,7 +56,7 @@ func (t *TelegramClient) Run() {
 
 		dispatcher := tg.NewUpdateDispatcher()
 
-		dispatcher.OnNewChannelMessage(func(ctx context.Context, e tg.Entities, update *tg.UpdateNewChannelMessage) error {
+		dispatcher.OnNewMessage(func(ctx context.Context, e tg.Entities, update *tg.UpdateNewMessage) error {
 			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New message received"}
 
 			msg, ok := update.Message.(*tg.Message)
@@ -69,6 +72,23 @@ func (t *TelegramClient) Run() {
 
 			return nil // Return nil if no error occurs
 		})
+
+		// dispatcher.OnNewChannelMessage(func(ctx context.Context, e tg.Entities, update *tg.UpdateNewChannelMessage) error {
+		// 	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New message received"}
+
+		// 	msg, ok := update.Message.(*tg.Message)
+		// 	if !ok {
+		// 		return nil
+		// 	}
+
+		// 	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: msg.Message[:10]}
+
+		// 	if msg.Replies.ChannelID == int64(channelID) {
+		// 		t.processMessage(msg)
+		// 	}
+
+		// 	return nil // Return nil if no error occurs
+		// })
 
 		// Mantener la ejecución
 		<-ctx.Done()

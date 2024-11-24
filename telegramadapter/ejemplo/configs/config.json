@@ -1,0 +1,12 @@
+{
+    "app_id": 0,
+    "app_hash": "",
+    "api_token": "",
+    "phone_number": "",
+    "db_settings": {
+        "host": "",
+        "username": "",
+        "password": "",
+        "database": ""
+    }
+}

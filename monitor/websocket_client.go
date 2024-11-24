@@ -47,10 +47,11 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 		return err
 	}
 
-	wsc.updateStatus("Start monitoring...", INFO)
 	go func() {
 		defer sub.Unsubscribe()
+		wsc.updateStatus("Start monitoring...", INFO)
 		for {
+			time.Sleep(1 * time.Second)
 			select {
 			case <-ctx.Done():
 				return
@@ -60,16 +61,7 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 					wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err), ERR)
 					return
 				}
-				wsc.updateStatus("Sending log message to logCh", INFO)
-				select {
-				case wsc.logCh <- msg:
-					wsc.updateStatus("Log message sent to logCh", INFO)
-				case <-ctx.Done():
-					wsc.updateStatus("Context done before sending log message", WARN)
-					return
-				default:
-					wsc.updateStatus("Log channel is blocked, unable to send message", ERR)
-				}
+				wsc.logCh <- msg
 			}
 		}
 	}()

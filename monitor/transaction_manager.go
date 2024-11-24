@@ -46,20 +46,20 @@ func (tm *TransactionManager) fetchAndProcessTransaction(signature solana.Signat
 	defer cancel()
 
 	updateStatus := func(message string, level LogLevel) {
-		tm.stateManager.AddStatusMessage(StatusMessage{Level: level, Message: message})
+		tm.statusUpdates <- StatusMessage{Level: level, Message: message}
 	}
 
 	tx, err := tm.rpcClient.GetTransaction(
 		ctx,
 		signature,
 		&rpc.GetTransactionOpts{
-			Encoding:                       solana.EncodingJSON,
+			Encoding:                       solana.EncodingBase58,
 			Commitment:                     rpc.CommitmentConfirmed,
 			MaxSupportedTransactionVersion: nil, // Usa el valor por defecto
 		},
 	)
 	if err != nil {
-		updateStatus(fmt.Sprintf("Error fetching transaction %s: %v", signature, err), ERR)
+		// updateStatus(fmt.Sprintf("Error fetching transaction %s", signature), ERR)
 		return
 	}
 
