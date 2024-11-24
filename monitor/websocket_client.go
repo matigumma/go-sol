@@ -61,7 +61,14 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 					return
 				}
 				wsc.updateStatus("Subscribe: Received log message", INFO)
-				wsc.logCh <- msg
+				wsc.updateStatus("Sending log message to logCh", INFO)
+				select {
+				case wsc.logCh <- msg:
+					wsc.updateStatus("Log message sent to logCh", INFO)
+				case <-ctx.Done():
+					wsc.updateStatus("Context done before sending log message", WARN)
+					return
+				}
 			}
 		}
 	}()

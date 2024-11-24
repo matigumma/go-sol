@@ -96,6 +96,7 @@ func (app *App) Run() {
 					app.StateManager.AddStatusMessage(StatusMessage{Level: ERR, Message: "FAILED TO GET LOGS"})
 					return // Exit if the channel is closed
 				}
+				fmt.Println("Received log message in app")
 				app.logProcessor.ProcessLog(logMsg)
 			}
 		}
