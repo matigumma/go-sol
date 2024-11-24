@@ -72,6 +72,21 @@ func containsRaydium(message string) bool {
 }
 
 func extractToken(message string) string {
-	// Implementar lógica para extraer la dirección del token
+	// Verificar si el mensaje contiene "Platform: Raydium"
+	if !containsRaydium(message) {
+		return ""
+	}
+
+	// Dividir el mensaje en partes usando "Base: " como separador
+	parts := regexp.MustCompile(`Base: `).Split(message, 2)
+	if len(parts) > 1 {
+		// Extraer dirección antes de "\nQuote:"
+		addressParts := regexp.MustCompile(`\nQuote:`).Split(parts[1], 2)
+		if len(addressParts) > 0 {
+			address := addressParts[0]
+			return address
+		}
+	}
+
 	return ""
 }
