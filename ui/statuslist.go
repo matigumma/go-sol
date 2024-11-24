@@ -19,7 +19,7 @@ var docStyle = lipgloss.NewStyle().Margin(1, 2)
 func NewStatusListModel(messages []monitor.StatusMessage) StatusListModel {
 	items := make([]list.Item, len(messages))
 	for i, msg := range messages {
-		items[i] = listItem{message: msg}
+		items[len(messages)-1-i] = listItem{message: msg} // Invertir el orden de los mensajes
 	}
 
 	s := spinner.New()
