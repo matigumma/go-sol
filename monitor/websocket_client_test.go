@@ -2,12 +2,13 @@ package monitor_test
 
 import (
 	"context"
+	"gosol/monitor"
 	"testing"
 	"time"
 
+	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc/ws"
 	"github.com/stretchr/testify/assert"
-	"monitor"
 )
 
 func TestWebSocketMessageFlow(t *testing.T) {
@@ -17,7 +18,7 @@ func TestWebSocketMessageFlow(t *testing.T) {
 
 	// Crear una instancia de App con el canal de logs
 	app := &monitor.App{
-		logCh:         logCh,
+		LogCh:         logCh,
 		StatusUpdates: statusCh,
 		Ctx:           context.Background(),
 	}
@@ -25,15 +26,21 @@ func TestWebSocketMessageFlow(t *testing.T) {
 	// Simular un mensaje de log
 	expectedSignature := "test-signature"
 	logMsg := &ws.LogResult{
-		Value: ws.LogValue{
-			Signature: expectedSignature,
+		Value: struct {
+			Signature solana.Signature `json:"signature"`
+			Err       interface{}      `json:"err"`
+			Logs      []string         `json:"logs"`
+		}{
+			Signature: solana.Signature(expectedSignature),
+			Err:       nil,
+			Logs:      nil,
 		},
 	}
 
 	// Iniciar una goroutine para simular el procesamiento de logs en app
 	go func() {
 		select {
-		case logMsg := <-app.logCh:
+		case logMsg := <-app.LogCh:
 			// Aquí puedes verificar que el mensaje se procesa correctamente
 			assert.Equal(t, expectedSignature, logMsg.Value.Signature)
 		case <-time.After(1 * time.Second):
