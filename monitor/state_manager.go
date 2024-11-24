@@ -75,7 +75,7 @@ func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) 
 	case tokenUpdates <- allTokens:
 		// Successfully sent token updates
 	default:
-		// Handle case where tokenUpdates channel is full or blocked
+		sm.AddStatusMessage(StatusMessage{Level: WARN, Message: "Token updates channel is full or blocked"})
 	}
 }
 
