@@ -72,9 +72,8 @@ func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
 		case <-ctx.Done():
 			return
 		default:
-			err := wsc.Connect(ctx)
-			if err != nil {
-				wsc.updateStatus("Retrying connection...", ERR)
+			if err := wsc.Connect(ctx); err != nil {
+				wsc.updateStatus(fmt.Sprintf("Connection failed: %v. Retrying...", err), ERR)
 				time.Sleep(backoff)
 				backoff *= 2
 				if backoff > maxBackoff {
@@ -82,9 +81,9 @@ func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
 				}
 				continue
 			}
-			err = wsc.Subscribe(ctx)
-			if err != nil {
-				wsc.updateStatus("Retrying subscription...", ERR)
+
+			if err := wsc.Subscribe(ctx); err != nil {
+				wsc.updateStatus(fmt.Sprintf("Subscription failed: %v. Retrying...", err), ERR)
 				time.Sleep(backoff)
 				backoff *= 2
 				if backoff > maxBackoff {
@@ -92,8 +91,10 @@ func (wsc *WebSocketClient) Reconnect(ctx context.Context) {
 				}
 				continue
 			}
+
+			wsc.updateStatus("Successfully reconnected and subscribed.", INFO)
 			backoff = 1 * time.Second // Reset backoff after a successful connection
-			break
+			return
 		}
 	}
 }
