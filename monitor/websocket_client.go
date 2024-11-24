@@ -12,25 +12,21 @@ import (
 
 type WebSocketClient struct {
 	client        *ws.Client
-	websocketURL  string
-	apiKey        string
-	pubkey        string
 	logCh         chan<- *ws.LogResult
 	statusUpdates chan<- StatusMessage
 }
 
-func NewWebSocketClient(websocketURL, apiKey, pubkey string, logCh chan<- *ws.LogResult, statusUpdates chan<- StatusMessage) *WebSocketClient {
+func NewWebSocketClient(logCh chan<- *ws.LogResult, statusUpdates chan<- StatusMessage) *WebSocketClient {
 	return &WebSocketClient{
-		websocketURL:  websocketURL,
-		apiKey:        apiKey,
-		pubkey:        pubkey,
 		logCh:         logCh,
 		statusUpdates: statusUpdates,
 	}
 }
 
 func (wsc *WebSocketClient) Connect(ctx context.Context) error {
-	client, err := ws.Connect(ctx, wsc.websocketURL+wsc.apiKey)
+	url := fmt.Sprintf("%s%s", websocketURL, apiKey)
+
+	client, err := ws.Connect(ctx, url)
 	if err != nil {
 		wsc.updateStatus(fmt.Sprintf("Failed to connect to WebSocket: %v", err), ERR)
 		return err
@@ -40,7 +36,7 @@ func (wsc *WebSocketClient) Connect(ctx context.Context) error {
 }
 
 func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
-	program := solana.MustPublicKeyFromBase58(wsc.pubkey)
+	program := solana.MustPublicKeyFromBase58(pubkey)
 
 	sub, err := wsc.client.LogsSubscribeMentions(
 		program,
@@ -51,9 +47,9 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 		return err
 	}
 
+	wsc.updateStatus("Start monitoring...", INFO)
 	go func() {
 		defer sub.Unsubscribe()
-		wsc.updateStatus("Start monitoring...", INFO)
 		for {
 			msg, err := sub.Recv(ctx)
 			if err != nil {
