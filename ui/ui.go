@@ -180,11 +180,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// m.statusBar.list.SetItems(append(m.statusBar.list.Items(), listItem{message: msg}))
 		// m.statusBar.list.NewStatusMessage(msg.Message)
 		m.statusBar.list.InsertItem(0, listItem{message: msg})
-	// case []types.TokenInfo:
-	// Actualizar la tabla de tokens
-	// m.updateTokenTable(msg)
 	case TokenUpdateMsg:
-		m.statusBar.list.NewStatusMessage("case []types.TokenInfo" + msg[0].Symbol)
+		m.statusBar.list.NewStatusMessage("Received token update for: " + msg[0].Symbol)
 		m.updateTokenTable(msg)
 		// case StatusBarUpdateMsg:
 		// 	messages := m.stateManager.GetStatusHistory()
