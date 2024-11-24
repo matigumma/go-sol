@@ -21,7 +21,7 @@ func TestLogChannelMessageFlow(t *testing.T) {
 	}
 
 	// Simular un mensaje de log
-	expectedSignature := "test-signature"
+	expectedSignature := solana.MustSignatureFromBase58("test-signature")
 	logMsg := &ws.LogResult{
 		Value: struct {
 			Signature solana.Signature `json:"signature"`
