@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"gosol/types"
-	"net/http"
 	_ "net/http/pprof"
 	"os"
 
@@ -24,19 +23,10 @@ type App struct {
 	ApiClient      *APIClient
 	StateManager   *StateManager
 	StatusUpdates  chan StatusMessage
-	logCh          chan *ws.LogResult
+	LogCh          chan *ws.LogResult
 	TokenUpdates   chan []types.TokenInfo
 	Ctx            context.Context
 	Cancel         context.CancelFunc
-}
-
-func (app *App) StartProfilingServer() {
-	go func() {
-		fmt.Println("Starting pprof server on :6060")
-		if err := http.ListenAndServe(":6060", nil); err != nil {
-			fmt.Printf("Error starting pprof server: %v\n", err)
-		}
-	}()
 }
 
 func NewApp() *App {
@@ -75,33 +65,32 @@ func NewApp() *App {
 		StateManager:   stateMgr,
 		StatusUpdates:  statusCh,
 		TokenUpdates:   tokenCh,
-		logCh:          logCh,
+		LogCh:          logCh,
 		Ctx:            ctx,
 		Cancel:         cancel,
 	}
 }
 
 func (app *App) Run() {
-	// app.StartProfilingServer()
 	go app.wsClient.Reconnect(app.Ctx)
+	done := make(chan struct{})
 
-	// Iniciar una goroutine para procesar los logs
 	go func() {
+		defer close(done)
 		for {
 			select {
+			case logMsg := <-app.LogCh:
+				fmt.Printf("Received logMsg value error: %v\n", logMsg.Value.Err)
+				app.StateManager.StatusHistory = append(app.StateManager.StatusHistory, StatusMessage{Message: logMsg.Value.Signature.String(), Level: WARN})
+				app.logProcessor.ProcessLog(logMsg)
+				close(done)
 			case <-app.Ctx.Done():
 				return
-			case logMsg, ok := <-app.logCh:
-				if !ok {
-					app.StateManager.AddStatusMessage(StatusMessage{Level: ERR, Message: "FAILED TO GET LOGS"})
-					return // Exit if the channel is closed
-				}
-				app.StateManager.AddStatusMessage(StatusMessage{Level: INFO, Message: "Received log message in app"})
-				app.logProcessor.ProcessLog(logMsg)
-				app.StateManager.AddStatusMessage(StatusMessage{Level: INFO, Message: "Log message processed in LogProcessor"})
 			}
 		}
 	}()
+
+	// <-done
 }
 
 func (app *App) Stop() {
@@ -109,5 +98,5 @@ func (app *App) Stop() {
 	app.transactionMgr.Wait()
 	close(app.StatusUpdates)
 	close(app.TokenUpdates)
-	close(app.logCh)
+	close(app.LogCh)
 }
