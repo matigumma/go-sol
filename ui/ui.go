@@ -8,7 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
@@ -30,6 +29,7 @@ type Model struct {
 	table         table.Model
 	statusBar     StatusListModel
 	selectedToken *types.Report
+	apiClient     *monitor.APIClient
 	statusUpdates <-chan monitor.StatusMessage
 	tokenUpdates  <-chan []types.TokenInfo
 	stateManager  *monitor.StateManager
@@ -87,9 +87,41 @@ func NewModel(app *monitor.App) Model {
 		statusUpdates: app.StatusUpdates,
 		tokenUpdates:  app.TokenUpdates,
 		stateManager:  app.StateManager,
+		apiClient:     app.ApiClient,
 		activeView:    1,
 		// Inicializar otros campos
 	}
+}
+
+func (m *Model) updateTokenTable(tokens []types.TokenInfo) {
+	m.statusBar.list.NewStatusMessage("Updating token table")
+	rows := []table.Row{}
+	for _, token := range tokens {
+		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
+			continue
+		}
+		address := token.Address[:7] + "..."
+		scoreColor := "🟢" // Green
+		if token.Score > 2000 {
+			scoreColor = "🟡" // Yellow
+		}
+		if token.Score > 3000 {
+			scoreColor = "🟠" // Orange
+		}
+		if token.Score > 4000 {
+			scoreColor = "🔴" // Red
+		}
+		row := table.Row{
+			scoreColor,
+			token.CreatedAt,
+			token.Symbol,
+			fmt.Sprintf("%d", token.Score),
+			address,
+		}
+		rows = append(rows, row)
+	}
+
+	m.table.SetRows(rows)
 }
 
 func (m Model) Init() tea.Cmd {
@@ -115,7 +147,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.table.MoveUp(1)
 				}
 			} else if m.activeView == 1 {
-				m.statusBar.list.CursorUp()
+				m.statusBar.list.CursorDown()
 			}
 		case "down":
 			if m.activeView == 0 {
@@ -123,7 +155,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.table.MoveDown(1)
 				}
 			} else if m.activeView == 1 {
-				m.statusBar.list.CursorDown()
+				m.statusBar.list.CursorUp()
 			}
 		case "enter":
 			// Obtener el token seleccionado de la tabla
@@ -145,29 +177,32 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case monitor.StatusMessage:
 		// Actualizar statusHistory en el UI
-		m.statusBar.list.SetItems(append(m.statusBar.list.Items(), listItem{message: msg}))
-	case []types.TokenInfo:
-		// Actualizar la tabla de tokens
-		m.table = NewModel(msg).table
+		// m.statusBar.list.SetItems(append(m.statusBar.list.Items(), listItem{message: msg}))
+		// m.statusBar.list.NewStatusMessage(msg.Message)
+		m.statusBar.list.InsertItem(0, listItem{message: msg})
+	// case []types.TokenInfo:
+	// Actualizar la tabla de tokens
+	// m.updateTokenTable(msg)
 	case TokenUpdateMsg:
-		m.table = NewModel(msg).table
-	case StatusBarUpdateMsg:
-		messages := m.stateManager.GetStatusHistory()
-		// Limitar los mensajes a los últimos 10
-		if len(messages) > 10 {
-			messages = messages[len(messages)-10:]
-		}
-		items := make([]list.Item, len(messages))
-		for i, msg := range messages {
-			items[i] = listItem{message: msg}
-		}
+		m.statusBar.list.NewStatusMessage("case []types.TokenInfo" + msg[0].Symbol)
+		m.updateTokenTable(msg)
+		// case StatusBarUpdateMsg:
+		// 	messages := m.stateManager.GetStatusHistory()
+		// 	// Limitar los mensajes a los últimos 10
+		// 	if len(messages) > 10 {
+		// 		messages = messages[len(messages)-10:]
+		// 	}
+		// 	items := make([]list.Item, len(messages))
+		// 	for i, msg := range messages {
+		// 		items[i] = listItem{message: msg}
+		// 	}
 
-		for i, j := 0, len(items)-1; i < j; i, j = i+1, j-1 {
-			items[i], items[j] = items[j], items[i]
-		}
+		// 	// for i, j := 0, len(items)-1; i < j; i, j = i+1, j-1 {
+		// 	// 	items[i], items[j] = items[j], items[i]
+		// 	// }
 
-		// Actualizar el modelo de la lista con los nuevos elementos
-		m.statusBar.list.SetItems(items)
+		// 	// Actualizar el modelo de la lista con los nuevos elementos
+		// 	m.statusBar.list.SetItems(items)
 	}
 
 	// Actualizar el spinner
@@ -175,8 +210,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	cmds = append(cmds, cmd)
 
 	// Asegúrate de que el spinner se actualice en cada ciclo
-	spinnerCmd := m.statusBar.spinner.Tick
-	cmds = append(cmds, spinnerCmd)
+	// spinnerCmd := m.statusBar.spinner.Tick
+	// cmds = append(cmds, spinnerCmd)
 
 	// Escuchar en los canales y enviar mensajes recibidos al modelo
 	cmds = append(cmds,
@@ -187,6 +222,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, tea.Batch(cmds...)
 }
 
+// esto envia un StatusMessage al Update verificar que lo reciba correctamente y ejecutar el Update
 func listenOnStatusUpdates(ch <-chan monitor.StatusMessage) tea.Cmd {
 	return func() tea.Msg {
 		msg, ok := <-ch
@@ -197,13 +233,14 @@ func listenOnStatusUpdates(ch <-chan monitor.StatusMessage) tea.Cmd {
 	}
 }
 
+// esto envia un slice de tokens al Update verificar que lo reciba correctamente y ejecutar el Update
 func listenOnTokenUpdates(ch <-chan []types.TokenInfo) tea.Cmd {
 	return func() tea.Msg {
 		tokens, ok := <-ch
 		if !ok {
 			return nil
 		}
-		return tokens
+		return TokenUpdateMsg(tokens)
 	}
 }
 
@@ -233,7 +270,7 @@ func (m Model) tokenDetailView() string {
 	}
 
 	// request update
-	go m.stateManager.RequestReportOnDemand(m.selectedToken.Mint)
+	go m.apiClient.RequestReportOnDemand(m.selectedToken.Mint)
 
 	time.Sleep(1 * time.Second)
 
