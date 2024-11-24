@@ -96,6 +96,7 @@ func (app *App) Run() {
 					return // Exit if the channel is closed
 				}
 				app.logProcessor.ProcessLog(logMsg)
+				fmt.Println("Processed log message")
 			}
 		}
 	}()
