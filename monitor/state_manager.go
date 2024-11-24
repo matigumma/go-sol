@@ -2,7 +2,6 @@ package monitor
 
 import (
 	"gosol/types"
-	"sort"
 	"sync"
 	"time"
 )
@@ -35,6 +34,7 @@ func NewStateManager() *StateManager {
 }
 
 func (sm *StateManager) AddMint(mint string) {
+	// sm.AddStatusMessage(StatusMessage{Level: NONE, Message: fmt.Sprintf("💩 New Token Found: %s", mint)})
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	if _, exists := sm.MintState[mint]; !exists {
@@ -67,9 +67,9 @@ func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) 
 		allTokens = append(allTokens, token)
 	}
 
-	sort.Slice(allTokens, func(i, j int) bool {
-		return allTokens[i].CreatedAt < allTokens[j].CreatedAt
-	})
+	// sort.Slice(allTokens, func(i, j int) bool {
+	// 	return allTokens[i].CreatedAt < allTokens[j].CreatedAt
+	// })
 
 	tokenUpdates <- allTokens
 }
