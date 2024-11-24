@@ -2,61 +2,40 @@ package main
 
 import (
 	"fmt"
-	"gosol/wsmanager"
-	"gosol/types"
+	"gosol/monitor"
+	"gosol/telegramadapter"
 	"gosol/ui"
 	"os"
-
-	"log"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/joho/godotenv"
 )
 
+var websocketURL string
+var apiKey string
+var pubkey string
+var apiBaseURL string
+
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	pubkey = os.Getenv("RAY_FEE_PUBKEY")
+	apiBaseURL = os.Getenv("API_BASE_URL")
 
-	// Crear canales
-	tokenUpdates := make(chan []types.TokenInfo)
-	statusUpdates := make(chan monitor.StatusMessage)
+	websocketURL = os.Getenv("WEBSOCKET_URL")
+	apiKey = os.Getenv("API_KEY")
 
-	// Inicializar el WSManager
-	wsMgr := wsmanager.NewWSManager(os.Getenv("WEBSOCKET_URL"), os.Getenv("API_KEY"), statusUpdates, tokenUpdates)
-	err = wsMgr.Connect()
-	if err != nil {
-		log.Fatalf("WebSocket connection failed: %v", err)
-	}
+	app := monitor.NewApp()
+	// app.Run()
 
-	// Suscribirse a los logs
-	pubkey := "7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5" // ray_fee_pubkey
-	err = wsMgr.SubscribeToLogs(pubkey)
-	if err != nil {
-		log.Fatalf("Failed to subscribe to logs: %v", err)
-	}
+	telegramclient := telegramadapter.NewTelegramClient(app)
+	telegramclient.Run()
 
-	uiModel, _ := ui.InitProject(monitor)
+	// Inicializar el modelo de UI con el StateManager
+	model := ui.NewModel(app)
 
-	p := tea.NewProgram(uiModel, tea.WithAltScreen())
-	// p := tea.NewProgram(uiModel)
-
-	go func() {
-		for tokens := range tokenUpdates {
-			p.Send(ui.TokenUpdateMsg(tokens))
-		}
-	}()
-
-	go func() {
-		for status := range statusUpdates {
-			p.Send(ui.StatusBarUpdateMsg(status))
-		}
-	}()
-
+	p := tea.NewProgram(model, tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
-		fmt.Println("Error running program:", err)
-		os.Exit(1)
+		fmt.Printf("Al iniciar la aplicación: %v\n", err)
+		app.Stop()
 	}
 	// Cerrar el WSManager al finalizar
 	wsMgr.Close()

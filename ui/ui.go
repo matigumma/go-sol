@@ -8,7 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
@@ -103,7 +102,6 @@ func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
@@ -152,17 +150,18 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.selectedToken = nil
 		}
 	case TokenUpdateMsg:
-		m.table = NewModel(msg).table
-	case StatusBarUpdateMsg:
-		messages := m.currentMonitor.GetStatusHistory()
-		// Limitar los mensajes a los últimos 10
-		if len(messages) > 10 {
-			messages = messages[len(messages)-10:]
-		}
-		items := make([]list.Item, len(messages))
-		for i, msg := range messages {
-			items[i] = listItem{message: msg}
-		}
+		// m.statusBar.list.NewStatusMessage("Received token update for: " + msg[0].Symbol)
+		m.updateTokenTable(msg)
+		// case StatusBarUpdateMsg:
+		// 	messages := m.stateManager.GetStatusHistory()
+		// 	// Limitar los mensajes a los últimos 10
+		// 	if len(messages) > 10 {
+		// 		messages = messages[len(messages)-10:]
+		// 	}
+		// 	items := make([]list.Item, len(messages))
+		// 	for i, msg := range messages {
+		// 		items[i] = listItem{message: msg}
+		// 	}
 
 		for i, j := 0, len(items)-1; i < j; i, j = i+1, j-1 {
 			items[i], items[j] = items[j], items[i]
@@ -177,10 +176,41 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	cmds = append(cmds, cmd)
 
 	// Asegúrate de que el spinner se actualice en cada ciclo
-	spinnerCmd := m.statusBar.spinner.Tick
-	cmds = append(cmds, spinnerCmd)
+	// spinnerCmd := m.statusBar.spinner.Tick
+	// cmds = append(cmds, spinnerCmd)
+
+	// Escuchar en los canales y enviar mensajes recibidos al modelo
+	cmds = append(cmds,
+		m.listenOnStatusUpdates(m.statusUpdates),
+		m.listenOnTokenUpdates(m.tokenUpdates),
+	)
 
 	return m, tea.Batch(cmds...)
+}
+
+// esto envia un StatusMessage al Update verificar que lo reciba correctamente y ejecutar el Update
+func (m Model) listenOnStatusUpdates(ch <-chan monitor.StatusMessage) tea.Cmd {
+	return func() tea.Msg {
+		msg, ok := <-ch
+		if !ok {
+			m.statusBar.list.NewStatusMessage("Status update channel closed")
+			return nil
+		}
+		return msg
+	}
+}
+
+// esto envia un slice de tokens al Update verificar que lo reciba correctamente y ejecutar el Update
+func (m Model) listenOnTokenUpdates(ch <-chan []types.TokenInfo) tea.Cmd {
+	return func() tea.Msg {
+		tokens, ok := <-ch
+		if !ok {
+			m.statusBar.list.NewStatusMessage("Token update channel closed")
+			return nil
+		}
+		m.statusBar.list.NewStatusMessage("Received token update for: " + tokens[0].Symbol)
+		return TokenUpdateMsg(tokens)
+	}
 }
 
 func (m Model) View() string {
