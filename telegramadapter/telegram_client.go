@@ -57,7 +57,7 @@ func getChannel(ctx context.Context, client *telegram.Client, channelID string) 
 
 func processMessage(msg *tg.Message) {
 	// Filtrar mensajes que contienen "Platform: Raydium"
-	if containsRaydium(msg.Message) {
+	if containsPlatformKeyword(msg.Message) {
 		// Extraer dirección del token
 		token := extractToken(msg.Message)
 		if token != "" {
@@ -67,13 +67,21 @@ func processMessage(msg *tg.Message) {
 	}
 }
 
-func containsRaydium(message string) bool {
-	return regexp.MustCompile(`Platform: Raydium`).MatchString(message)
+func containsPlatformKeyword(message string) bool {
+	// Obtener el valor de la variable de entorno PLATFORM_KEYWORD
+	platformKeyword := os.Getenv("PLATFORM_KEYWORD")
+	if platformKeyword == "" {
+		// Valor por defecto si la variable de entorno no está configurada
+		platformKeyword = "Platform: Raydium"
+	}
+
+	// Verificar si el mensaje contiene el valor de platformKeyword
+	return regexp.MustCompile(regexp.QuoteMeta(platformKeyword)).MatchString(message)
 }
 
 func extractToken(message string) string {
 	// Verificar si el mensaje contiene "Platform: Raydium"
-	if !containsRaydium(message) {
+	if !containsPlatformKeyword(message) {
 		return ""
 	}
 
