@@ -83,7 +83,6 @@ func (app *App) Run() {
 				fmt.Printf("Received logMsg value error: %v\n", logMsg.Value.Err)
 				app.StateManager.StatusHistory = append(app.StateManager.StatusHistory, StatusMessage{Message: logMsg.Value.Signature.String(), Level: WARN})
 				app.logProcessor.ProcessLog(logMsg)
-				close(done)
 			case <-app.Ctx.Done():
 				return
 			}
