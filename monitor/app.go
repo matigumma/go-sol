@@ -97,7 +97,6 @@ func (app *App) Run() {
 					return // Exit if the channel is closed
 				}
 				app.StateManager.AddStatusMessage(StatusMessage{Level: INFO, Message: "Received log message in app"})
-				app.StateManager.AddStatusMessage(StatusMessage{Level: INFO, Message: "Processing log message in LogProcessor"})
 				app.logProcessor.ProcessLog(logMsg)
 				app.StateManager.AddStatusMessage(StatusMessage{Level: INFO, Message: "Log message processed in LogProcessor"})
 			}

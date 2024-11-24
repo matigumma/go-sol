@@ -67,6 +67,8 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 				case <-ctx.Done():
 					wsc.updateStatus("Context done before sending log message", WARN)
 					return
+				default:
+					wsc.updateStatus("Log channel is blocked, unable to send message", ERR)
 				}
 			}
 		}
