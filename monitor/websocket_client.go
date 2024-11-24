@@ -51,12 +51,17 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 	go func() {
 		defer sub.Unsubscribe()
 		for {
-			msg, err := sub.Recv(ctx)
-			if err != nil {
-				wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err), ERR)
+			select {
+			case <-ctx.Done():
 				return
+			default:
+				msg, err := sub.Recv(ctx)
+				if err != nil {
+					wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err), ERR)
+					return
+				}
+				wsc.logCh <- msg
 			}
-			wsc.logCh <- msg
 		}
 	}()
 

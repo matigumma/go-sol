@@ -91,7 +91,10 @@ func (app *App) Run() {
 			select {
 			case <-app.Ctx.Done():
 				return
-			case logMsg := <-app.logCh:
+			case logMsg, ok := <-app.logCh:
+				if !ok {
+					return // Exit if the channel is closed
+				}
 				app.logProcessor.ProcessLog(logMsg)
 			}
 		}
