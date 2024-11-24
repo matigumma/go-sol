@@ -2,20 +2,24 @@ package monitor
 
 import (
 	"context"
+	"fmt"
 	"gosol/types"
 	"os"
 
 	"github.com/gagliardetto/solana-go/rpc/ws"
+	"github.com/joho/godotenv"
 )
 
 var websocketURL string
 var apiKey string
+var pubkey string
+var apiBaseURL string
 
 type App struct {
 	wsClient       *WebSocketClient
 	logProcessor   *LogProcessor
 	transactionMgr *TransactionManager
-	apiClient      *APIClient
+	ApiClient      *APIClient
 	StateManager   *StateManager
 	StatusUpdates  chan StatusMessage
 	logCh          chan *ws.LogResult
@@ -25,29 +29,38 @@ type App struct {
 }
 
 func NewApp() *App {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
 	ctx, cancel := context.WithCancel(context.Background())
 
 	statusCh := make(chan StatusMessage, 100)
 	tokenCh := make(chan []types.TokenInfo, 100)
 	logCh := make(chan *ws.LogResult, 100)
 
-	pubkey := os.Getenv("RAY_FEE_PUBKEY")
-	apiBaseURL := os.Getenv("API_BASE_URL")
+	pubkey = os.Getenv("RAY_FEE_PUBKEY")
+	apiBaseURL = os.Getenv("API_BASE_URL")
 
 	websocketURL = os.Getenv("WEBSOCKET_URL")
 	apiKey = os.Getenv("API_KEY")
 
+	if websocketURL == "" || apiKey == "" || pubkey == "" || apiBaseURL == "" {
+		panic(fmt.Sprintf("Environment variables are not set properly: WEBSOCKET_URL=%s, API_KEY=%s, RAY_FEE_PUBKEY=%s, API_BASE_URL=%s", websocketURL, apiKey, pubkey, apiBaseURL))
+	}
+
 	stateMgr := NewStateManager()
-	apiCli := NewAPIClient(apiBaseURL, stateMgr, statusCh, tokenCh)
+	apiCli := NewAPIClient(stateMgr, statusCh, tokenCh)
 	transMgr := NewTransactionManager(apiCli, stateMgr, statusCh, tokenCh)
 	logProc := NewLogProcessor(transMgr, statusCh)
-	wsCli := NewWebSocketClient(websocketURL, apiKey, pubkey, logCh, statusCh)
+	wsCli := NewWebSocketClient(logCh, statusCh)
 
 	return &App{
 		wsClient:       wsCli,
 		logProcessor:   logProc,
 		transactionMgr: transMgr,
-		apiClient:      apiCli,
+		ApiClient:      apiCli,
 		StateManager:   stateMgr,
 		StatusUpdates:  statusCh,
 		TokenUpdates:   tokenCh,
@@ -59,7 +72,6 @@ func NewApp() *App {
 
 func (app *App) Run() {
 	go app.wsClient.Reconnect(app.Ctx)
-	// Aquí puedes iniciar otras rutinas necesarias
 
 	// Iniciar una goroutine para procesar los logs
 	go func() {
