@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"gosol/types"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 
 	"github.com/gagliardetto/solana-go/rpc/ws"
@@ -26,6 +28,15 @@ type App struct {
 	TokenUpdates   chan []types.TokenInfo
 	Ctx            context.Context
 	Cancel         context.CancelFunc
+}
+
+func (app *App) StartProfilingServer() {
+	go func() {
+		fmt.Println("Starting pprof server on :6060")
+		if err := http.ListenAndServe(":6060", nil); err != nil {
+			fmt.Printf("Error starting pprof server: %v\n", err)
+		}
+	}()
 }
 
 func NewApp() *App {
@@ -71,6 +82,7 @@ func NewApp() *App {
 }
 
 func (app *App) Run() {
+	app.StartProfilingServer()
 	go app.wsClient.Reconnect(app.Ctx)
 
 	// Iniciar una goroutine para procesar los logs
