@@ -16,6 +16,9 @@ func main() {
 	// Inicializar el modelo de UI con el StateManager
 	model := ui.NewModel(app)
 
+	telegramclient := telegramadapter.NewTelegramClient(app)
+	telegramclient.Run()
+
 	p := tea.NewProgram(model)
 	if err := p.Start(); err != nil {
 		fmt.Printf("Al iniciar la aplicación: %v\n", err)

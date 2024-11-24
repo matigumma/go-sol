@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strconv"
 
 	"gosol/monitor"
 
@@ -13,7 +14,17 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func StartTelegramClient() {
+type TelegramClient struct {
+	monitor *monitor.App
+}
+
+func NewTelegramClient(monitor *monitor.App) *TelegramClient {
+	return &TelegramClient{
+		monitor: monitor,
+	}
+}
+
+func (t *TelegramClient) Run() {
 	// Cargar variables de entorno
 	err := godotenv.Load()
 	if err != nil {
@@ -21,26 +32,42 @@ func StartTelegramClient() {
 	}
 
 	apiID := os.Getenv("API_ID")
+	apiIDInt, err := strconv.Atoi(apiID)
+	if err != nil {
+		log.Fatal("Error converting API_ID to int:", err)
+	}
 	apiHash := os.Getenv("API_HASH")
-	channelID := os.Getenv("TELEGRAM_CHANNEL_ID")
+	tchannelID := os.Getenv("TELEGRAM_CHANNEL_ID")
+	channelID, err := strconv.Atoi(tchannelID)
+	if err != nil {
+		log.Fatal("Error converting API_ID to int:", err)
+	}
 
 	// Crear cliente de Telegram
-	client := telegram.NewClient(apiID, apiHash, telegram.Options{})
+	client := telegram.NewClient(apiIDInt, apiHash, telegram.Options{})
 
 	// Conectar al cliente
 	if err := client.Run(context.Background(), func(ctx context.Context) error {
-		// Obtener el canal
-		channel, err := getChannel(ctx, client, channelID)
-		if err != nil {
-			return err
-		}
 
-		// Configurar manejador de eventos
-		client.OnNewMessage(func(ctx context.Context, msg *tg.Message) error {
-			if msg.PeerID.ChannelID == channel.ID {
-				processMessage(msg)
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Connected to Telegram"}
+
+		dispatcher := tg.NewUpdateDispatcher()
+
+		dispatcher.OnNewChannelMessage(func(ctx context.Context, e tg.Entities, update *tg.UpdateNewChannelMessage) error {
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New message received"}
+
+			msg, ok := update.Message.(*tg.Message)
+			if !ok {
+				return nil
 			}
-			return nil
+
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: msg.Message[:10]}
+
+			if msg.Replies.ChannelID == int64(channelID) {
+				t.processMessage(msg)
+			}
+
+			return nil // Return nil if no error occurs
 		})
 
 		// Mantener la ejecución
@@ -51,19 +78,15 @@ func StartTelegramClient() {
 	}
 }
 
-func getChannel(ctx context.Context, client *telegram.Client, channelID string) (*tg.Channel, error) {
-	// Implementar lógica para obtener el canal usando el ID
-	return nil, nil
-}
-
-func processMessage(msg *tg.Message) {
-	// Filtrar mensajes que contienen "Platform: Raydium"
+func (t *TelegramClient) processMessage(msg *tg.Message) {
+	// Filtrar mensajes que contienen "Platform: Raydium || Pump Fun"
 	if containsPlatformKeyword(msg.Message) {
 		// Extraer dirección del token
 		token := extractToken(msg.Message)
 		if token != "" {
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New Token Found: " + token}
 			// Enviar token al StateManager
-			monitor.StateManager.AddMint(token)
+			t.monitor.StateManager.AddMint(token)
 		}
 	}
 }
@@ -73,7 +96,7 @@ func containsPlatformKeyword(message string) bool {
 	platformKeyword := os.Getenv("PLATFORM_KEYWORD")
 	if platformKeyword == "" {
 		// Valor por defecto si la variable de entorno no está configurada
-		platformKeyword = "Platform: Raydium"
+		platformKeyword = "Raydium"
 	}
 
 	// Asegurarse de que el valor de platformKeyword siempre comience con "Platform: "
