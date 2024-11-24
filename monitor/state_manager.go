@@ -71,7 +71,12 @@ func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) 
 	// 	return allTokens[i].CreatedAt < allTokens[j].CreatedAt
 	// })
 
-	tokenUpdates <- allTokens
+	select {
+	case tokenUpdates <- allTokens:
+		// Successfully sent token updates
+	default:
+		// Handle case where tokenUpdates channel is full or blocked
+	}
 }
 
 func (sm *StateManager) AddStatusMessage(msg StatusMessage) {
