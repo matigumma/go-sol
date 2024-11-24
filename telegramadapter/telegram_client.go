@@ -76,8 +76,11 @@ func containsPlatformKeyword(message string) bool {
 		platformKeyword = "Platform: Raydium"
 	}
 
-	// Verificar si el mensaje contiene el valor de platformKeyword
-	return regexp.MustCompile(regexp.QuoteMeta(platformKeyword)).MatchString(message)
+	// Asegurarse de que el valor de platformKeyword siempre comience con "Platform: "
+	fullKeyword := "Platform: " + platformKeyword
+
+	// Verificar si el mensaje contiene el valor de fullKeyword
+	return regexp.MustCompile(regexp.QuoteMeta(fullKeyword)).MatchString(message)
 }
 
 func extractToken(message string) string {
