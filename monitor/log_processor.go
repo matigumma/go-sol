@@ -19,6 +19,7 @@ func NewLogProcessor(tm *TransactionManager, statusUpdates chan<- StatusMessage)
 }
 
 func (lp *LogProcessor) ProcessLog(msg *ws.LogResult) {
+	lp.updateStatus("ProcessLog", NONE)
 	if msg.Value.Err != nil {
 		lp.updateStatus(fmt.Sprintf("Transaction failed: %v", msg.Value.Err), ERR)
 		return

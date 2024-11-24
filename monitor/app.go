@@ -82,7 +82,7 @@ func NewApp() *App {
 }
 
 func (app *App) Run() {
-	app.StartProfilingServer()
+	// app.StartProfilingServer()
 	go app.wsClient.Reconnect(app.Ctx)
 
 	// Iniciar una goroutine para procesar los logs
@@ -93,10 +93,10 @@ func (app *App) Run() {
 				return
 			case logMsg, ok := <-app.logCh:
 				if !ok {
+					app.StateManager.AddStatusMessage(StatusMessage{Level: ERR, Message: "FAILED TO GET LOGS"})
 					return // Exit if the channel is closed
 				}
 				app.logProcessor.ProcessLog(logMsg)
-				fmt.Println("Processed log message")
 			}
 		}
 	}()

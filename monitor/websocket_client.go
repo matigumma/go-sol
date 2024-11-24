@@ -60,7 +60,7 @@ func (wsc *WebSocketClient) Subscribe(ctx context.Context) error {
 					wsc.updateStatus(fmt.Sprintf("WebSocket error: %v", err), ERR)
 					return
 				}
-				wsc.updateStatus("Received log message", INFO)
+				wsc.updateStatus("Subscribe: Received log message", INFO)
 				wsc.logCh <- msg
 			}
 		}
