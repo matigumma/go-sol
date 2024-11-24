@@ -6,10 +6,11 @@ import (
 	"os"
 	"regexp"
 
+	"gosol/monitor"
+
 	"github.com/gotd/td/telegram"
 	"github.com/gotd/td/tg"
 	"github.com/joho/godotenv"
-	"monitor"
 )
 
 func StartTelegramClient() {
