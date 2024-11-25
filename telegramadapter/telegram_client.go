@@ -2,7 +2,6 @@ package telegramadapter
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"regexp"
@@ -19,14 +18,12 @@ type TelegramClient struct {
 }
 
 func NewTelegramClient(monitor *monitor.App) *TelegramClient {
-	fmt.Println("New Telegram Client model")
 	return &TelegramClient{
 		monitor: monitor,
 	}
 }
 
 func (t *TelegramClient) Run() {
-	fmt.Println("Running Telegram Client")
 	// Cargar variables de entorno
 	// err := godotenv.Load()
 	// if err != nil {
@@ -47,7 +44,17 @@ func (t *TelegramClient) Run() {
 
 	// Crear cliente de Telegram
 	client := telegram.NewClient(apiIDInt, apiHash, telegram.Options{})
-	fmt.Println("Client created")
+
+	status, err := client.Auth().Status(context.Background())
+	if err != nil {
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Error getting authorization status"}
+	}
+	/* Can be already authenticated if we have valid session in session storage. */
+	if !status.Authorized {
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Authorization required"}
+	}
+
+	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: status.User.Username}
 
 	// Conectar al cliente
 	if err := client.Run(context.Background(), func(ctx context.Context) error {
