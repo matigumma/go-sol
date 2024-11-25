@@ -73,22 +73,8 @@ func (t *TelegramClient) Run() {
 			return nil // Return nil if no error occurs
 		})
 
-		// dispatcher.OnNewChannelMessage(func(ctx context.Context, e tg.Entities, update *tg.UpdateNewChannelMessage) error {
-		// 	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New message received"}
-
-		// 	msg, ok := update.Message.(*tg.Message)
-		// 	if !ok {
-		// 		return nil
-		// 	}
-
-		// 	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: msg.Message[:10]}
-
-		// 	if msg.Replies.ChannelID == int64(channelID) {
-		// 		t.processMessage(msg)
-		// 	}
-
-		// 	return nil // Return nil if no error occurs
-		// })
+		// Registrar el event handler para nuevos mensajes de canal
+		dispatcher.OnNewChannelMessage(t.onNewChannelMessage)
 
 		// Mantener la ejecución
 		<-ctx.Done()
@@ -126,7 +112,19 @@ func containsPlatformKeyword(message string) bool {
 	return regexp.MustCompile(regexp.QuoteMeta(fullKeyword)).MatchString(message)
 }
 
-func extractToken(message string) string {
+func (t *TelegramClient) onNewChannelMessage(ctx context.Context, entities tg.Entities, update *tg.UpdateNewChannelMessage) error {
+	t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New channel message received"}
+
+	msg, ok := update.Message.(*tg.Message)
+	if !ok {
+		return nil
+	}
+
+	// Procesar el mensaje del canal
+	t.processMessage(msg)
+
+	return nil
+}
 	// Verificar si el mensaje contiene "Platform: Raydium"
 	if !containsPlatformKeyword(message) {
 		return ""
