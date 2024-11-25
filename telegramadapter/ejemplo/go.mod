@@ -22,8 +22,10 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
+	gorm.io/driver/sqlite v1.5.6 // indirect
 )
 
 require (
