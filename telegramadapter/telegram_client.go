@@ -11,7 +11,16 @@ import (
 
 	"github.com/gotd/td/telegram"
 	"github.com/gotd/td/tg"
+	"go.uber.org/zap"
 )
+
+func setupLogger() (*zap.Logger, error) {
+	logger, err := zap.NewDevelopment(zap.AddStacktrace(zap.ErrorLevel))
+	if err != nil {
+		return nil, err
+	}
+	return logger, nil
+}
 
 type TelegramClient struct {
 	monitor *monitor.App
@@ -30,6 +39,13 @@ func (t *TelegramClient) Run() {
 	// 	log.Fatal("Error loading .env file")
 	// }
 
+	// Configurar el logger
+	logger, err := setupLogger()
+	if err != nil {
+		log.Fatal("Error setting up logger:", err)
+	}
+	defer logger.Sync() // Asegúrate de sincronizar el logger al final
+
 	apiID := os.Getenv("API_ID")
 	apiIDInt, err := strconv.Atoi(apiID)
 	if err != nil {
@@ -39,11 +55,16 @@ func (t *TelegramClient) Run() {
 	tchannelID := os.Getenv("TELEGRAM_CHANNEL_ID")
 	channelID, err := strconv.Atoi(tchannelID)
 	if err != nil {
-		log.Fatal("Error converting API_ID to int:", err)
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Error converting API_ID to int:" + err.Error()}
 	}
 
 	// Crear cliente de Telegram
-	client := telegram.NewClient(apiIDInt, apiHash, telegram.Options{})
+	client := telegram.NewClient(apiIDInt, apiHash, telegram.Options{
+		Logger: logger,
+		OnDead: func() {
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Client is dead"}
+		},
+	})
 
 	status, err := client.Auth().Status(context.Background())
 	if err != nil {
@@ -60,6 +81,11 @@ func (t *TelegramClient) Run() {
 	if err := client.Run(context.Background(), func(ctx context.Context) error {
 
 		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Connected to Telegram"}
+
+		// Mover la llamada a Ping aquí, después de que el cliente esté listo
+		if err := client.Ping(ctx); err != nil {
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Error pinging Telegram: " + err.Error()}
+		}
 
 		dispatcher := tg.NewUpdateDispatcher()
 
@@ -87,7 +113,8 @@ func (t *TelegramClient) Run() {
 		<-ctx.Done()
 		return nil
 	}); err != nil {
-		log.Fatal(err)
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "Fatal: " + err.Error()}
+		// log.Fatal(err)
 	}
 }
 
