@@ -125,6 +125,8 @@ func (t *TelegramClient) onNewChannelMessage(ctx context.Context, entities tg.En
 
 	return nil
 }
+
+func extractToken(message string) string {
 	// Verificar si el mensaje contiene "Platform: Raydium"
 	if !containsPlatformKeyword(message) {
 		return ""
