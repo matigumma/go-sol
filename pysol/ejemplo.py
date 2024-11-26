@@ -494,7 +494,7 @@ async def telegram():
 
     client = TelegramClient('anon', api_id, api_hash)
 
-    @client.on(events.NewMessage(chats=-1002023951506)) # flux  -1002109566555 - -1002109566555    solana scaner - -1002023951506
+    @client.on(events.NewMessage(chats=-1002109566555)) # flux  -1002109566555 - -1002109566555    solana scaner - -1002023951506
     async def my_event_handler(event):
         text = event.raw_text
         if "Platform: Raydium" in text:
