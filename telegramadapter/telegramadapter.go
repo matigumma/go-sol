@@ -32,17 +32,17 @@ func (t *TelegramClient) Run() {
 
 	appID := os.Getenv("API_ID")
 	appIDInt, _ := strconv.Atoi(appID)
-	// if err != nil {
-	// 	log.Fatal("Error converting API_ID to int:", err)
-	// }
+
 	appHash := os.Getenv("API_HASH")
 	// botToken := os.Getenv("BOT_TOKEN")
-	phoneNum := os.Getenv("PHONE")
+	// phoneNum := os.Getenv("PHONE")
+
 	// tchannelID := os.Getenv("TELEGRAM_CHANNEL_ID")
 	// channelID, err := strconv.Atoi(tchannelID)
 	// if err != nil {
 	// 	log.Fatal("Error converting API_ID to int:" + err.Error())
 	// }
+
 	t.platformKeyword = os.Getenv("PLATFORM_KEYWORD")
 
 	// rsapubkey := os.Getenv("TEST_RSA_PUB_KEY")
@@ -71,12 +71,13 @@ func (t *TelegramClient) Run() {
 		AppID:    int32(appIDInt), // https://my.telegram.org/auth?to=apps
 		AppHash:  appHash,
 		LogLevel: tg.LogInfo,
-		TestMode: true,
 		// PublicKeys: rsaPublicKeys,
+		MemorySession: true,
 		StringSession: func() string {
 			sessionData, err := os.ReadFile("session.session")
 			if err != nil {
 				log.Fatal("Error reading session from file:", err)
+				return ""
 			}
 			return string(sessionData)
 		}(),
@@ -85,20 +86,22 @@ func (t *TelegramClient) Run() {
 		log.Fatal(err)
 	}
 
-	client.Conn()
+	// client.Conn()
+
+	// Authenticate the client using the bot token
+	// This will send a code to the phone number if it is not already authenticated
+	// if err := client.LoginBot(botToken); err != nil {
+	// if _, err := client.Login(phoneNum); err != nil {
+	// 	panic(err)
+	// }
+
+	client.Start()
 
 	sessionData := client.ExportSession()
 
 	err = os.WriteFile("session.session", []byte(sessionData), 0644)
 	if err != nil {
 		log.Fatal("Error writing session to file:", err)
-	}
-
-	// Authenticate the client using the bot token
-	// This will send a code to the phone number if it is not already authenticated
-	// if err := client.LoginBot(botToken); err != nil {
-	if _, err := client.Login(phoneNum); err != nil {
-		panic(err)
 	}
 
 	// client.UpdatesGetState()
