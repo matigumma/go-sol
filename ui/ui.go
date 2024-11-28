@@ -10,6 +10,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/bubbles/viewport"
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -33,7 +34,7 @@ type Model struct {
 	statusUpdates <-chan monitor.StatusMessage
 	tokenUpdates  <-chan []types.TokenInfo
 	stateManager  *monitor.StateManager
-}
+	stdoutView    StdoutViewModel
 
 func NewModel(app *monitor.App) Model {
 	columns := []table.Column{
@@ -90,7 +91,7 @@ func NewModel(app *monitor.App) Model {
 		stateManager:  app.StateManager,
 		apiClient:     app.ApiClient,
 		activeView:    1,
-		// Inicializar otros campos
+		stdoutView:    NewStdoutViewModel(),
 	}
 }
 
@@ -126,7 +127,7 @@ func (m *Model) updateTokenTable(tokens []types.TokenInfo) {
 }
 
 func (m Model) Init() tea.Cmd {
-	return nil
+	return tea.Batch(m.stdoutView.Init())
 }
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -205,7 +206,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// 	m.statusBar.list.SetItems(items)
 	}
 
-	// Actualizar el spinner
+	cmd, _ := m.stdoutView.Update(msg)
+	cmds = append(cmds, cmd)
 	cmd, _ := m.statusBar.Update(msg)
 	cmds = append(cmds, cmd)
 
@@ -258,7 +260,7 @@ func (m Model) View() string {
 		tableView = inactiveBorderStyle.Render(m.table.View())
 		statusBarView = activeBorderStyle.Render(m.statusBar.View())
 	}
-	return fmt.Sprintf("\n%s\n%s", statusBarView, tableView)
+	return fmt.Sprintf("\n%s\n%s\n%s", statusBarView, tableView, stdoutView)
 }
 
 func (m Model) tokenDetailView() string {
