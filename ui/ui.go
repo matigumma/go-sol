@@ -46,7 +46,6 @@ func NewModel(app *monitor.App) Model {
 		{Title: "ADDRESS", Width: 10},
 		// {Title: "URL", Width: 100},
 	}
-}
 
 	rows := []table.Row{}
 	for _, token := range []types.TokenInfo{} {
