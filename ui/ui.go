@@ -79,7 +79,8 @@ func NewModel(app *monitor.App) Model {
 		table.WithFocused(true),
 	)
 
-	messages := app.StateManager.GetStatusHistory()
+	// messages := app.StateManager.GetStatusHistory()
+	messages := []monitor.StatusMessage{}
 
 	return Model{
 		table:         t,
@@ -164,12 +165,14 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// Asume que el primer campo es el símbolo del token
 				symbol := selectedRow[2]
 
-				for _, row := range m.stateManager.MintState {
+				ms := m.stateManager.GetMintState()
+				for _, row := range ms {
 					if row[0].TokenMeta.Symbol == symbol { // Accede al índice correcto
 						m.selectedToken = &row[0]
 						break
 					}
 				}
+
 			}
 		case "esc":
 			// Volver a la vista de la tabla
