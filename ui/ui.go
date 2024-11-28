@@ -35,6 +35,7 @@ type Model struct {
 	tokenUpdates  <-chan []types.TokenInfo
 	stateManager  *monitor.StateManager
 	stdoutView    StdoutViewModel
+}
 
 func NewModel(app *monitor.App) Model {
 	columns := []table.Column{
@@ -45,6 +46,7 @@ func NewModel(app *monitor.App) Model {
 		{Title: "ADDRESS", Width: 10},
 		// {Title: "URL", Width: 100},
 	}
+}
 
 	rows := []table.Row{}
 	for _, token := range []types.TokenInfo{} {
