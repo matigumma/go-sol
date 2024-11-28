@@ -3,7 +3,7 @@ module gosol
 go 1.23.3
 
 require (
-	github.com/amarnathcjd/gogram v1.4.2
+	matu/gogram v1.4.2
 	github.com/charmbracelet/bubbles v0.20.0
 	github.com/charmbracelet/bubbletea v1.2.3
 	github.com/charmbracelet/glamour v0.8.0

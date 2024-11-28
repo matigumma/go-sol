@@ -11,6 +11,9 @@ const (
 	WARN
 	ERR
 	NONE
+	DEBUG
+	TRACE
+	PANIC
 )
 
 type LogLevel int
@@ -34,7 +37,6 @@ func NewStateManager() *StateManager {
 }
 
 func (sm *StateManager) AddMint(mint string) {
-	// sm.AddStatusMessage(StatusMessage{Level: NONE, Message: fmt.Sprintf("💩 New Token Found: %s", mint)})
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	if _, exists := sm.MintState[mint]; !exists {
@@ -89,4 +91,10 @@ func (sm *StateManager) GetStatusHistory() []StatusMessage {
 	sm.mu.RLock()
 	defer sm.mu.RUnlock()
 	return sm.StatusHistory
+}
+
+func (sm *StateManager) GetMintState() map[string][]types.Report {
+	sm.mu.RLock()
+	defer sm.mu.RUnlock()
+	return sm.MintState
 }

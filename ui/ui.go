@@ -10,7 +10,6 @@ import (
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/bubbles/viewport"
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -34,7 +33,6 @@ type Model struct {
 	statusUpdates <-chan monitor.StatusMessage
 	tokenUpdates  <-chan []types.TokenInfo
 	stateManager  *monitor.StateManager
-	stdoutView    StdoutViewModel
 }
 
 func NewModel(app *monitor.App) Model {
@@ -92,28 +90,24 @@ func NewModel(app *monitor.App) Model {
 		stateManager:  app.StateManager,
 		apiClient:     app.ApiClient,
 		activeView:    1,
-		stdoutView:    NewStdoutViewModel(),
+		// Inicializar otros campos
 	}
 }
 
 func (m *Model) updateTokenTable(tokens []types.TokenInfo) {
 	m.statusBar.list.NewStatusMessage("Updating token table")
-	rows := []table.Row{}
+	rows := createTokenRows(tokens)
+	m.table.SetRows(rows)
+}
+
+func createTokenRows(tokens []types.TokenInfo) []table.Row {
+	var rows []table.Row
 	for _, token := range tokens {
 		if token.Address == "" && token.Symbol == "" && token.CreatedAt == "" && token.Score == 0 {
 			continue
 		}
 		address := token.Address[:7] + "..."
-		scoreColor := "🟢" // Green
-		if token.Score > 2000 {
-			scoreColor = "🟡" // Yellow
-		}
-		if token.Score > 3000 {
-			scoreColor = "🟠" // Orange
-		}
-		if token.Score > 4000 {
-			scoreColor = "🔴" // Red
-		}
+		scoreColor := determineScoreColor(token.Score)
 		row := table.Row{
 			scoreColor,
 			token.CreatedAt,
@@ -123,12 +117,42 @@ func (m *Model) updateTokenTable(tokens []types.TokenInfo) {
 		}
 		rows = append(rows, row)
 	}
+	return rows
+}
 
-	m.table.SetRows(rows)
+func determineScoreColor(score int64) string {
+	switch {
+	case score > 4000:
+		return "🔴" // Red
+	case score > 3000:
+		return "🟠" // Orange
+	case score > 2000:
+		return "🟡" // Yellow
+	default:
+		return "🟢" // Green
+	}
 }
 
 func (m Model) Init() tea.Cmd {
-	return tea.Batch(m.stdoutView.Init())
+	// Devuelve un comando para cargar datos iniciales
+	return loadInitialData()
+}
+
+func loadInitialData() tea.Cmd {
+	return func() tea.Msg {
+		// Aquí iría la lógica para cargar datos, por ejemplo, una solicitud HTTP
+		// Simularemos la carga de datos con un sleep y un mensaje ficticio
+		time.Sleep(2 * time.Second) // Simula un retraso en la carga de datos
+
+		// Supongamos que cargamos una lista de tokens
+		tokens := []types.TokenInfo{
+			{Symbol: "BTC", Address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", CreatedAt: "2009-01-03", Score: 1000},
+			{Symbol: "ETH", Address: "0x00000000219ab540356cBB839Cbe05303d7705Fa", CreatedAt: "2015-07-30", Score: 2000},
+		}
+
+		// Devuelve un mensaje con los datos cargados
+		return TokenUpdateMsg(tokens)
+	}
 }
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -207,8 +231,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// 	m.statusBar.list.SetItems(items)
 	}
 
-	cmd, _ := m.stdoutView.Update(msg)
-	cmds = append(cmds, cmd)
+	// Actualizar el spinner
 	cmd, _ := m.statusBar.Update(msg)
 	cmds = append(cmds, cmd)
 
@@ -261,7 +284,7 @@ func (m Model) View() string {
 		tableView = inactiveBorderStyle.Render(m.table.View())
 		statusBarView = activeBorderStyle.Render(m.statusBar.View())
 	}
-	return fmt.Sprintf("\n%s\n%s\n%s", statusBarView, tableView, stdoutView)
+	return fmt.Sprintf("\n%s\n%s", statusBarView, tableView)
 }
 
 func (m Model) tokenDetailView() string {

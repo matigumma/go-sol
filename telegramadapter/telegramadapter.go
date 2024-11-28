@@ -3,13 +3,15 @@ package telegramadapter
 import (
 	"encoding/json"
 	"fmt"
+	"gosol/logger"
 	"gosol/monitor"
 	"log"
 	"os"
 	"regexp"
 	"strconv"
 
-	tg "github.com/amarnathcjd/gogram/telegram"
+	tg "matu/gogram/telegram"
+
 	"github.com/joho/godotenv"
 )
 
@@ -28,6 +30,7 @@ func (t *TelegramClient) Run() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
+		return
 	}
 
 	appID := os.Getenv("API_ID")
@@ -35,7 +38,8 @@ func (t *TelegramClient) Run() {
 
 	appHash := os.Getenv("API_HASH")
 	// botToken := os.Getenv("BOT_TOKEN")
-	// phoneNum := os.Getenv("PHONE")
+	phoneNum := os.Getenv("PHONE")
+	fmt.Printf("Phone number: %s", phoneNum)
 
 	// tchannelID := os.Getenv("TELEGRAM_CHANNEL_ID")
 	// channelID, err := strconv.Atoi(tchannelID)
@@ -67,30 +71,32 @@ func (t *TelegramClient) Run() {
 	// 	}
 	// }
 
+	logger := logger.NewLogger("gosol [telegram]", t.monitor.StatusUpdates)
+
 	client, err := tg.NewClient(tg.ClientConfig{
 		AppID:    int32(appIDInt), // https://my.telegram.org/auth?to=apps
 		AppHash:  appHash,
-		LogLevel: tg.LogInfo,
+		LogLevel: tg.LogDebug,
 		// PublicKeys: rsaPublicKeys,
 		MemorySession: true,
 		StringSession: func() string {
 			sessionData, err := os.ReadFile("session.session")
 			if err != nil {
-				log.Fatal("Error reading session from file:", err)
+				// log.Fatal("Error reading session from file:", err)
 				return ""
 			}
 			return string(sessionData)
 		}(),
-	})
+	}, logger)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// client.Conn()
 
-	// Authenticate the client using the bot token
-	// This will send a code to the phone number if it is not already authenticated
-	// if err := client.LoginBot(botToken); err != nil {
+	// // Authenticate the client using the bot token
+	// // This will send a code to the phone number if it is not already authenticated
+	// // if err := client.LoginBot(botToken); err != nil {
 	// if _, err := client.Login(phoneNum); err != nil {
 	// 	panic(err)
 	// }
@@ -101,32 +107,26 @@ func (t *TelegramClient) Run() {
 
 	err = os.WriteFile("session.session", []byte(sessionData), 0644)
 	if err != nil {
-		log.Fatal("Error writing session to file:", err)
+		errSess := fmt.Sprintln("Error writing session to file:", err)
+		t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.ERR, Message: errSess}
 	}
 
 	// client.UpdatesGetState()
 
 	client.On(tg.OnMessage, func(message *tg.NewMessage) error { // client.AddMessageHandler
-		log.Printf("Received message")
-
-		messageJSON, err := json.MarshalIndent(message, "", "  ")
-		if err != nil {
-			log.Println("Error marshaling message to JSON:", err)
-			return err
-		}
-		fmt.Printf("Received message: %s\n", messageJSON)
-
-		os.Exit(0)
+		t.processMessage(message)
 
 		return nil
 	}, tg.Filter{
 		Group: true,
-		Func: func(message *tg.NewMessage) bool {
-			if message.Message.Replies.ChannelID == int64(-1002109566555) {
-				return false
-			}
-			return true
-		},
+		// Chats: []int64{227962}, // 227963 Raydium, 227963 pump fun thread {Message.ReplyTo.ReplyToMsgID}
+		// Func: func(message *tg.NewMessage) bool {
+		// 	// esto es para testear si esta leyendo mensajes de otro canal que no sea el de Raydium
+		// 	if message.Message.Replies.ChannelID == int64(-1002109566555) {
+		// 		return false
+		// 	}
+		// 	return true
+		// },
 		// Chats: []int64{-1002109566555},
 	})
 
@@ -147,14 +147,34 @@ func (t *TelegramClient) Run() {
 func (t *TelegramClient) processMessage(msg *tg.NewMessage) {
 	// Filtrar mensajes que contienen "Platform: Raydium || Pump Fun"
 	if t.containsPlatformKeyword(msg.Message.Message) {
+
+		messageJSON, err := json.MarshalIndent(msg, "", "  ")
+		if err == nil {
+			// Append the message to a JSON file
+			file, err := os.OpenFile("messages.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				errOpen := fmt.Sprintf("Error opening file: %v", err)
+				t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.ERR, Message: errOpen}
+			} else {
+				defer file.Close()
+				if _, err := file.WriteString(string(messageJSON) + "\n"); err != nil {
+					erMsg := fmt.Sprintf("Error writing to file: %v", err)
+					t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.ERR, Message: erMsg}
+				}
+			}
+		}
+
 		// Extraer dirección del token
 		token := t.extractToken(msg.Message.Message)
 		if token != "" {
-			// t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "New Token Found: " + token}
-			log.Printf("New Token: %s", token)
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.INFO, Message: "✅ New Token: " + token}
+			// log.Printf("New Token: %s", token)
 			// Enviar token al StateManager
-			// t.monitor.StateManager.AddMint(token)
+			t.monitor.StateManager.AddMint(token)
+			t.monitor.ApiClient.FetchAndProcessReport(token)
 		}
+		// } else {
+		// 	fmt.Print(".")
 	}
 }
 

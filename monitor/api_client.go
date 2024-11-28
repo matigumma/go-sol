@@ -40,6 +40,7 @@ func (api *APIClient) FetchAndProcessReport(mint string) {
 			return
 		}
 
+		go PushToDiscord(report, api.statusUpdates)
 		api.stateManager.UpdateMintState(mint, report)
 		api.stateManager.SendTokenUpdates(api.tokenUpdates)
 	}()
