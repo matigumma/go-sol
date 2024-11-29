@@ -2,8 +2,8 @@ package ui
 
 import (
 	"fmt"
-	"gosol/monitor"
-	"gosol/types"
+	"matu/gosol/monitor"
+	"matu/gosol/types"
 	"strconv"
 	"strings"
 	"time"

@@ -1,0 +1,8106 @@
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249316,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249316,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839233,
+    "Message": "Pair: BHB/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.29%\n\nMarket Cap: $7,220.46\nLiquidity: $7,169.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:53 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/2Gj1VyCpKRAQJtLS6kTx3UPGKmYke8r9pbjzBLccLpUYNfsTQA45RGr9cfqT7No4MhbRUjDqRndbAVmiX6GaeQwX"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249316,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839233,
+    "Message": "Pair: BHB/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.29%\n\nMarket Cap: $7,220.46\nLiquidity: $7,169.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:53 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-AHKFwrHhPLXT6syiJVzsRWyn7Peb5NPWG79EgDPSpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/2Gj1VyCpKRAQJtLS6kTx3UPGKmYke8r9pbjzBLccLpUYNfsTQA45RGr9cfqT7No4MhbRUjDqRndbAVmiX6GaeQwX"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249317,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249317,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839236,
+    "Message": "Pair: Frost/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 71.64%\n\nMarket Cap: $765.58\nLiquidity: $548.44\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:56 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 7
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 7
+      },
+      {
+        "Offset": 113,
+        "Length": 10
+      },
+      {
+        "Offset": 113,
+        "Length": 10
+      },
+      {
+        "Offset": 127,
+        "Length": 13
+      },
+      {
+        "Offset": 141,
+        "Length": 4
+      },
+      {
+        "Offset": 148,
+        "Length": 15
+      },
+      {
+        "Offset": 164,
+        "Length": 4
+      },
+      {
+        "Offset": 170,
+        "Length": 5
+      },
+      {
+        "Offset": 176,
+        "Length": 44
+      },
+      {
+        "Offset": 221,
+        "Length": 6
+      },
+      {
+        "Offset": 228,
+        "Length": 43
+      },
+      {
+        "Offset": 273,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/32DyRpLJ64aydNbBgQhhrBhUceYYwHXpTAoPvo4GHjnM6HN9UWM8jjAQTD7c9KXgRHZoUmDgC7dHGLUPk3JEjdkx"
+      },
+      {
+        "Offset": 273,
+        "Length": 16
+      },
+      {
+        "Offset": 289,
+        "Length": 3
+      },
+      {
+        "Offset": 292,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249317,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839236,
+    "Message": "Pair: Frost/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 71.64%\n\nMarket Cap: $765.58\nLiquidity: $548.44\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:56 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-A39hKVb8Kz5dJyQvi1Hb9dP7hixTFq6NLAGGY1Mmpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 7
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 7
+      },
+      {
+        "Offset": 113,
+        "Length": 10
+      },
+      {
+        "Offset": 113,
+        "Length": 10
+      },
+      {
+        "Offset": 127,
+        "Length": 13
+      },
+      {
+        "Offset": 141,
+        "Length": 4
+      },
+      {
+        "Offset": 148,
+        "Length": 15
+      },
+      {
+        "Offset": 164,
+        "Length": 4
+      },
+      {
+        "Offset": 170,
+        "Length": 5
+      },
+      {
+        "Offset": 176,
+        "Length": 44
+      },
+      {
+        "Offset": 221,
+        "Length": 6
+      },
+      {
+        "Offset": 228,
+        "Length": 43
+      },
+      {
+        "Offset": 273,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/32DyRpLJ64aydNbBgQhhrBhUceYYwHXpTAoPvo4GHjnM6HN9UWM8jjAQTD7c9KXgRHZoUmDgC7dHGLUPk3JEjdkx"
+      },
+      {
+        "Offset": 273,
+        "Length": 16
+      },
+      {
+        "Offset": 289,
+        "Length": 3
+      },
+      {
+        "Offset": 292,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249318,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249318,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839238,
+    "Message": "Pair: ROYER/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 96.54%\n\nMarket Cap: $7,625.08\nLiquidity: $7,361.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:58 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 9
+      },
+      {
+        "Offset": 95,
+        "Length": 10
+      },
+      {
+        "Offset": 106,
+        "Length": 9
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 131,
+        "Length": 13
+      },
+      {
+        "Offset": 145,
+        "Length": 4
+      },
+      {
+        "Offset": 152,
+        "Length": 15
+      },
+      {
+        "Offset": 168,
+        "Length": 4
+      },
+      {
+        "Offset": 174,
+        "Length": 5
+      },
+      {
+        "Offset": 180,
+        "Length": 44
+      },
+      {
+        "Offset": 225,
+        "Length": 6
+      },
+      {
+        "Offset": 232,
+        "Length": 43
+      },
+      {
+        "Offset": 277,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/63KDriSWrRrPE5HTi3JtXS4R6qKUxER1XXnYdpddjjnfYBsxSu6yGM9i6SFNPuEqBQ9npAHtfs3u2XyWKwhC4dwH"
+      },
+      {
+        "Offset": 277,
+        "Length": 16
+      },
+      {
+        "Offset": 293,
+        "Length": 3
+      },
+      {
+        "Offset": 296,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249318,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839238,
+    "Message": "Pair: ROYER/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 96.54%\n\nMarket Cap: $7,625.08\nLiquidity: $7,361.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:58 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-BJDqNpfLXXFxdnZBpstqUSDSYRnjK3FGKn1e3kVApump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 9
+      },
+      {
+        "Offset": 95,
+        "Length": 10
+      },
+      {
+        "Offset": 106,
+        "Length": 9
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 131,
+        "Length": 13
+      },
+      {
+        "Offset": 145,
+        "Length": 4
+      },
+      {
+        "Offset": 152,
+        "Length": 15
+      },
+      {
+        "Offset": 168,
+        "Length": 4
+      },
+      {
+        "Offset": 174,
+        "Length": 5
+      },
+      {
+        "Offset": 180,
+        "Length": 44
+      },
+      {
+        "Offset": 225,
+        "Length": 6
+      },
+      {
+        "Offset": 232,
+        "Length": 43
+      },
+      {
+        "Offset": 277,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/63KDriSWrRrPE5HTi3JtXS4R6qKUxER1XXnYdpddjjnfYBsxSu6yGM9i6SFNPuEqBQ9npAHtfs3u2XyWKwhC4dwH"
+      },
+      {
+        "Offset": 277,
+        "Length": 16
+      },
+      {
+        "Offset": 293,
+        "Length": 3
+      },
+      {
+        "Offset": 296,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249319,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249319,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839239,
+    "Message": "Pair: RA/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 96.54%\n\nMarket Cap: $7,624.53\nLiquidity: $7,360.63\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:59 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 6
+      },
+      {
+        "Offset": 13,
+        "Length": 9
+      },
+      {
+        "Offset": 23,
+        "Length": 8
+      },
+      {
+        "Offset": 32,
+        "Length": 7
+      },
+      {
+        "Offset": 40,
+        "Length": 5
+      },
+      {
+        "Offset": 46,
+        "Length": 15
+      },
+      {
+        "Offset": 62,
+        "Length": 6
+      },
+      {
+        "Offset": 70,
+        "Length": 11
+      },
+      {
+        "Offset": 82,
+        "Length": 9
+      },
+      {
+        "Offset": 92,
+        "Length": 10
+      },
+      {
+        "Offset": 103,
+        "Length": 9
+      },
+      {
+        "Offset": 114,
+        "Length": 10
+      },
+      {
+        "Offset": 114,
+        "Length": 10
+      },
+      {
+        "Offset": 128,
+        "Length": 13
+      },
+      {
+        "Offset": 142,
+        "Length": 4
+      },
+      {
+        "Offset": 149,
+        "Length": 15
+      },
+      {
+        "Offset": 165,
+        "Length": 4
+      },
+      {
+        "Offset": 171,
+        "Length": 5
+      },
+      {
+        "Offset": 177,
+        "Length": 44
+      },
+      {
+        "Offset": 222,
+        "Length": 6
+      },
+      {
+        "Offset": 229,
+        "Length": 43
+      },
+      {
+        "Offset": 274,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/41WCZ6dEyFstVZZNUZs4h3pu6frgHi2pgmZeJ61aEzHnbDEQmtuPWbuwUBu3WpM6atgACjHvjGJxD5opmFKd7Jb7"
+      },
+      {
+        "Offset": 274,
+        "Length": 16
+      },
+      {
+        "Offset": 290,
+        "Length": 3
+      },
+      {
+        "Offset": 293,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249319,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839239,
+    "Message": "Pair: RA/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 96.54%\n\nMarket Cap: $7,624.53\nLiquidity: $7,360.63\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:13:59 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-8gpwP6Hq4jt9AU5NJBqoSYR9qgKu21yRKcWpUHzzpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 6
+      },
+      {
+        "Offset": 13,
+        "Length": 9
+      },
+      {
+        "Offset": 23,
+        "Length": 8
+      },
+      {
+        "Offset": 32,
+        "Length": 7
+      },
+      {
+        "Offset": 40,
+        "Length": 5
+      },
+      {
+        "Offset": 46,
+        "Length": 15
+      },
+      {
+        "Offset": 62,
+        "Length": 6
+      },
+      {
+        "Offset": 70,
+        "Length": 11
+      },
+      {
+        "Offset": 82,
+        "Length": 9
+      },
+      {
+        "Offset": 92,
+        "Length": 10
+      },
+      {
+        "Offset": 103,
+        "Length": 9
+      },
+      {
+        "Offset": 114,
+        "Length": 10
+      },
+      {
+        "Offset": 114,
+        "Length": 10
+      },
+      {
+        "Offset": 128,
+        "Length": 13
+      },
+      {
+        "Offset": 142,
+        "Length": 4
+      },
+      {
+        "Offset": 149,
+        "Length": 15
+      },
+      {
+        "Offset": 165,
+        "Length": 4
+      },
+      {
+        "Offset": 171,
+        "Length": 5
+      },
+      {
+        "Offset": 177,
+        "Length": 44
+      },
+      {
+        "Offset": 222,
+        "Length": 6
+      },
+      {
+        "Offset": 229,
+        "Length": 43
+      },
+      {
+        "Offset": 274,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/41WCZ6dEyFstVZZNUZs4h3pu6frgHi2pgmZeJ61aEzHnbDEQmtuPWbuwUBu3WpM6atgACjHvjGJxD5opmFKd7Jb7"
+      },
+      {
+        "Offset": 274,
+        "Length": 16
+      },
+      {
+        "Offset": 290,
+        "Length": 3
+      },
+      {
+        "Offset": 293,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249320,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249320,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839242,
+    "Message": "Pair: BOXXY/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 94.89%\n\nMarket Cap: $7,889.29\nLiquidity: $7,486.19\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:02 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 9
+      },
+      {
+        "Offset": 95,
+        "Length": 10
+      },
+      {
+        "Offset": 106,
+        "Length": 9
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 131,
+        "Length": 13
+      },
+      {
+        "Offset": 145,
+        "Length": 4
+      },
+      {
+        "Offset": 152,
+        "Length": 15
+      },
+      {
+        "Offset": 168,
+        "Length": 4
+      },
+      {
+        "Offset": 174,
+        "Length": 5
+      },
+      {
+        "Offset": 180,
+        "Length": 44
+      },
+      {
+        "Offset": 225,
+        "Length": 6
+      },
+      {
+        "Offset": 232,
+        "Length": 43
+      },
+      {
+        "Offset": 277,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3TNBNDwS4AJqfk9hQ4yUXsvjt3FQbkyfs7BjAHykj3PygpsR36H9vbZt9xqf1P2iRsbtQPC9uK4ENHVAjrBhFAaU"
+      },
+      {
+        "Offset": 277,
+        "Length": 16
+      },
+      {
+        "Offset": 293,
+        "Length": 3
+      },
+      {
+        "Offset": 296,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249320,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839242,
+    "Message": "Pair: BOXXY/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 94.89%\n\nMarket Cap: $7,889.29\nLiquidity: $7,486.19\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:02 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-9YeRDN5Sm4d8MdKVonYc3kPLR2kyF8prHGwV3QTXZQZA"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 6
+      },
+      {
+        "Offset": 73,
+        "Length": 11
+      },
+      {
+        "Offset": 85,
+        "Length": 9
+      },
+      {
+        "Offset": 95,
+        "Length": 10
+      },
+      {
+        "Offset": 106,
+        "Length": 9
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 117,
+        "Length": 10
+      },
+      {
+        "Offset": 131,
+        "Length": 13
+      },
+      {
+        "Offset": 145,
+        "Length": 4
+      },
+      {
+        "Offset": 152,
+        "Length": 15
+      },
+      {
+        "Offset": 168,
+        "Length": 4
+      },
+      {
+        "Offset": 174,
+        "Length": 5
+      },
+      {
+        "Offset": 180,
+        "Length": 44
+      },
+      {
+        "Offset": 225,
+        "Length": 6
+      },
+      {
+        "Offset": 232,
+        "Length": 43
+      },
+      {
+        "Offset": 277,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3TNBNDwS4AJqfk9hQ4yUXsvjt3FQbkyfs7BjAHykj3PygpsR36H9vbZt9xqf1P2iRsbtQPC9uK4ENHVAjrBhFAaU"
+      },
+      {
+        "Offset": 277,
+        "Length": 16
+      },
+      {
+        "Offset": 293,
+        "Length": 3
+      },
+      {
+        "Offset": 296,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249321,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249321,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839243,
+    "Message": "Pair: AMAZON/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,150.76\nLiquidity: $7,604.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:03 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/5aR2gLg3WPF7VGXu6sHx9D52GNZYRdmtgvM1dJ14uFNdinR2trcLjHYmH4mPG8yww5RzCLjE3QNHojrEnQFsmJp3"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249321,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839243,
+    "Message": "Pair: AMAZON/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,150.76\nLiquidity: $7,604.15\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:03 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-63jVHVvfaoW3eBfJUD8TY9Z1x1tBzzCNvUsKfiCWpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/5aR2gLg3WPF7VGXu6sHx9D52GNZYRdmtgvM1dJ14uFNdinR2trcLjHYmH4mPG8yww5RzCLjE3QNHojrEnQFsmJp3"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249322,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249322,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839247,
+    "Message": "Pair: Blizzy/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,149.39\nLiquidity: $7,602.87\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:07 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/tep693Vkav8pLWPKJ3GuxVnXCw5qWWWcu7dKkM7zhSSSLMWi1EiH3KYXivX5DWyZDYP98Uyqnf3XRrd14Ss71op"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249322,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839247,
+    "Message": "Pair: Blizzy/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,149.39\nLiquidity: $7,602.87\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:07 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-5FJD4rrWKVSJ51JsBsE88tU98nmginTdKtzC8zFtpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/tep693Vkav8pLWPKJ3GuxVnXCw5qWWWcu7dKkM7zhSSSLMWi1EiH3KYXivX5DWyZDYP98Uyqnf3XRrd14Ss71op"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249323,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249323,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839248,
+    "Message": "Pair: RUSSYC/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 95.87%\n\nMarket Cap: $7,731.72\nLiquidity: $7,412.64\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:08 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3UdiEWQSMfpkjYzGUxViUNZ6eZ3UVphHjefP9NVagCK4uBz7F5sD5p3bZsiEdFGkhBwsam7Vv4ok5RJcB3sPLFgT"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249323,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839248,
+    "Message": "Pair: RUSSYC/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 95.87%\n\nMarket Cap: $7,731.72\nLiquidity: $7,412.64\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:08 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-9yJKVxCzGY9ZeJWtqR6u7rXFeqJ5KvP8vRb3UXGDpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3UdiEWQSMfpkjYzGUxViUNZ6eZ3UVphHjefP9NVagCK4uBz7F5sD5p3bZsiEdFGkhBwsam7Vv4ok5RJcB3sPLFgT"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249324,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249324,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839249,
+    "Message": "Pair: Eung ang/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.96%\n\nMarket Cap: $7,127.68\nLiquidity: $7,125.13\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:09 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 12
+      },
+      {
+        "Offset": 19,
+        "Length": 9
+      },
+      {
+        "Offset": 29,
+        "Length": 8
+      },
+      {
+        "Offset": 38,
+        "Length": 7
+      },
+      {
+        "Offset": 46,
+        "Length": 5
+      },
+      {
+        "Offset": 52,
+        "Length": 15
+      },
+      {
+        "Offset": 68,
+        "Length": 6
+      },
+      {
+        "Offset": 76,
+        "Length": 11
+      },
+      {
+        "Offset": 88,
+        "Length": 9
+      },
+      {
+        "Offset": 98,
+        "Length": 10
+      },
+      {
+        "Offset": 109,
+        "Length": 9
+      },
+      {
+        "Offset": 120,
+        "Length": 10
+      },
+      {
+        "Offset": 120,
+        "Length": 10
+      },
+      {
+        "Offset": 134,
+        "Length": 13
+      },
+      {
+        "Offset": 148,
+        "Length": 4
+      },
+      {
+        "Offset": 155,
+        "Length": 15
+      },
+      {
+        "Offset": 171,
+        "Length": 4
+      },
+      {
+        "Offset": 177,
+        "Length": 5
+      },
+      {
+        "Offset": 183,
+        "Length": 44
+      },
+      {
+        "Offset": 228,
+        "Length": 6
+      },
+      {
+        "Offset": 235,
+        "Length": 43
+      },
+      {
+        "Offset": 280,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/26f9Hsbd1qSZvTu9i8gbjEZQb8AqqEbg21dzxkqtRpTfRjZ2woArbYK9kV463BECNENondQYubW1QAXtumuaEXdC"
+      },
+      {
+        "Offset": 280,
+        "Length": 16
+      },
+      {
+        "Offset": 296,
+        "Length": 3
+      },
+      {
+        "Offset": 299,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249324,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839249,
+    "Message": "Pair: Eung ang/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.96%\n\nMarket Cap: $7,127.68\nLiquidity: $7,125.13\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:09 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-FfpykUtCjwAgUhGCRG3zoSU97ick9FxsUmDavvcDpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 12
+      },
+      {
+        "Offset": 19,
+        "Length": 9
+      },
+      {
+        "Offset": 29,
+        "Length": 8
+      },
+      {
+        "Offset": 38,
+        "Length": 7
+      },
+      {
+        "Offset": 46,
+        "Length": 5
+      },
+      {
+        "Offset": 52,
+        "Length": 15
+      },
+      {
+        "Offset": 68,
+        "Length": 6
+      },
+      {
+        "Offset": 76,
+        "Length": 11
+      },
+      {
+        "Offset": 88,
+        "Length": 9
+      },
+      {
+        "Offset": 98,
+        "Length": 10
+      },
+      {
+        "Offset": 109,
+        "Length": 9
+      },
+      {
+        "Offset": 120,
+        "Length": 10
+      },
+      {
+        "Offset": 120,
+        "Length": 10
+      },
+      {
+        "Offset": 134,
+        "Length": 13
+      },
+      {
+        "Offset": 148,
+        "Length": 4
+      },
+      {
+        "Offset": 155,
+        "Length": 15
+      },
+      {
+        "Offset": 171,
+        "Length": 4
+      },
+      {
+        "Offset": 177,
+        "Length": 5
+      },
+      {
+        "Offset": 183,
+        "Length": 44
+      },
+      {
+        "Offset": 228,
+        "Length": 6
+      },
+      {
+        "Offset": 235,
+        "Length": 43
+      },
+      {
+        "Offset": 280,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/26f9Hsbd1qSZvTu9i8gbjEZQb8AqqEbg21dzxkqtRpTfRjZ2woArbYK9kV463BECNENondQYubW1QAXtumuaEXdC"
+      },
+      {
+        "Offset": 280,
+        "Length": 16
+      },
+      {
+        "Offset": 296,
+        "Length": 3
+      },
+      {
+        "Offset": 299,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249325,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249325,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839250,
+    "Message": "Pair: RONKEY/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.93%\n\nMarket Cap: $8,041.91\nLiquidity: $7,553.48\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:10 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4Zwi37MvqCT5eosjnGpenzgPrKsD5ah1oDnGaoJ73MsP2hjLjQGWVHwAGAMHMmCEKrCSJoMELGqpP6CikgnU4omH"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249325,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839250,
+    "Message": "Pair: RONKEY/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.93%\n\nMarket Cap: $8,041.91\nLiquidity: $7,553.48\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:10 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-DJ5aycTViAQyzrFunZNjaKQH8JFES4B7tQwkr7Gmpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 10
+      },
+      {
+        "Offset": 17,
+        "Length": 9
+      },
+      {
+        "Offset": 27,
+        "Length": 8
+      },
+      {
+        "Offset": 36,
+        "Length": 7
+      },
+      {
+        "Offset": 44,
+        "Length": 5
+      },
+      {
+        "Offset": 50,
+        "Length": 15
+      },
+      {
+        "Offset": 66,
+        "Length": 6
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4Zwi37MvqCT5eosjnGpenzgPrKsD5ah1oDnGaoJ73MsP2hjLjQGWVHwAGAMHMmCEKrCSJoMELGqpP6CikgnU4omH"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249326,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249326,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839253,
+    "Message": "Pair: KIA/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 98.24%\n\nMarket Cap: $7,370.45\nLiquidity: $7,240.80\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:13 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/oWk6yEBKLDWDuUnZFvckCBryHcn3U9DEZY3EY2w3ZuBKRx9duH4PCHrJiecWj5aosGpbALv2UJmG5h2uhCXHbJY"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249326,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839253,
+    "Message": "Pair: KIA/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 98.24%\n\nMarket Cap: $7,370.45\nLiquidity: $7,240.80\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:13 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-GJacXhVZVGDAnqQyatrfVWg8HN56FK6tE4bXcb2Bpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/oWk6yEBKLDWDuUnZFvckCBryHcn3U9DEZY3EY2w3ZuBKRx9duH4PCHrJiecWj5aosGpbALv2UJmG5h2uhCXHbJY"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249327,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249327,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839256,
+    "Message": "Pair: MEF/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,146.32\nLiquidity: $7,600.00\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3MrsMyGdFdA9qnnTAaVcn1dqPBpBtuZ88dD3hbNNTuxXuASd32ecGxzAfgjT8xtVyusMgA9THZZryWV3njmEFFVx"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249327,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839256,
+    "Message": "Pair: MEF/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 93.29%\n\nMarket Cap: $8,146.32\nLiquidity: $7,600.00\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-5etPBDxgM2AWvbE3FbHvVWUkqLX1PNFU9QahsEkhpump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 7
+      },
+      {
+        "Offset": 14,
+        "Length": 9
+      },
+      {
+        "Offset": 24,
+        "Length": 8
+      },
+      {
+        "Offset": 33,
+        "Length": 7
+      },
+      {
+        "Offset": 41,
+        "Length": 5
+      },
+      {
+        "Offset": 47,
+        "Length": 15
+      },
+      {
+        "Offset": 63,
+        "Length": 6
+      },
+      {
+        "Offset": 71,
+        "Length": 11
+      },
+      {
+        "Offset": 83,
+        "Length": 9
+      },
+      {
+        "Offset": 93,
+        "Length": 10
+      },
+      {
+        "Offset": 104,
+        "Length": 9
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 115,
+        "Length": 10
+      },
+      {
+        "Offset": 129,
+        "Length": 13
+      },
+      {
+        "Offset": 143,
+        "Length": 4
+      },
+      {
+        "Offset": 150,
+        "Length": 15
+      },
+      {
+        "Offset": 166,
+        "Length": 4
+      },
+      {
+        "Offset": 172,
+        "Length": 5
+      },
+      {
+        "Offset": 178,
+        "Length": 44
+      },
+      {
+        "Offset": 223,
+        "Length": 6
+      },
+      {
+        "Offset": 230,
+        "Length": 43
+      },
+      {
+        "Offset": 275,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/3MrsMyGdFdA9qnnTAaVcn1dqPBpBtuZ88dD3hbNNTuxXuASd32ecGxzAfgjT8xtVyusMgA9THZZryWV3njmEFFVx"
+      },
+      {
+        "Offset": 275,
+        "Length": 16
+      },
+      {
+        "Offset": 291,
+        "Length": 3
+      },
+      {
+        "Offset": 294,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249328,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249328,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839256,
+    "Message": "Pair: Daisu/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 100.00%\n\nMarket Cap: $7,120.54\nLiquidity: $7,120.54\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 7
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4oLxZeF52hGC5Tuz95Zz91kiTixYxzt4SHf3MGrbmo1q8wDZh7y2VBPaWLw2Ec6srHpbu9jovFYKBYnmAxgscqmQ"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249328,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839256,
+    "Message": "Pair: Daisu/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 100.00%\n\nMarket Cap: $7,120.54\nLiquidity: $7,120.54\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: 88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-88uedauXPKUbNSoM28LxHDe4yHeVKEoUEJdvTQ43pump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 9
+      },
+      {
+        "Offset": 16,
+        "Length": 9
+      },
+      {
+        "Offset": 26,
+        "Length": 8
+      },
+      {
+        "Offset": 35,
+        "Length": 7
+      },
+      {
+        "Offset": 43,
+        "Length": 5
+      },
+      {
+        "Offset": 49,
+        "Length": 15
+      },
+      {
+        "Offset": 65,
+        "Length": 7
+      },
+      {
+        "Offset": 74,
+        "Length": 11
+      },
+      {
+        "Offset": 86,
+        "Length": 9
+      },
+      {
+        "Offset": 96,
+        "Length": 10
+      },
+      {
+        "Offset": 107,
+        "Length": 9
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 118,
+        "Length": 10
+      },
+      {
+        "Offset": 132,
+        "Length": 13
+      },
+      {
+        "Offset": 146,
+        "Length": 4
+      },
+      {
+        "Offset": 153,
+        "Length": 15
+      },
+      {
+        "Offset": 169,
+        "Length": 4
+      },
+      {
+        "Offset": 175,
+        "Length": 5
+      },
+      {
+        "Offset": 181,
+        "Length": 44
+      },
+      {
+        "Offset": 226,
+        "Length": 6
+      },
+      {
+        "Offset": 233,
+        "Length": 43
+      },
+      {
+        "Offset": 278,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4oLxZeF52hGC5Tuz95Zz91kiTixYxzt4SHf3MGrbmo1q8wDZh7y2VBPaWLw2Ec6srHpbu9jovFYKBYnmAxgscqmQ"
+      },
+      {
+        "Offset": 278,
+        "Length": 16
+      },
+      {
+        "Offset": 294,
+        "Length": 3
+      },
+      {
+        "Offset": 297,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}
+{
+  "Action": null,
+  "Channel": {
+    "Creator": false,
+    "Left": true,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": true,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": true,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": true,
+    "SignatureProfiles": false,
+    "ID": 2109566555,
+    "AccessHash": -6807968663726781214,
+    "Title": "FluxBot Pool Sniper",
+    "Username": "fluxbot_pool_sniper",
+    "Photo": {
+      "HasVideo": false,
+      "PhotoID": 5810121012753317183,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Date": 1732669734,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": {
+      "ViewMessages": false,
+      "SendMessages": true,
+      "SendMedia": true,
+      "SendStickers": true,
+      "SendGifs": true,
+      "SendGames": true,
+      "SendInline": true,
+      "EmbedLinks": true,
+      "SendPolls": true,
+      "ChangeInfo": true,
+      "InviteUsers": false,
+      "PinMessages": true,
+      "ManageTopics": true,
+      "SendPhotos": true,
+      "SendVideos": true,
+      "SendRoundvideos": true,
+      "SendAudios": true,
+      "SendVoices": true,
+      "SendDocs": true,
+      "SendPlain": true,
+      "UntilDate": 2147483647
+    },
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  },
+  "Chat": {
+    "Creator": false,
+    "Left": false,
+    "Deactivated": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Noforwards": false,
+    "ID": 6705708231,
+    "Title": "FluxBot",
+    "Photo": null,
+    "ParticipantsCount": 0,
+    "Date": 0,
+    "Version": 0,
+    "MigratedTo": null,
+    "AdminRights": null,
+    "DefaultBannedRights": null
+  },
+  "Client": {
+    "Addr": "149.154.175.51:443",
+    "IpV6": false,
+    "Logger": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    },
+    "Cache": {
+      "input_peers": {
+        "channels": {
+          "2109566555": -6807968663726781214
+        },
+        "users": {
+          "0": 0,
+          "6705708231": 2923481999028888457
+        }
+      }
+    },
+    "Log": {
+      "Level": 1,
+      "Prefix": "gosol [telegram]"
+    }
+  },
+  "File": null,
+  "ID": 3249329,
+  "Message": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249329,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839257,
+    "Message": "Pair: Chin/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.95%\n\nMarket Cap: $7,126.97\nLiquidity: $7,123.65\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 8
+      },
+      {
+        "Offset": 15,
+        "Length": 9
+      },
+      {
+        "Offset": 25,
+        "Length": 8
+      },
+      {
+        "Offset": 34,
+        "Length": 7
+      },
+      {
+        "Offset": 42,
+        "Length": 5
+      },
+      {
+        "Offset": 48,
+        "Length": 15
+      },
+      {
+        "Offset": 64,
+        "Length": 6
+      },
+      {
+        "Offset": 72,
+        "Length": 11
+      },
+      {
+        "Offset": 84,
+        "Length": 9
+      },
+      {
+        "Offset": 94,
+        "Length": 10
+      },
+      {
+        "Offset": 105,
+        "Length": 9
+      },
+      {
+        "Offset": 116,
+        "Length": 10
+      },
+      {
+        "Offset": 116,
+        "Length": 10
+      },
+      {
+        "Offset": 130,
+        "Length": 13
+      },
+      {
+        "Offset": 144,
+        "Length": 4
+      },
+      {
+        "Offset": 151,
+        "Length": 15
+      },
+      {
+        "Offset": 167,
+        "Length": 4
+      },
+      {
+        "Offset": 173,
+        "Length": 5
+      },
+      {
+        "Offset": 179,
+        "Length": 44
+      },
+      {
+        "Offset": 224,
+        "Length": 6
+      },
+      {
+        "Offset": 231,
+        "Length": 43
+      },
+      {
+        "Offset": 276,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4HeYCLYychtTTKqEKwW3x2deteQvQC8cpgFpPJqwtiCXuma4XUz7h4MLDmjQHkQignxJTz91dv6LjJffWKuBYBT"
+      },
+      {
+        "Offset": 276,
+        "Length": 16
+      },
+      {
+        "Offset": 292,
+        "Length": 3
+      },
+      {
+        "Offset": 295,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "OriginalUpdate": {
+    "Out": false,
+    "Mentioned": false,
+    "MediaUnread": false,
+    "Silent": false,
+    "Post": false,
+    "FromScheduled": false,
+    "Legacy": false,
+    "EditHide": false,
+    "Pinned": false,
+    "Noforwards": false,
+    "InvertMedia": false,
+    "Offline": false,
+    "VideoProcessingPending": false,
+    "ID": 3249329,
+    "FromID": {
+      "UserID": 6705708231
+    },
+    "FromBoostsApplied": 0,
+    "PeerID": {
+      "ChannelID": 2109566555
+    },
+    "SavedPeerID": null,
+    "FwdFrom": null,
+    "ViaBotID": 0,
+    "ViaBusinessBotID": 0,
+    "ReplyTo": {
+      "ReplyToScheduled": false,
+      "ForumTopic": true,
+      "Quote": false,
+      "ReplyToMsgID": 227963,
+      "ReplyToPeerID": null,
+      "ReplyFrom": null,
+      "ReplyMedia": null,
+      "ReplyToTopID": 0,
+      "QuoteText": "",
+      "QuoteEntities": null,
+      "QuoteOffset": 0
+    },
+    "Date": 1732839257,
+    "Message": "Pair: Chin/SOL\nPlatform: Pump Fun\nSupply: 1.00b\nSupply in Pool: 99.95%\n\nMarket Cap: $7,126.97\nLiquidity: $7,123.65\n\nRisk Score \n✅ Mint Revoked: true\n✅ Freeze Revoked: true\n\nBase: E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump\nQuote: So11111111111111111111111111111111111111112\n\nView On Explorer | 00:14:16 UTC",
+    "Media": null,
+    "ReplyMarkup": {
+      "Rows": [
+        {
+          "Buttons": [
+            {
+              "Text": "📈 Chart",
+              "URL": "https://pump.fun/E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump"
+            },
+            {
+              "Text": "🕵️ RugCheck",
+              "URL": "https://rugcheck.xyz/tokens/E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump?key=8b2f634d-6220-4b93-a1fa-3def5a59775a"
+            },
+            {
+              "Text": "📊 Trade",
+              "URL": "https://t.me/fluxbeam_bot?start=ca-E87tZBkLSxj89tCwiRBxw12u9qnXCKXNekRQJDoypump"
+            }
+          ]
+        }
+      ]
+    },
+    "Entities": [
+      {
+        "Offset": 0,
+        "Length": 5
+      },
+      {
+        "Offset": 6,
+        "Length": 8
+      },
+      {
+        "Offset": 15,
+        "Length": 9
+      },
+      {
+        "Offset": 25,
+        "Length": 8
+      },
+      {
+        "Offset": 34,
+        "Length": 7
+      },
+      {
+        "Offset": 42,
+        "Length": 5
+      },
+      {
+        "Offset": 48,
+        "Length": 15
+      },
+      {
+        "Offset": 64,
+        "Length": 6
+      },
+      {
+        "Offset": 72,
+        "Length": 11
+      },
+      {
+        "Offset": 84,
+        "Length": 9
+      },
+      {
+        "Offset": 94,
+        "Length": 10
+      },
+      {
+        "Offset": 105,
+        "Length": 9
+      },
+      {
+        "Offset": 116,
+        "Length": 10
+      },
+      {
+        "Offset": 116,
+        "Length": 10
+      },
+      {
+        "Offset": 130,
+        "Length": 13
+      },
+      {
+        "Offset": 144,
+        "Length": 4
+      },
+      {
+        "Offset": 151,
+        "Length": 15
+      },
+      {
+        "Offset": 167,
+        "Length": 4
+      },
+      {
+        "Offset": 173,
+        "Length": 5
+      },
+      {
+        "Offset": 179,
+        "Length": 44
+      },
+      {
+        "Offset": 224,
+        "Length": 6
+      },
+      {
+        "Offset": 231,
+        "Length": 43
+      },
+      {
+        "Offset": 276,
+        "Length": 16,
+        "URL": "https://solscan.io/tx/4HeYCLYychtTTKqEKwW3x2deteQvQC8cpgFpPJqwtiCXuma4XUz7h4MLDmjQHkQignxJTz91dv6LjJffWKuBYBT"
+      },
+      {
+        "Offset": 276,
+        "Length": 16
+      },
+      {
+        "Offset": 292,
+        "Length": 3
+      },
+      {
+        "Offset": 295,
+        "Length": 12
+      }
+    ],
+    "Views": 0,
+    "Forwards": 0,
+    "Replies": null,
+    "EditDate": 0,
+    "PostAuthor": "",
+    "GroupedID": 0,
+    "Reactions": null,
+    "RestrictionReason": null,
+    "TtlPeriod": 172800,
+    "QuickReplyShortcutID": 0,
+    "Effect": 0,
+    "Factcheck": null
+  },
+  "Peer": {
+    "ChannelID": 2109566555,
+    "AccessHash": -6807968663726781214
+  },
+  "Sender": {
+    "Self": false,
+    "Contact": false,
+    "MutualContact": false,
+    "Deleted": false,
+    "Bot": true,
+    "BotChatHistory": false,
+    "BotNochats": false,
+    "Verified": false,
+    "Restricted": false,
+    "Min": false,
+    "BotInlineGeo": false,
+    "Support": false,
+    "Scam": false,
+    "ApplyMinPhoto": true,
+    "Fake": false,
+    "BotAttachMenu": false,
+    "Premium": false,
+    "AttachMenuEnabled": false,
+    "BotCanEdit": false,
+    "CloseFriend": false,
+    "StoriesHidden": false,
+    "StoriesUnavailable": true,
+    "ContactRequirePremium": false,
+    "BotBusiness": false,
+    "BotHasMainApp": false,
+    "ID": 6705708231,
+    "AccessHash": 2923481999028888457,
+    "FirstName": "FluxBot",
+    "LastName": "",
+    "Username": "fluxbeam_pool_bot",
+    "Phone": "",
+    "Photo": {
+      "HasVideo": false,
+      "Personal": false,
+      "PhotoID": 5810180893187359067,
+      "StrippedThumb": "AQgIzcR/Z+qb+vvRRRTA",
+      "DcID": 4
+    },
+    "Status": null,
+    "BotInfoVersion": 1,
+    "RestrictionReason": null,
+    "BotInlinePlaceholder": "",
+    "LangCode": "",
+    "EmojiStatus": null,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "BotActiveUsers": 0
+  },
+  "SenderChat": {
+    "Creator": false,
+    "Left": false,
+    "Broadcast": false,
+    "Verified": false,
+    "Megagroup": false,
+    "Restricted": false,
+    "Signatures": false,
+    "Min": false,
+    "Scam": false,
+    "HasLink": false,
+    "HasGeo": false,
+    "SlowmodeEnabled": false,
+    "CallActive": false,
+    "CallNotEmpty": false,
+    "Fake": false,
+    "Gigagroup": false,
+    "Noforwards": false,
+    "JoinToSend": false,
+    "JoinRequest": false,
+    "Forum": false,
+    "StoriesHidden": false,
+    "StoriesHiddenMin": false,
+    "StoriesUnavailable": false,
+    "SignatureProfiles": false,
+    "ID": 0,
+    "AccessHash": 0,
+    "Title": "",
+    "Username": "",
+    "Photo": null,
+    "Date": 0,
+    "RestrictionReason": null,
+    "AdminRights": null,
+    "BannedRights": null,
+    "DefaultBannedRights": null,
+    "ParticipantsCount": 0,
+    "Usernames": null,
+    "StoriesMaxID": 0,
+    "Color": null,
+    "ProfileColor": null,
+    "EmojiStatus": null,
+    "Level": 0,
+    "SubscriptionUntilDate": 0
+  }
+}

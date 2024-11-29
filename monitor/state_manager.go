@@ -1,7 +1,7 @@
 package monitor
 
 import (
-	"gosol/types"
+	"matu/gosol/types"
 	"sync"
 	"time"
 )

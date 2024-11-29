@@ -3,7 +3,7 @@ package monitor
 import (
 	"context"
 	"fmt"
-	"gosol/types"
+	"matu/gosol/types"
 	_ "net/http/pprof"
 	"os"
 

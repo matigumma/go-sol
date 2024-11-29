@@ -2,7 +2,7 @@ package logger
 
 import (
 	"fmt"
-	"gosol/monitor"
+	"matu/gosol/monitor"
 	"runtime"
 	"strings"
 )
@@ -150,6 +150,10 @@ func NewLogger(prefix string, logChan chan monitor.StatusMessage) *Logger {
 		Prefix:  prefix,
 		logChan: logChan,
 	}
+}
+
+func (l *Logger) LogChannel() chan monitor.StatusMessage {
+	return l.logChan
 }
 
 func getVariable(v ...any) string {

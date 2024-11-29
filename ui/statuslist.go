@@ -1,7 +1,7 @@
 package ui
 
 import (
-	"gosol/monitor"
+	"matu/gosol/monitor"
 
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"

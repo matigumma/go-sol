@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gosol/types"
+	"matu/gosol/types"
 	"net/http"
 )
 

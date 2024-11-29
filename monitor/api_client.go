@@ -3,7 +3,7 @@ package monitor
 import (
 	"encoding/json"
 	"fmt"
-	"gosol/types"
+	"matu/gosol/types"
 	"net/http"
 	"time"
 )

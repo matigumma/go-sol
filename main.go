@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"gosol/monitor"
-	"gosol/telegramadapter"
-	"gosol/ui"
+	"matu/gosol/monitor"
+	"matu/gosol/telegramadapter"
+	"matu/gosol/ui"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -19,8 +19,8 @@ func main() {
 	telegramclient := telegramadapter.NewTelegramClient(app)
 	go telegramclient.Run()
 
-	// p := tea.NewProgram(model, tea.WithAltScreen())
-	p := tea.NewProgram(model)
+	p := tea.NewProgram(model, tea.WithAltScreen())
+	// p := tea.NewProgram(model)
 	// p := tea.NewProgram(model)
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Al iniciar la aplicación: %v\n", err)

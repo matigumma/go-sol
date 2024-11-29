@@ -3,14 +3,14 @@ package telegramadapter
 import (
 	"encoding/json"
 	"fmt"
-	"gosol/logger"
-	"gosol/monitor"
 	"log"
+	"matu/gosol/logger"
+	"matu/gosol/monitor"
 	"os"
 	"regexp"
 	"strconv"
 
-	tg "matu/gogram/telegram"
+	tg "matu/gosol/gogram/telegram"
 
 	"github.com/joho/godotenv"
 )
@@ -76,7 +76,7 @@ func (t *TelegramClient) Run() {
 	client, err := tg.NewClient(tg.ClientConfig{
 		AppID:    int32(appIDInt), // https://my.telegram.org/auth?to=apps
 		AppHash:  appHash,
-		LogLevel: tg.LogDebug,
+		LogLevel: tg.LogInfo,
 		// PublicKeys: rsaPublicKeys,
 		MemorySession: true,
 		StringSession: func() string {
