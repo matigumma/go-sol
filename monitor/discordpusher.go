@@ -28,24 +28,7 @@ func PushToDiscord(report types.Report, statusUpdates chan<- StatusMessage) {
 	}
 
 	payload := map[string]interface{}{
-		"username":   "Report Bot",
-		"avatar_url": tokenMetaData.Image,
-		"content":    report.TokenMeta.Name,
-		"embeds": []map[string]interface{}{
-			{
-				"title":       "Report Details",
-				"description": "Details of the report for " + report.TokenMeta.Name,
-				"url":         "https://api.rugcheck.xyz/v1/tokens/" + report.Mint,
-				"color":       15258703,
-				"fields": []map[string]interface{}{
-					{"name": "Total Market Liquidity", "value": fmt.Sprintf("%f", report.TotalMarketLiquidity), "inline": true},
-					{"name": "Total LP Providers", "value": fmt.Sprintf("%d", report.TotalLPProviders), "inline": true},
-					{"name": "Rugged", "value": fmt.Sprintf("%t", report.Rugged), "inline": true},
-					{"name": "Verification", "value": report.Verification, "inline": true},
-					// Add more fields as necessary
-				},
-			},
-		},
+		"content": "Example Embed Title",
 	}
 
 	// Convert payload to JSON
