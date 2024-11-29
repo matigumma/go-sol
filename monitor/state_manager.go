@@ -33,7 +33,7 @@ type StateManager struct {
 	storage       *storage.Storage
 }
 
-func NewStateManager(dbPath string) *StateManager {
+func NewStateManager() *StateManager {
 	storage, err := storage.NewStorage("./sqlite.db")
 	if err != nil {
 		log.Fatalf("Error al inicializar el almacenamiento: %v", err)
