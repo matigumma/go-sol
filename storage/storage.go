@@ -2,12 +2,11 @@ package storage
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
 	"matu/gosol/types"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Storage struct {

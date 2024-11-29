@@ -1,8 +1,9 @@
 package monitor
 
 import (
-	"matu/gosol/types"
+	"log"
 	"matu/gosol/storage"
+	"matu/gosol/types"
 	"sync"
 	"time"
 )
@@ -22,16 +23,18 @@ type LogLevel int
 type StatusMessage struct {
 	Level   LogLevel
 	Message string
+}
 
 type StateManager struct {
 	IndexedMints  []string
 	MintState     map[string][]types.Report
 	StatusHistory []StatusMessage
 	Mu            sync.RWMutex
+	storage       *storage.Storage
 }
 
 func NewStateManager(dbPath string) *StateManager {
-	storage, err := storage.NewStorage(dbPath)
+	storage, err := storage.NewStorage("./sqlite.db")
 	if err != nil {
 		log.Fatalf("Error al inicializar el almacenamiento: %v", err)
 	}
