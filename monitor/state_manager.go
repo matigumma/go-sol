@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"matu/gosol/types"
+	"matu/gosol/storage"
 	"sync"
 	"time"
 )
@@ -21,7 +22,12 @@ type LogLevel int
 type StatusMessage struct {
 	Level   LogLevel
 	Message string
-}
+	storage *storage.Storage
+	// Persistir el reporte en la base de datos
+	err := sm.storage.AddReport(mint, report)
+	if err != nil {
+		sm.AddStatusMessage(StatusMessage{Level: ERR, Message: "Error al persistir el reporte: " + err.Error()})
+	}
 
 type StateManager struct {
 	IndexedMints  []string
@@ -30,10 +36,21 @@ type StateManager struct {
 	Mu            sync.RWMutex
 }
 
-func NewStateManager() *StateManager {
+func NewStateManager(dbPath string) *StateManager {
+	storage, err := storage.NewStorage(dbPath)
+	if err != nil {
+		log.Fatalf("Error al inicializar el almacenamiento: %v", err)
+	}
+
+	mintState, err := storage.GetMintState()
+	if err != nil {
+		log.Fatalf("Error al obtener el estado de los mints: %v", err)
+	}
+
 	return &StateManager{
-		MintState:     make(map[string][]types.Report),
+		MintState:     mintState,
 		StatusHistory: make([]StatusMessage, 0),
+		storage:       storage,
 	}
 }
 
