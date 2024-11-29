@@ -22,12 +22,6 @@ type LogLevel int
 type StatusMessage struct {
 	Level   LogLevel
 	Message string
-	storage *storage.Storage
-	// Persistir el reporte en la base de datos
-	err := sm.storage.AddReport(mint, report)
-	if err != nil {
-		sm.AddStatusMessage(StatusMessage{Level: ERR, Message: "Error al persistir el reporte: " + err.Error()})
-	}
 
 type StateManager struct {
 	IndexedMints  []string
@@ -67,6 +61,12 @@ func (sm *StateManager) UpdateMintState(mint string, report types.Report) {
 	sm.Mu.Lock()
 	defer sm.Mu.Unlock()
 	sm.MintState[mint] = append(sm.MintState[mint], report)
+
+	// Persistir el reporte en la base de datos
+	err := sm.storage.AddReport(mint, report)
+	if err != nil {
+		sm.AddStatusMessage(StatusMessage{Level: ERR, Message: "Error al persistir el reporte: " + err.Error()})
+	}
 }
 
 func (sm *StateManager) SendTokenUpdates(tokenUpdates chan<- []types.TokenInfo) {
