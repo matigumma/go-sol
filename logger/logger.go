@@ -44,6 +44,7 @@ func (l *Logger) Color() {
 func (l *Logger) colorize(color []byte, s string) string {
 	if l.nocolor {
 		return s
+	}
 	return string(color) + s + string(colorOff)
 }
 
