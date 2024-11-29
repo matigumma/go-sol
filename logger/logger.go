@@ -3,6 +3,7 @@ package logger
 import (
 	"fmt"
 	"matu/gosol/monitor"
+	"os"
 	"runtime"
 	"strings"
 )
@@ -43,7 +44,35 @@ func (l *Logger) Color() {
 func (l *Logger) colorize(color []byte, s string) string {
 	if l.nocolor {
 		return s
-	}
+		message := fmt.Sprintf("%s %s - %s", l.colorize(color, level), l.Prefix, getVariable(v...))
+		var statusLevel monitor.LogLevel
+		switch level {
+		case "[error]":
+			statusLevel = monitor.ERR
+		case "[warn]":
+			statusLevel = monitor.WARN
+		case "[info]":
+			statusLevel = monitor.INFO
+		case "[debug]":
+			statusLevel = monitor.DEBUG
+		case "[trace]":
+			statusLevel = monitor.TRACE
+		default:
+			statusLevel = monitor.NONE
+		}
+		l.logChan <- monitor.StatusMessage{Level: statusLevel, Message: message}
+
+		// Append log message to file
+		file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			fmt.Printf("Error opening log file: %v\n", err)
+			return
+		}
+		defer file.Close()
+
+		if _, err := file.WriteString(message + "\n"); err != nil {
+			fmt.Printf("Error writing to log file: %v\n", err)
+		}
 	return string(color) + s + string(colorOff)
 }
 
