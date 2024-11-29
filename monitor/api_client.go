@@ -24,37 +24,33 @@ func NewAPIClient(stateManager *StateManager, statusUpdates chan<- StatusMessage
 	}
 }
 
-func (api *APIClient) FetchAndProcessReport(mint string) {
-	go func() {
-		// api.requestThrottle <- struct{}{}        // Adquirir un "permiso" para hacer la solicitud
-		// defer func() { <-api.requestThrottle }() // Liberar el "permiso" al finalizar
+func (api *APIClient) FetchAndProcessReport(mint string) bool {
+	api.statusUpdates <- StatusMessage{Level: INFO, Message: fmt.Sprintf("fetching at %v: %v", time.Now().Format("2006-01-02 15:04:05"), mint)}
 
-		report, err := api.fetchTokenReport(mint)
-		if err != nil {
-			api.statusUpdates <- StatusMessage{Level: ERR, Message: fmt.Sprintf("Error fetching report for %s: %v", mint, err)}
-			return
-		}
+	report, err := api.fetchTokenReport(mint)
+	if err != nil {
+		api.statusUpdates <- StatusMessage{Level: ERR, Message: fmt.Sprintf("Error fetching report for %s: %v", mint, err)}
+		return true
+	}
 
-		if report.Score > 8000 {
-			api.handleHighRiskToken(report)
-			return
-		}
+	if report.Score > 8000 {
+		api.handleHighRiskToken(report)
+		return true
+	}
 
-		go PushToDiscord(report, api.statusUpdates)
-		api.stateManager.UpdateMintState(mint, report)
-		api.stateManager.SendTokenUpdates(api.tokenUpdates)
-	}()
+	PushToDiscord(report, api.statusUpdates)
+	api.stateManager.UpdateMintState(mint, report)
+	api.stateManager.SendTokenUpdates(api.tokenUpdates)
+
+	return true
 }
 
 func (api *APIClient) fetchTokenReport(mint string) (types.Report, error) {
 	var report types.Report
 	var err error
-	for attempts := 0; attempts < 3; attempts++ {
-		report, err = api.tryFetchTokenReport(mint)
-		if err == nil {
-			return report, nil
-		}
-		time.Sleep(time.Duration(attempts+1) * time.Second) // Esperar más tiempo en cada intento
+	report, err = api.tryFetchTokenReport(mint)
+	if err == nil {
+		return report, nil
 	}
 	return report, err
 }

@@ -6,6 +6,7 @@ import (
 	"matu/gosol/types"
 	_ "net/http/pprof"
 	"os"
+	"sync"
 
 	"github.com/gagliardetto/solana-go/rpc/ws"
 	"github.com/joho/godotenv"
@@ -29,6 +30,8 @@ type App struct {
 	Cancel         context.CancelFunc
 }
 
+var mu sync.Mutex
+
 func NewApp() *App {
 	err := godotenv.Load()
 	if err != nil {
@@ -38,6 +41,24 @@ func NewApp() *App {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	statusCh := make(chan StatusMessage, 100)
+	go func() {
+		for status := range statusCh {
+			mu.Lock() // Bloquear el acceso al archivo
+			file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				fmt.Printf("Error opening log file: %v\n", err)
+				mu.Unlock() // Asegurarse de desbloquear en caso de error
+				continue
+			}
+			defer file.Close()
+
+			logMessage := fmt.Sprintf("[%d] %s", status.Level, status.Message)
+			if _, err := file.WriteString(logMessage + "\n"); err != nil {
+				fmt.Printf("Error writing to log file: %v\n", err)
+			}
+			mu.Unlock() // Desbloquear después de escribir
+		}
+	}()
 	tokenCh := make(chan []types.TokenInfo, 100)
 	logCh := make(chan *ws.LogResult, 100)
 

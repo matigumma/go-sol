@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"matu/gosol/types"
 	"net/http"
+	"time"
 )
 
 func PushToDiscord(report types.Report, statusUpdates chan<- StatusMessage) {
@@ -27,9 +28,60 @@ func PushToDiscord(report types.Report, statusUpdates chan<- StatusMessage) {
 		return
 	}
 
-	payload := map[string]interface{}{
-		"content": "Example Embed Title",
+	extra_risk_fields := []map[string]interface{}{}
+	for _, risk := range report.Risks {
+		if risk.Level == "" || risk.Name == "" || risk.Score == 0 {
+			continue
+		}
+		extra_risk_fields = append(extra_risk_fields, map[string]interface{}{"name": "Riesgo", "value": risk.Name, "inline": true})
+		extra_risk_fields = append(extra_risk_fields, map[string]interface{}{"name": "Nivel", "value": risk.Level, "inline": true})
+		extra_risk_fields = append(extra_risk_fields, map[string]interface{}{"name": "Score", "value": risk.Score, "inline": true})
 	}
+
+	for _, market := range report.Markets {
+		if market.MarketType == "pump_fun" {
+			extra_risk_fields = append(extra_risk_fields, map[string]interface{}{"name": "Market", "value": "https://pump.fun/coin/" + report.Mint, "inline": true})
+		}
+		if market.MarketType == "raydium" {
+			extra_risk_fields = append(extra_risk_fields, map[string]interface{}{"name": "Market", "value": "https://raydium.io/swap/?inputMint=sol&outputMint=" + report.Mint, "inline": true})
+		}
+	}
+
+	var color int
+	switch {
+	case report.Score <= 5000:
+		color = 65280 // Green
+	case report.Score <= 8000:
+		color = 16776960 // Yellow
+	default:
+		color = 16711680 // Red
+	}
+
+	payload := map[string]interface{}{
+		"username":   "Meme sniper",
+		"avatar_url": tokenMetaData.Image,
+		"content":    "Address: " + report.Mint,
+		"embeds": []map[string]interface{}{
+			{
+				"title":       report.TokenMeta.Symbol,
+				"description": report.TokenMeta.Name,
+				"url":         "https://dexscreener.com/solana/" + report.Mint,
+				"color":       color,
+				"fields": []map[string]interface{}{
+					{"name": "Rugged", "value": fmt.Sprintf("%t", report.Rugged), "inline": true},
+					{"name": "SCORE", "value": report.Score, "inline": true},
+					{"name": "Verification", "value": fmt.Sprintf("%s", report.Verification), "inline": true},
+					{"name": "Detectado", "value": report.DetectedAt.In(time.Local).Format("2006-01-02 15:04"), "inline": true},
+					{"name": "", "value": "", "inline": true},
+					{"name": "", "value": "", "inline": true},
+				},
+			},
+		},
+	}
+
+	embeds := payload["embeds"].([]map[string]interface{})
+	embeds[0]["fields"] = append(embeds[0]["fields"].([]map[string]interface{}), extra_risk_fields...)
+	payload["embeds"] = embeds
 
 	// Convert payload to JSON
 	jsonPayload, err := json.Marshal(payload)

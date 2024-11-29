@@ -3,7 +3,6 @@ package logger
 import (
 	"fmt"
 	"matu/gosol/monitor"
-	"os"
 	"runtime"
 	"strings"
 )
@@ -104,6 +103,7 @@ func (l *Logger) logMessage(level string, color []byte, v ...any) {
 			statusLevel = monitor.NONE
 		}
 		l.logChan <- monitor.StatusMessage{Level: statusLevel, Message: message}
+
 	}
 }
 

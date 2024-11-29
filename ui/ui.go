@@ -187,7 +187,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			// Obtener el token seleccionado de la tabla
 			selectedRow := m.table.SelectedRow()
-			if selectedRow != nil {
+			if selectedRow != nil && len(selectedRow) > 2 {
 				// Asume que el primer campo es el símbolo del token
 				symbol := selectedRow[2]
 

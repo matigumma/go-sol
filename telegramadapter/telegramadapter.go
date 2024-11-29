@@ -9,6 +9,7 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"time"
 
 	tg "matu/gosol/gogram/telegram"
 
@@ -18,11 +19,13 @@ import (
 type TelegramClient struct {
 	monitor         *monitor.App
 	platformKeyword string
+	messageQueue    chan *tg.NewMessage
 }
 
 func NewTelegramClient(monitor *monitor.App) *TelegramClient {
 	return &TelegramClient{
-		monitor: monitor,
+		monitor:      monitor,
+		messageQueue: make(chan *tg.NewMessage, 100),
 	}
 }
 
@@ -38,8 +41,8 @@ func (t *TelegramClient) Run() {
 
 	appHash := os.Getenv("API_HASH")
 	// botToken := os.Getenv("BOT_TOKEN")
-	phoneNum := os.Getenv("PHONE")
-	fmt.Printf("Phone number: %s", phoneNum)
+	// phoneNum := os.Getenv("PHONE")
+	// fmt.Printf("Phone number: %s", phoneNum)
 
 	// tchannelID := os.Getenv("TELEGRAM_CHANNEL_ID")
 	// channelID, err := strconv.Atoi(tchannelID)
@@ -114,8 +117,13 @@ func (t *TelegramClient) Run() {
 	// client.UpdatesGetState()
 
 	client.On(tg.OnMessage, func(message *tg.NewMessage) error { // client.AddMessageHandler
-		t.processMessage(message)
+		if len(t.messageQueue) >= 100 {
+			alertMessage := "⚠️ Alert: Message queue is full!"
+			t.monitor.StatusUpdates <- monitor.StatusMessage{Level: monitor.WARN, Message: alertMessage}
+			return nil
+		}
 
+		t.messageQueue <- message // Enviar el mensaje a la cola
 		return nil
 	}, tg.Filter{
 		Group: true,
@@ -130,6 +138,8 @@ func (t *TelegramClient) Run() {
 		// Chats: []int64{-1002109566555},
 	})
 
+	go t.processMessageQueue()
+
 	// "Message": {
 	// 		"PeerID": {
 	// 			"ChannelID": 2109566555
@@ -142,6 +152,19 @@ func (t *TelegramClient) Run() {
 
 	// client Do anything
 	client.Idle()
+}
+
+func (t *TelegramClient) processMessageQueue() {
+	for {
+		msg := <-t.messageQueue // Esperar hasta que haya un mensaje en la cola
+		done := make(chan struct{})
+		go func() {
+			t.processMessage(msg) // Procesar el mensaje
+			done <- struct{}{}
+		}()
+		<-done                      // Esperar hasta que finalize la ejecución de t.processMessage(msg)
+		time.Sleep(2 * time.Second) // Esperar 1 segundo antes de procesar el siguiente
+	}
 }
 
 func (t *TelegramClient) processMessage(msg *tg.NewMessage) {
@@ -171,10 +194,11 @@ func (t *TelegramClient) processMessage(msg *tg.NewMessage) {
 			// log.Printf("New Token: %s", token)
 			// Enviar token al StateManager
 			t.monitor.StateManager.AddMint(token)
-			t.monitor.ApiClient.FetchAndProcessReport(token)
+			r := t.monitor.ApiClient.FetchAndProcessReport(token)
+			if r {
+				return
+			}
 		}
-		// } else {
-		// 	fmt.Print(".")
 	}
 }
 

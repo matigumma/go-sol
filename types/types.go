@@ -35,18 +35,23 @@ type Holder struct {
 
 type Report struct {
 	Mint                 string        `json:"mint"`
-	TokenMeta            TokenMeta     `json:"tokenMeta"`
-	Risks                []Risk        `json:"risks"`
-	TotalMarketLiquidity float64       `json:"totalMarketLiquidity"`
-	TotalLPProviders     int           `json:"totalLPProviders"`
+	TokenMeta            TokenMeta     `json:"tokenMeta,omitempty"`
+	Risks                []Risk        `json:"risks,omitempty"`
+	TotalMarketLiquidity float64       `json:"totalMarketLiquidity,omitempty"`
+	TotalLPProviders     int           `json:"totalLPProviders,omitempty"`
 	Rugged               bool          `json:"rugged"`
-	KnownAccounts        KnownAccounts `json:"knownAccounts"`
-	Verification         string        `json:"verification"`
+	KnownAccounts        KnownAccounts `json:"knownAccounts,omitempty"`
+	Verification         string        `json:"verification,omitempty"`
 	Score                int           `json:"score"`
-	FreezeAuthority      string        `json:"freezeAuthority"`
-	MintAuthority        string        `json:"mintAuthority"`
-	TopHolders           []Holder      `json:"topHolders"`
+	FreezeAuthority      []interface{} `json:"freezeAuthority,omitempty"`
+	MintAuthority        string        `json:"mintAuthority,omitempty"`
+	TopHolders           []Holder      `json:"topHolders,omitempty"`
 	DetectedAt           time.Time     `json:"detectedAt"`
+	Markets              []Markets     `json:"markets,omitempty"`
+}
+
+type Markets struct {
+	MarketType string `json:"marketType"`
 }
 
 type MintInfo struct {
