@@ -23,7 +23,7 @@ type TelegramListener struct {
 func NewTelegramListener(monitor *monitor.App, botID int64) *TelegramListener {
 	return &TelegramListener{
 		monitor:      monitor,
-		botID:        botID,
+		botID:        botID, // TTF bot: int64(6113783210)
 		messageQueue: make(chan *tg.NewMessage, 100),
 	}
 }
